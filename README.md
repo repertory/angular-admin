@@ -26,3 +26,18 @@ Before running the tests make sure you are serving the app via `ng serve`.
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## Nginx rewrite
+
+```
+server {
+    listen       80;
+    server_name  admin.dev;
+    root         /var/www/html/admin/dist;
+
+    location / {
+        index  index.html index.htm;
+        try_files $uri $uri/ /index.html$is_args$args;
+    }
+}
+```

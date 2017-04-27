@@ -1,0 +1,77 @@
+<div fxLayout="column" fxFill>
+    <md-toolbar color="primary" fxFlex="64px">
+        <span fxFlex>后台管理系统</span>
+
+        <button md-icon-button [mdMenuTriggerFor]="menu" *ngIf="user | async">
+            <md-icon>account_circle</md-icon>
+        </button>
+        <button md-icon-button *ngIf="!(user | async)" (click)="login()">
+            登录
+        </button>
+
+        <button md-icon-button (click)="sidenav.toggle()">
+            <md-icon>menu</md-icon>
+        </button>
+
+        <md-menu #menu>
+            <button md-menu-item>
+                <md-icon>perm_identity</md-icon>
+                <span>{{(user | async)?.get('username')}}</span>
+            </button>
+            <button md-menu-item (click)="parse.logout()">
+                <md-icon>exit_to_app</md-icon>
+                <span>注销</span>
+            </button>
+        </md-menu>
+    </md-toolbar>
+
+    <md-sidenav-container fxFlex>
+        <md-sidenav class="mat-elevation-z6"
+                    [style.width.px]="260"
+                    [opened]="!isScreenSmall()"
+                    [mode]="isScreenSmall() ? 'push' : 'side'"
+                    #sidenav>
+
+            <md-nav-list fxFlex>
+                <h3 md-subheader>分组名</h3>
+                <a md-list-item>
+                    <md-icon>flag</md-icon>
+                    <span>菜单名</span>
+                </a>
+                <a md-list-item>
+                    <md-icon>flag</md-icon>
+                    <span>菜单名</span>
+                </a>
+                <md-divider></md-divider>
+
+                <h3 md-subheader>分组名</h3>
+                <a md-list-item>
+                    <md-icon>flag</md-icon>
+                    <span>菜单名</span>
+                </a>
+                <a md-list-item>
+                    <md-icon>flag</md-icon>
+                    <span>菜单名</span>
+                </a>
+                <md-divider></md-divider>
+
+                <a md-list-item>
+                    <span>菜单名</span>
+                </a>
+                <a md-list-item>
+                    <span>菜单名</span>
+                </a>
+            </md-nav-list>
+
+        </md-sidenav>
+
+        <div fxFlex fxLayout="column" fxFill>
+            <div fxFlex>
+                <router-outlet></router-outlet>
+            </div>
+
+            <app-footer fxFlex="64px"></app-footer>
+        </div>
+
+    </md-sidenav-container>
+</div>
