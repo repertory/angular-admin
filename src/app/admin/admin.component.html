@@ -1,5 +1,5 @@
 <div fxLayout="column" fxFill>
-    <md-toolbar color="primary" fxFlex="64px">
+    <md-toolbar color="primary" [fxFlex]="isScreenSmall() ? '56px' : '64px'">
         <span fxFlex>后台管理系统</span>
 
         <button md-icon-button [mdMenuTriggerFor]="menu" *ngIf="user | async">
@@ -35,37 +35,38 @@
             <md-nav-list fxFlex>
                 <h3 md-subheader>分组名</h3>
                 <a md-list-item>
-                    <md-icon>flag</md-icon>
-                    <span>菜单名</span>
+                    <md-icon md-list-icon>flag</md-icon>
+                    <span md-line>菜单名</span>
                 </a>
                 <a md-list-item>
-                    <md-icon>flag</md-icon>
-                    <span>菜单名</span>
+                    <md-icon md-list-icon>flag</md-icon>
+                    <span md-line>菜单名</span>
                 </a>
                 <md-divider></md-divider>
 
                 <h3 md-subheader>分组名</h3>
                 <a md-list-item>
-                    <md-icon>flag</md-icon>
-                    <span>菜单名</span>
+                    <md-icon md-list-icon>flag</md-icon>
+                    <span md-line>菜单名</span>
                 </a>
                 <a md-list-item>
-                    <md-icon>flag</md-icon>
-                    <span>菜单名</span>
+                    <md-icon md-list-icon>flag</md-icon>
+                    <span md-line>菜单名</span>
                 </a>
                 <md-divider></md-divider>
 
                 <a md-list-item>
-                    <span>菜单名</span>
+                    <span md-line>菜单名</span>
                 </a>
                 <a md-list-item>
-                    <span>菜单名</span>
+                    <span md-line>菜单名</span>
                 </a>
             </md-nav-list>
 
         </md-sidenav>
 
         <div fxFlex fxLayout="column" fxFill>
+
             <div fxFlex>
                 <router-outlet></router-outlet>
             </div>

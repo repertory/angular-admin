@@ -2,15 +2,27 @@ import {NgModule} from '@angular/core';
 
 import {SharedModule} from '../shared/shared.module';
 import {AdminRoutingModule} from './admin-routing.module';
-import {AdminComponent, AdminLoginComponent, AdminRegisterComponent, AdminForgetComponent} from './admin.component';
+import {AdminComponent} from './admin.component';
+
+import {
+    SharedModule as AdminSharedModule,
+    LoginDialog,
+    RegisterDialog,
+    ForgetDialog
+} from './shared/shared.module';
 
 @NgModule({
     imports: [
         SharedModule,
-        AdminRoutingModule
+        AdminRoutingModule,
+        AdminSharedModule,
     ],
-    declarations: [AdminComponent, AdminLoginComponent, AdminRegisterComponent, AdminForgetComponent],
-    entryComponents: [AdminLoginComponent, AdminRegisterComponent, AdminForgetComponent]
+    declarations: [AdminComponent],
+    entryComponents: [
+        LoginDialog,
+        RegisterDialog,
+        ForgetDialog
+    ]
 })
 export class AdminModule {
 }
