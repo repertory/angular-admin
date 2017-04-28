@@ -1,5 +1,6 @@
 @import 'assets/iconfont/material-icons.css';
 @import '~@angular/material/theming';
+@import '~@covalent/core/theming/all-theme';
 
 @include mat-core();
 
@@ -11,6 +12,7 @@ $warn: mat-palette($mat-red);
 $theme: mat-light-theme($primary, $accent, $warn);
 
 @include angular-material-theme($theme);
+@include covalent-theme($theme);
 
 // 夜间模式
 .dark-theme {
@@ -21,4 +23,5 @@ $theme: mat-light-theme($primary, $accent, $warn);
   $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 
   @include angular-material-theme($dark-theme);
+  @include covalent-theme($dark-theme);
 }

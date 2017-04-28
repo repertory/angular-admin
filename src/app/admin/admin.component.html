@@ -28,54 +28,59 @@
         </md-menu>
     </div>
 
-    <md-sidenav-container fxFlex>
-        <md-sidenav class="mat-elevation-z6"
-                    [style.width.px]="240"
-                    [opened]="!isScreenSmall()"
-                    [mode]="isScreenSmall() ? 'push' : 'side'"
-                    #sidenav>
+    <div fxFlex [style.position]="'relative'">
+        <md-sidenav-container fullscreen>
+            <md-sidenav class="mat-elevation-z6"
+                        [style.width.px]="240"
+                        [opened]="!isScreenSmall()"
+                        [mode]="isScreenSmall() ? 'push' : 'side'"
+                        #sidenav>
 
-            <md-nav-list fxFlex>
-                <h3 md-subheader>分组名</h3>
-                <a md-list-item>
-                    <md-icon md-list-icon>flag</md-icon>
-                    <span md-line>菜单名</span>
-                </a>
-                <a md-list-item>
-                    <md-icon md-list-icon>flag</md-icon>
-                    <span md-line>菜单名</span>
-                </a>
-                <md-divider></md-divider>
+                <md-nav-list fxFlex>
+                    <h3 md-subheader>系统设置</h3>
+                    <a md-list-item>
+                        <md-icon md-list-icon>settings</md-icon>
+                        <span md-line>配置管理</span>
+                    </a>
+                    <a md-list-item>
+                        <md-icon md-list-icon>list</md-icon>
+                        <span md-line>菜单管理</span>
+                    </a>
+                    <md-divider></md-divider>
 
-                <h3 md-subheader>分组名</h3>
-                <a md-list-item>
-                    <md-icon md-list-icon>flag</md-icon>
-                    <span md-line>菜单名</span>
-                </a>
-                <a md-list-item>
-                    <md-icon md-list-icon>flag</md-icon>
-                    <span md-line>菜单名</span>
-                </a>
-                <md-divider></md-divider>
+                    <h3 md-subheader>用户设置</h3>
+                    <a md-list-item>
+                        <md-icon md-list-icon>group</md-icon>
+                        <span md-line>角色管理</span>
+                    </a>
+                    <a md-list-item>
+                        <md-icon md-list-icon>person</md-icon>
+                        <span md-line>用户管理</span>
+                    </a>
+                    <md-divider></md-divider>
 
-                <a md-list-item>
-                    <span md-line>菜单名</span>
-                </a>
-                <a md-list-item>
-                    <span md-line>菜单名</span>
-                </a>
-            </md-nav-list>
+                    <h3 md-subheader>关于系统</h3>
+                    <a md-list-item>
+                        <md-icon md-list-icon>code</md-icon>
+                        <span md-line>代码托管</span>
+                    </a>
+                    <a md-list-item>
+                        <md-icon md-list-icon>help</md-icon>
+                        <span md-line>使用帮助</span>
+                    </a>
+                </md-nav-list>
 
-        </md-sidenav>
+            </md-sidenav>
 
-        <div fxFlex fxLayout="column" fxFill>
+            <div fxFlex fxLayout="column" fxFill>
 
-            <div fxFlex>
-                <router-outlet></router-outlet>
+                <div fxFlex>
+                    <router-outlet></router-outlet>
+                </div>
+
+                <app-footer fxFlex="64px"></app-footer>
             </div>
 
-            <app-footer fxFlex="64px"></app-footer>
-        </div>
-
-    </md-sidenav-container>
+        </md-sidenav-container>
+    </div>
 </div>

@@ -17,4 +17,5 @@ export class IndexComponent implements OnInit {
     ngOnInit() {
         this.user = this.parse.userInfo();
     }
+
 }

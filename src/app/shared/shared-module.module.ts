@@ -4,8 +4,9 @@ import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {RouterModule} from '@angular/router';
 
-import {MaterialModule} from '@angular/material';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {MaterialModule} from '@angular/material';
+import {CovalentCoreModule} from '@covalent/core';
 
 @NgModule({
     imports: [
@@ -17,8 +18,9 @@ import {FlexLayoutModule} from '@angular/flex-layout';
         FormsModule,
         RouterModule,
         HttpModule,
-        MaterialModule,
         FlexLayoutModule,
+        MaterialModule,
+        CovalentCoreModule,
     ]
 })
 export class SharedModuleModule {
