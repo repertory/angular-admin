@@ -9,10 +9,14 @@
             <h3 style="width: 20px;text-align: center">后台管理系统</h3>
         </div>
 
-        <button md-icon-button [mdMenuTriggerFor]="menu" *ngIf="user | async">
+        <button md-icon-button (click)="isDarkTheme = !isDarkTheme" mdTooltip="主题模式" mdTooltipPosition="right">
+            <md-icon [textContent]="isDarkTheme ? 'brightness_4' : 'brightness_5'"></md-icon>
+        </button>
+
+        <button md-icon-button [mdMenuTriggerFor]="menu" *ngIf="user | async" mdTooltip="用户中心" mdTooltipPosition="right">
             <md-icon>account_circle</md-icon>
         </button>
-        <button md-icon-button *ngIf="!(user | async)" (click)="login()">
+        <button md-icon-button *ngIf="!(user | async)" (click)="login()" mdTooltip="用户登录" mdTooltipPosition="right">
             登录
         </button>
 

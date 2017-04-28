@@ -8,9 +8,13 @@ import {LoginDialog} from './shared/shared.module';
 @Component({
     selector: 'app-admin',
     templateUrl: './admin.component.html',
-    styleUrls: ['./admin.component.css']
+    styleUrls: ['./admin.component.css'],
+    host: {
+        '[class.dark-theme]': 'isDarkTheme',
+    },
 })
 export class AdminComponent implements OnInit {
+    isDarkTheme = false;
     user: Observable<any>;
     loginDialog = false;
 
