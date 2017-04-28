@@ -15,8 +15,10 @@
 <md-dialog-actions>
   <button
           md-raised-button
+          [style.marginRight.px]="10"
           color="primary"
           (click)="register(username2.value, password2.value, {email: email2.value})"
           [disabled]="!registerForm.form.valid">注册
   </button>
+  <button md-button (click)="login()">已有账号登录</button>
 </md-dialog-actions>

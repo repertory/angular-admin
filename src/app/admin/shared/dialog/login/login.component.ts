@@ -34,12 +34,12 @@ export class LoginComponent implements OnInit {
 
     register() {
         this.dialogRef.close();
-        this.dialog.open(RegisterDialog);
+        this.dialog.open(RegisterDialog, {disableClose: true});
     }
 
     forget() {
         this.dialogRef.close();
-        this.dialog.open(ForgetDialog);
+        this.dialog.open(ForgetDialog, {disableClose: true});
     }
 
 }

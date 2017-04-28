@@ -19,6 +19,10 @@ export class AdminComponent implements OnInit {
 
     ngOnInit() {
         this.user = this.parse.userInfo();
+
+        this.parse.userInfo()
+            .filter(x => !x)
+            .subscribe(x => this.login());
     }
 
     isScreenSmall(): boolean {
@@ -26,7 +30,12 @@ export class AdminComponent implements OnInit {
     }
 
     login() {
-        this.dialog.open(LoginDialog)
+        if (this.loginDialog) {
+            return false;
+        }
+
+        this.loginDialog = true;
+        this.dialog.open(LoginDialog, {disableClose: true})
             .afterClosed()
             .subscribe(x => this.loginDialog = false);
     }

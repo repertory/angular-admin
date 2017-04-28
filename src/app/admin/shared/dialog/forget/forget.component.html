@@ -9,8 +9,10 @@
 <md-dialog-actions>
   <button
           md-raised-button
+          [style.marginRight.px]="10"
           color="primary"
           (click)="forget(email3.value)"
           [disabled]="!forgetForm.form.valid">发送邮件
   </button>
+  <button md-button (click)="login()">已有账号登录</button>
 </md-dialog-actions>
