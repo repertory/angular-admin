@@ -1,16 +1,19 @@
-<div fxLayout="column" fxFill>
-    <md-toolbar color="primary" [fxFlex]="isScreenSmall() ? '56px' : '64px'">
-        <span fxFlex>后台管理系统</span>
+<div fxLayout="row" fxFill>
+    <div fxFlex="56px" fxLayout="column" fxLayoutAlign="start center" [style.padding.px]="8"
+         class="mat-toolbar mat-primary">
+        <button md-icon-button (click)="sidenav.toggle()">
+            <md-icon>menu</md-icon>
+        </button>
+
+        <div fxFlex>
+            <h3 style="width: 20px;text-align: center">后台管理系统</h3>
+        </div>
 
         <button md-icon-button [mdMenuTriggerFor]="menu" *ngIf="user | async">
             <md-icon>account_circle</md-icon>
         </button>
         <button md-icon-button *ngIf="!(user | async)" (click)="login()">
             登录
-        </button>
-
-        <button md-icon-button (click)="sidenav.toggle()">
-            <md-icon>menu</md-icon>
         </button>
 
         <md-menu #menu>
@@ -23,11 +26,11 @@
                 <span>注销</span>
             </button>
         </md-menu>
-    </md-toolbar>
+    </div>
 
     <md-sidenav-container fxFlex>
         <md-sidenav class="mat-elevation-z6"
-                    [style.width.px]="260"
+                    [style.width.px]="240"
                     [opened]="!isScreenSmall()"
                     [mode]="isScreenSmall() ? 'push' : 'side'"
                     #sidenav>
