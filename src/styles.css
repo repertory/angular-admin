@@ -19,3 +19,24 @@ app-root .centre {
     justify-content: center;
     align-items: center;
 }
+
+pre {
+    background: #333;
+    color: #fff;
+    font-family: Menlo, 'Bitstream Vera Sans Mono', 'DejaVu Sans Mono', Monaco, Consolas, monospace;
+    font-size: 12px;
+    line-height: 1.5;
+    border: 1px solid #dedede;
+    padding: 10px;
+    width: auto;
+    overflow: auto;
+    border-radius: 4px;
+}
+
+md-card {
+    margin: 8px;
+}
+
+md-card-content {
+    overflow-x: auto;
+}

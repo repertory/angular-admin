@@ -1,8 +1,7 @@
-<div fxLayout="column" fxFill>
-    <div fxFlex>
-        <div>
-            <p>当前登录用户：</p>
-            <pre>{{user | async | json}}</pre>
-        </div>
-    </div>
-</div>
+<md-card>
+    <md-card-title>当前登录用户</md-card-title>
+    <md-divider></md-divider>
+    <md-card-content>
+        <pre>{{user | async | json}}</pre>
+    </md-card-content>
+</md-card>
