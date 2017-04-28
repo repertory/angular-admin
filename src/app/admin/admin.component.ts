@@ -35,7 +35,7 @@ export class AdminComponent implements OnInit {
         }
 
         this.loginDialog = true;
-        this.dialog.open(LoginDialog, {disableClose: true})
+        this.dialog.open(LoginDialog, {disableClose: false})
             .afterClosed()
             .subscribe(x => this.loginDialog = false);
     }

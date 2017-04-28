@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
 
     login() {
         this.dialogRef.close();
-        this.dialog.open(LoginDialog, {disableClose: true});
+        this.dialog.open(LoginDialog, {disableClose: false});
     }
 
 }
