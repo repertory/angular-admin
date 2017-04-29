@@ -27,11 +27,9 @@ export class AdminComponent implements OnInit {
     ];
 
     constructor(public parse: ParseService, private router: Router, private snackBar: MdSnackBar) {
-        console.log('AdminComponent constructor');
     }
 
     ngOnInit() {
-        console.log('AdminComponent ngOnInit');
         this.user = this.parse.userInfo();
 
         this.parse.userInfo()

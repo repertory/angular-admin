@@ -8,11 +8,11 @@ export const routerConfig: Route[] = [
 
 @NgModule({
     providers: [
-        // Location,
+        Location,
         {provide: LocationStrategy, useClass: PathLocationStrategy}
     ],
     imports: [
-        RouterModule.forRoot(routerConfig)
+        RouterModule.forRoot(routerConfig, {initialNavigation: true})
     ],
     exports: [RouterModule]
 })
