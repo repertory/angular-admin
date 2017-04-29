@@ -1,12 +1,14 @@
 import {NgModule} from '@angular/core';
 
-import {SharedModule} from '../../../../shared/shared.module';
+import {SharedModule} from '../shared/shared.module';
+
+import {RegisterRoutingModule} from './register-routing.module';
 import {RegisterComponent} from './register.component';
-export {RegisterComponent as RegisterDialog} from './register.component';
 
 @NgModule({
     imports: [
-        SharedModule
+        SharedModule,
+        RegisterRoutingModule,
     ],
     declarations: [RegisterComponent]
 })

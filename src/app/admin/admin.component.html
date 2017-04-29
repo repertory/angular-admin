@@ -1,25 +1,30 @@
 <div fxLayout="row" fxFill>
-    <div fxFlex="56px" fxLayout="column" fxLayoutAlign="start center" [style.padding.px]="8"
-         class="mat-toolbar mat-primary">
+
+    <!--左侧工具栏-->
+    <div fxFlex="56px" fxLayout="column" fxLayoutAlign="start center"
+         class="pd-8 mat-toolbar mat-primary">
+
+        <!--顶部按钮-->
         <button md-icon-button (click)="sidenav.toggle()">
             <md-icon>menu</md-icon>
         </button>
 
+        <!--中间部分-->
         <div fxFlex>
             <h3 style="width: 20px;text-align: center">后台管理系统</h3>
         </div>
 
+        <!--底部按钮-->
         <button md-icon-button (click)="isDarkTheme = !isDarkTheme" mdTooltip="主题模式" mdTooltipPosition="right">
             <md-icon [textContent]="isDarkTheme ? 'brightness_4' : 'brightness_5'"></md-icon>
         </button>
-
-        <button md-icon-button [mdMenuTriggerFor]="menu" *ngIf="user | async" mdTooltip="用户中心" mdTooltipPosition="right">
+        <a routerLink="/login" md-icon-button *ngIf="!(user | async)" mdTooltip="用户登录" mdTooltipPosition="right">
+            登录
+        </a>
+        <button md-icon-button [mdMenuTriggerFor]="menu" *ngIf="user | async" mdTooltip="用户中心"
+                mdTooltipPosition="right">
             <md-icon>account_circle</md-icon>
         </button>
-        <button md-icon-button *ngIf="!(user | async)" (click)="login()" mdTooltip="用户登录" mdTooltipPosition="right">
-            登录
-        </button>
-
         <md-menu #menu>
             <button md-menu-item>
                 <md-icon>perm_identity</md-icon>
@@ -32,50 +37,62 @@
         </md-menu>
     </div>
 
+    <!--内容区域-->
     <div fxFlex [style.position]="'relative'">
         <md-sidenav-container fullscreen>
+
+            <!--左侧菜单-->
             <md-sidenav class="mat-elevation-z6"
-                        [style.width.px]="240"
                         [opened]="!isScreenSmall()"
                         [mode]="isScreenSmall() ? 'push' : 'side'"
                         #sidenav>
 
-                <md-nav-list fxFlex>
-                    <h3 md-subheader>系统设置</h3>
-                    <a md-list-item>
-                        <md-icon md-list-icon>settings</md-icon>
-                        <span md-line>配置管理</span>
-                    </a>
-                    <a md-list-item>
-                        <md-icon md-list-icon>list</md-icon>
-                        <span md-line>菜单管理</span>
-                    </a>
-                    <md-divider></md-divider>
+                <div fxFlex fxLayout="column" fxFill>
+                    <md-nav-list fxFlex style="overflow-y: auto">
 
-                    <h3 md-subheader>用户设置</h3>
-                    <a md-list-item>
-                        <md-icon md-list-icon>group</md-icon>
-                        <span md-line>角色管理</span>
-                    </a>
-                    <a md-list-item>
-                        <md-icon md-list-icon>person</md-icon>
-                        <span md-line>用户管理</span>
-                    </a>
-                    <md-divider></md-divider>
+                        <h3 md-subheader>系统设置</h3>
+                        <a md-list-item>
+                            <md-icon md-list-icon>settings</md-icon>
+                            <span md-line>配置管理</span>
+                        </a>
+                        <a md-list-item>
+                            <md-icon md-list-icon>list</md-icon>
+                            <span md-line>菜单管理</span>
+                        </a>
+                        <md-divider></md-divider>
 
-                    <h3 md-subheader>关于系统</h3>
-                    <a md-list-item>
-                        <md-icon md-list-icon>code</md-icon>
-                        <span md-line>代码托管</span>
-                    </a>
-                    <a md-list-item>
-                        <md-icon md-list-icon>help</md-icon>
-                        <span md-line>使用帮助</span>
-                    </a>
-                </md-nav-list>
+                        <h3 md-subheader>用户设置</h3>
+                        <a md-list-item>
+                            <md-icon md-list-icon>group</md-icon>
+                            <span md-line>角色管理</span>
+                        </a>
+                        <a md-list-item>
+                            <md-icon md-list-icon>person</md-icon>
+                            <span md-line>用户管理</span>
+                        </a>
+                        <md-divider></md-divider>
+
+                        <h3 md-subheader>关于系统</h3>
+                        <a md-list-item>
+                            <md-icon md-list-icon>code</md-icon>
+                            <span md-line>代码托管</span>
+                        </a>
+                        <a md-list-item>
+                            <md-icon md-list-icon>help</md-icon>
+                            <span md-line>使用帮助</span>
+                        </a>
+                    </md-nav-list>
+
+                    <!--<md-divider></md-divider>-->
+
+                    <!--<div fxFlex="40px" fxLayoutAlign="center center">-->
+                        <!--<input type="search" placeholder="搜索关键字">-->
+                    <!--</div>-->
+                </div>
 
             </md-sidenav>
 
+            <!--右侧内容区域-->
             <div fxFlex fxLayout="column" fxFill>
 
                 <div fxFlex>

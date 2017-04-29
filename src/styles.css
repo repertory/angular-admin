@@ -29,7 +29,7 @@ pre {
     padding: 10px;
     width: auto;
     overflow: auto;
-    border-radius: 4px;
+    /*border-radius: 4px;*/
 }
 
 md-card {
@@ -38,4 +38,8 @@ md-card {
 
 md-card-content {
     overflow-x: auto;
+}
+
+.pd-8 {
+    padding: 8px;
 }

@@ -1,13 +1,14 @@
 import {NgModule} from '@angular/core';
 
-import {SharedModule} from '../../../../shared/shared.module';
+import {SharedModule} from '../shared/shared.module';
 
+import {ForgetRoutingModule} from './forget-routing.module';
 import {ForgetComponent} from './forget.component';
-export {ForgetComponent as ForgetDialog} from './forget.component';
 
 @NgModule({
     imports: [
-        SharedModule
+        SharedModule,
+        ForgetRoutingModule,
     ],
     declarations: [ForgetComponent]
 })

@@ -4,7 +4,7 @@ import {IndexModule} from './index/index.module';
 
 @NgModule({
     imports: [
-        IndexModule
+        IndexModule,
     ]
 })
 export class AdminChildrenModule {

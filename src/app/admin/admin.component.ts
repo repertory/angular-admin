@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
-import {MdDialog} from '@angular/material';
+import {MdSnackBar} from '@angular/material';
 
 import {ParseService} from '../shared/shared.module';
-import {LoginDialog} from './shared/shared.module';
 
 @Component({
     selector: 'app-admin',
@@ -14,33 +14,37 @@ import {LoginDialog} from './shared/shared.module';
     },
 })
 export class AdminComponent implements OnInit {
-    isDarkTheme = false;
-    user: Observable<any>;
-    loginDialog = false;
+    isDarkTheme = false;    // 夜间模式
+    user: Observable<any>;  // 用户信息
 
-    constructor(public parse: ParseService, public dialog: MdDialog) {
+    menus: any[] = [
+        {group: '系统设置', name: '配置管理', link: '#', icon: 'settings'},
+        {group: '系统设置', name: '菜单管理', link: '#', icon: 'list'},
+        {group: '用户设置', name: '角色管理', link: '#', icon: 'group'},
+        {group: '用户设置', name: '用户管理', link: '#', icon: 'person'},
+        {group: '关于系统', name: '代码托管', link: '#', icon: 'code'},
+        {group: '关于系统', name: '使用帮助', link: '#', icon: 'help'},
+    ];
+
+    constructor(public parse: ParseService, private router: Router, private snackBar: MdSnackBar) {
+        console.log('AdminComponent constructor');
     }
 
     ngOnInit() {
+        console.log('AdminComponent ngOnInit');
         this.user = this.parse.userInfo();
 
         this.parse.userInfo()
             .filter(x => !x)
-            .subscribe(x => this.login());
+            .subscribe(x => this.gotoLogin());
     }
 
     isScreenSmall(): boolean {
         return window.matchMedia(`(max-width: 768px)`).matches;
     }
 
-    login() {
-        if (this.loginDialog) {
-            return false;
-        }
-
-        this.loginDialog = true;
-        this.dialog.open(LoginDialog, {disableClose: false})
-            .afterClosed()
-            .subscribe(x => this.loginDialog = false);
+    gotoLogin() {
+        this.snackBar.open('请先登录', '关闭', {duration: 2000});
+        this.router.navigateByUrl('/login');
     }
 }

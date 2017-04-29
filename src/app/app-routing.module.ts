@@ -8,7 +8,7 @@ export const routerConfig: Route[] = [
 
 @NgModule({
     providers: [
-        Location,
+        // Location,
         {provide: LocationStrategy, useClass: PathLocationStrategy}
     ],
     imports: [
