@@ -9,6 +9,6 @@ export const environment = {
     parse: {
         appId: '7afa28e6-ff85-11e6-9766-0242ac110002',
         javascriptKey: '7b004cd0-ff85-11e6-9766-0242ac110002',
-        serverURL: 'http://127.0.0.1:8080/test',
+        serverURL: 'http://api.demo.wangdong.io/test',
     }
 };
