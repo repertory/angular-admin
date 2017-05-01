@@ -40,6 +40,10 @@ md-card-content {
     overflow-x: auto;
 }
 
-.pd-8 {
+.padding {
     padding: 8px;
+}
+
+.dark-theme input[type="search"] {
+    color: white;
 }

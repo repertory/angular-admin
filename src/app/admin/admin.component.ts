@@ -16,6 +16,7 @@ import {ParseService} from '../shared/shared.module';
 export class AdminComponent implements OnInit {
     isDarkTheme = false;    // 夜间模式
     user: Observable<any>;  // 用户信息
+    keyword: string;        // 菜单搜索
 
     menus: any[] = [
         {group: '系统设置', name: '配置管理', link: '#', icon: 'settings'},
@@ -44,5 +45,17 @@ export class AdminComponent implements OnInit {
     gotoLogin() {
         this.snackBar.open('请先登录', '关闭', {duration: 2000});
         this.router.navigateByUrl('/login');
+    }
+
+    getMenus() {
+        const result = {groups: [], tree: {}};
+        for (const menu of this.menus.filter(m => JSON.stringify(m).includes(this.keyword || ''))) {
+            if (!result.tree[menu.group]) {
+                result.tree[menu.group] = [];
+                result.groups.push(menu.group);
+            }
+            result.tree[menu.group].push(menu);
+        }
+        return result;
     }
 }

@@ -2,7 +2,7 @@
 
     <!--左侧工具栏-->
     <div fxFlex="56px" fxLayout="column" fxLayoutAlign="start center"
-         class="pd-8 mat-toolbar mat-primary">
+         class="padding mat-toolbar mat-primary">
 
         <!--顶部按钮-->
         <button md-icon-button (click)="sidenav.toggle()">
@@ -49,45 +49,26 @@
 
                 <div fxFlex fxLayout="column" fxFill>
                     <md-nav-list fxFlex style="overflow-y: auto">
+                        <div *ngFor="let group of getMenus().groups; let first=first">
+                            <!--分隔符-->
+                            <md-divider *ngIf="!first"></md-divider>
 
-                        <h3 md-subheader>系统设置</h3>
-                        <a md-list-item>
-                            <md-icon md-list-icon>settings</md-icon>
-                            <span md-line>配置管理</span>
-                        </a>
-                        <a md-list-item>
-                            <md-icon md-list-icon>list</md-icon>
-                            <span md-line>菜单管理</span>
-                        </a>
-                        <md-divider></md-divider>
+                            <!--菜单分组-->
+                            <h3 md-subheader>{{group}}</h3>
 
-                        <h3 md-subheader>用户设置</h3>
-                        <a md-list-item>
-                            <md-icon md-list-icon>group</md-icon>
-                            <span md-line>角色管理</span>
-                        </a>
-                        <a md-list-item>
-                            <md-icon md-list-icon>person</md-icon>
-                            <span md-line>用户管理</span>
-                        </a>
-                        <md-divider></md-divider>
-
-                        <h3 md-subheader>关于系统</h3>
-                        <a md-list-item>
-                            <md-icon md-list-icon>code</md-icon>
-                            <span md-line>代码托管</span>
-                        </a>
-                        <a md-list-item>
-                            <md-icon md-list-icon>help</md-icon>
-                            <span md-line>使用帮助</span>
-                        </a>
+                            <!--菜单列表-->
+                            <a md-list-item *ngFor="let menu of getMenus().tree[group]">
+                                <md-icon md-list-icon>{{menu.icon}}</md-icon>
+                                <span md-line>{{menu.name}}</span>
+                            </a>
+                        </div>
                     </md-nav-list>
 
-                    <!--<md-divider></md-divider>-->
+                    <md-divider></md-divider>
 
-                    <!--<div fxFlex="40px" fxLayoutAlign="center center">-->
-                        <!--<input type="search" placeholder="搜索关键字">-->
-                    <!--</div>-->
+                    <div fxFlex="40px" fxLayoutAlign="center center">
+                        <input type="search" placeholder="搜索关键字" [(ngModel)]="keyword">
+                    </div>
                 </div>
 
             </md-sidenav>
