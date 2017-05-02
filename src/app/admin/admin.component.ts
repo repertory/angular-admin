@@ -19,8 +19,8 @@ export class AdminComponent implements OnInit {
     keyword: string;        // 菜单搜索
 
     menus: any[] = [
-        {group: '系统设置', name: '配置管理', link: '/admin/system/menu', icon: 'settings'},
-        {group: '系统设置', name: '菜单管理', link: '/admin/system/setting', icon: 'list'},
+        {group: '系统设置', name: '配置管理', link: '/admin/system/setting', icon: 'settings'},
+        {group: '系统设置', name: '菜单管理', link: '/admin/system/menu', icon: 'list'},
         {group: '用户设置', name: '角色管理', link: '/admin/system/role', icon: 'group'},
         {group: '用户设置', name: '用户管理', link: '/admin/system/user', icon: 'person'},
         {group: '关于系统', name: '代码托管', link: '/admin/about/code', icon: 'code'},

@@ -6,7 +6,6 @@ import {RouterModule} from '@angular/router';
 
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MaterialModule} from '@angular/material';
-import {Md2Module}  from 'md2';
 
 @NgModule({
     imports: [
@@ -20,7 +19,6 @@ import {Md2Module}  from 'md2';
         HttpModule,
         FlexLayoutModule,
         MaterialModule,
-        Md2Module,
     ]
 })
 export class SharedModuleModule {
