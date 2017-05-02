@@ -48,7 +48,13 @@
                         #sidenav>
 
                 <div fxFlex fxLayout="column" fxFill>
+
+                    <!--菜单列表-->
                     <md-nav-list fxFlex style="overflow-y: auto">
+                        <div *ngIf="!getMenus().groups.length" fxLayoutAlign="center start">
+                            <p>没有数据</p>
+                        </div>
+
                         <div *ngFor="let group of getMenus().groups; let first=first">
                             <!--分隔符-->
                             <md-divider *ngIf="!first"></md-divider>
@@ -64,11 +70,11 @@
                         </div>
                     </md-nav-list>
 
+                    <!--搜索-->
                     <md-divider></md-divider>
+                    <input fxFlex="40px" fxLayoutAlign="start center" class="mat-toolbar padding searchbar"
+                           type="search" placeholder="搜索关键字" [(ngModel)]="keyword">
 
-                    <div fxFlex="40px" fxLayoutAlign="center center">
-                        <input type="search" placeholder="搜索关键字" [(ngModel)]="keyword">
-                    </div>
                 </div>
 
             </md-sidenav>

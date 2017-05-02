@@ -45,6 +45,14 @@ md-card-content {
     padding: 8px;
 }
 
-.dark-theme input[type="search"] {
-    color: white;
+.no-padding {
+    padding: 0;
+}
+
+.margin {
+    margin: 8px;
+}
+
+.no-margin {
+    margin: 0;
 }
