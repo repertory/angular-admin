@@ -4,11 +4,12 @@
         <h3>后台管理系统</h3>
     </div>
 
-    <div fxFlex [fxLayoutAlign]="isScreenSmall() ? 'start center' : 'center center'" fxLayout="column">
+    <form #registerForm="ngForm" fxFlex [fxLayoutAlign]="isScreenSmall() ? 'start center' : 'center center'"
+          fxLayout="column">
         <md-card style="box-shadow: none; width:68%; min-width: 240px">
             <md-card-title>用户注册</md-card-title>
             <md-card-content fxLayoutAlign="start center">
-                <form #registerForm="ngForm" style="width: 100%">
+                <div style="width: 100%">
                     <md-input-container style="width: 100%">
                         <input mdInput placeholder="请输入用户名" name="username"
                                #usernameElement
@@ -38,7 +39,7 @@
                                maxlength="20">
                         <md-hint align="end">{{passwordElement.value.length}} / 20</md-hint>
                     </md-input-container>
-                </form>
+                </div>
             </md-card-content>
             <md-card-actions>
                 <div style="padding:0 8px">
@@ -49,5 +50,5 @@
             </md-card-actions>
         </md-card>
 
-    </div>
+    </form>
 </div>
