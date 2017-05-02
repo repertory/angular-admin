@@ -38,6 +38,7 @@ md-card {
 
 md-card-content {
     overflow-x: auto;
+    padding: 8px 0;
 }
 
 .padding {
