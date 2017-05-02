@@ -4,6 +4,7 @@ import {PathLocationStrategy, Location, LocationStrategy} from '@angular/common'
 
 export const routerConfig: Route[] = [
     {path: '', loadChildren: './app-children.module#AppChildrenModule'},
+    {path: '**', redirectTo: '/error/404', pathMatch: 'full'}
 ];
 
 @NgModule({
