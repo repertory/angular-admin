@@ -11,7 +11,7 @@
 
         <!--中间部分-->
         <div fxFlex>
-            <h3 style="width: 20px;text-align: center">后台管理系统</h3>
+            <h3 style="width: 20px;text-align: center;outline: none" routerLink="/admin">后台管理系统</h3>
         </div>
 
         <!--底部按钮-->
@@ -63,7 +63,7 @@
                             <h3 md-subheader>{{group}}</h3>
 
                             <!--菜单列表-->
-                            <a md-list-item *ngFor="let menu of getMenus().tree[group]">
+                            <a md-list-item *ngFor="let menu of getMenus().tree[group]" [routerLink]="menu.link">
                                 <md-icon md-list-icon>{{menu.icon}}</md-icon>
                                 <span md-line>{{menu.name}}</span>
                             </a>

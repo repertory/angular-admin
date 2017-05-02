@@ -19,12 +19,12 @@ export class AdminComponent implements OnInit {
     keyword: string;        // 菜单搜索
 
     menus: any[] = [
-        {group: '系统设置', name: '配置管理', link: '#', icon: 'settings'},
-        {group: '系统设置', name: '菜单管理', link: '#', icon: 'list'},
-        {group: '用户设置', name: '角色管理', link: '#', icon: 'group'},
-        {group: '用户设置', name: '用户管理', link: '#', icon: 'person'},
-        {group: '关于系统', name: '代码托管', link: '#', icon: 'code'},
-        {group: '关于系统', name: '使用帮助', link: '#', icon: 'help'},
+        {group: '系统设置', name: '配置管理', link: '/admin/system/menu', icon: 'settings'},
+        {group: '系统设置', name: '菜单管理', link: '/admin/system/setting', icon: 'list'},
+        {group: '用户设置', name: '角色管理', link: '/admin/system/role', icon: 'group'},
+        {group: '用户设置', name: '用户管理', link: '/admin/system/user', icon: 'person'},
+        {group: '关于系统', name: '代码托管', link: '/admin/about/code', icon: 'code'},
+        {group: '关于系统', name: '使用帮助', link: '/admin/about/help', icon: 'help'},
     ];
 
     constructor(public parse: ParseService, private router: Router, private snackBar: MdSnackBar) {
