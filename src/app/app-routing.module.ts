@@ -12,7 +12,7 @@ export const routerConfig: Route[] = [
         {provide: LocationStrategy, useClass: PathLocationStrategy}
     ],
     imports: [
-        RouterModule.forRoot(routerConfig, {initialNavigation: true})
+        RouterModule.forRoot(routerConfig)
     ],
     exports: [RouterModule]
 })
