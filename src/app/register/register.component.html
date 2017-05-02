@@ -4,7 +4,8 @@
         <h3>后台管理系统</h3>
     </div>
 
-    <form #registerForm="ngForm" fxFlex [fxLayoutAlign]="isScreenSmall() ? 'start center' : 'center center'"
+    <form #registerForm="ngForm" (ngSubmit)="submit()" fxFlex
+          [fxLayoutAlign]="isScreenSmall() ? 'start center' : 'center center'"
           fxLayout="column">
         <md-card style="box-shadow: none; width:68%; min-width: 240px">
             <md-card-title>用户注册</md-card-title>

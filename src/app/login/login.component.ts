@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
                 },
                 err => this.snackBar.open(err.message || '登录失败', '关闭', {duration: 2000})
             );
+        return false;
     }
 
     goto() {

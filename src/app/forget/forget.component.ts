@@ -26,6 +26,7 @@ export class ForgetComponent implements OnInit {
                 res => this.snackBar.open('邮件发送成功', '关闭', {duration: 2000}),
                 err => this.snackBar.open(err.message || '邮件发送失败', '关闭', {duration: 2000})
             );
+        return false;
     }
 
 }

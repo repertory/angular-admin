@@ -35,6 +35,7 @@ export class RegisterComponent implements OnInit {
                 },
                 err => this.snackBar.open(err.message || '用户注册失败', '关闭', {duration: 2000})
             );
+        return false;
     }
 
     goto() {
