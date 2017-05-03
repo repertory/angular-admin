@@ -2,8 +2,16 @@ md-sidenav {
     width: 240px;
 }
 
-.searchbar {
-    border: none;
+a {
     outline: none;
-    background: none;
+}
+
+.search-container {
+    width: 100%;
+    margin-top: -8px;
+}
+
+.search-container md-icon {
+    padding: 4px 8px;
+    cursor: default;
 }

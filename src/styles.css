@@ -56,3 +56,7 @@ md-card-content {
 .no-margin {
     margin: 0;
 }
+
+.no-input-underline .mat-input-underline {
+    display: none;
+}

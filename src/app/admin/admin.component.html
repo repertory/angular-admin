@@ -52,7 +52,7 @@
                     <!--菜单列表-->
                     <md-nav-list fxFlex style="overflow-y: auto">
                         <div *ngIf="!getMenus().groups.length" fxLayoutAlign="center start">
-                            <p>没有数据</p>
+                            <p style="font-size: 14px;font-style: italic;">没有数据</p>
                         </div>
 
                         <div *ngFor="let group of getMenus().groups; let first=first">
@@ -72,8 +72,18 @@
 
                     <!--搜索-->
                     <md-divider></md-divider>
-                    <input fxFlex="40px" fxLayoutAlign="start center" class="mat-toolbar padding searchbar"
-                           type="search" placeholder="搜索关键字" [(ngModel)]="keyword">
+
+                    <div fxFlex="40px" style="overflow: hidden">
+                        <md-input-container floatPlaceholder="never" class="search-container no-input-underline">
+                            <div mdPrefix>
+                                <md-icon>search</md-icon>
+                            </div>
+                            <input mdInput placeholder="搜索关键字" [(ngModel)]="keyword">
+                            <div mdSuffix *ngIf="keyword">
+                                <md-icon (click)="keyword = ''">close</md-icon>
+                            </div>
+                        </md-input-container>
+                    </div>
 
                 </div>
 
