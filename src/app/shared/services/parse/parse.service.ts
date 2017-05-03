@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {Subject} from 'rxjs/Subject';
+import {Observable, Subject} from 'rxjs/Rx';
 import {Parse} from 'parse';
 
 @Injectable()
@@ -42,7 +41,7 @@ export class ParseService {
     }
 
     // 运行自定义作业
-    job(name: string, func: Function) {
+    job(name: string, func: Function): Observable<any> {
         return Observable.fromPromise(this.Cloud.job(name, func));
     }
 

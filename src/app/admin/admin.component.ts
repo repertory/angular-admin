@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Router} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
+import {Observable, Subscription} from 'rxjs/Rx';
 import {MdSnackBar} from '@angular/material';
 
 import {ParseService} from '../shared/shared.module';
@@ -13,9 +13,10 @@ import {ParseService} from '../shared/shared.module';
         '[class.dark-theme]': 'isDarkTheme',
     },
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent implements OnInit, OnDestroy {
+    private subscriptions: Array<Subscription> = [];
     isDarkTheme = false;    // 夜间模式
-    user: Observable<any>;  // 用户信息
+    user: Observable<any>;   // 用户信息
     keyword: string;        // 菜单搜索
 
     menus: any[] = [
@@ -33,9 +34,17 @@ export class AdminComponent implements OnInit {
     ngOnInit() {
         this.user = this.parse.userInfo();
 
-        this.parse.userInfo()
+        const checkLogin = this.user
             .filter(x => !x)
             .subscribe(x => this.gotoLogin());
+
+        this.subscriptions.push(checkLogin);
+    }
+
+    ngOnDestroy() {
+        for (const subs of this.subscriptions) {
+            subs.unsubscribe();
+        }
     }
 
     isScreenSmall(): boolean {
@@ -43,6 +52,7 @@ export class AdminComponent implements OnInit {
     }
 
     gotoLogin() {
+        console.log('请先登录');
         this.snackBar.open('请先登录', '关闭', {duration: 2000});
         this.router.navigateByUrl('/login');
     }
