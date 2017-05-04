@@ -1,9 +1,10 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Router} from '@angular/router';
 import {Observable, Subscription} from 'rxjs/Rx';
-import {MdSnackBar} from '@angular/material';
+import {MdSnackBar, MdDialog} from '@angular/material';
 
 import {ParseService} from '../shared/shared.module';
+import {AdminDialogComponent} from './admin-dialog.component';
 
 @Component({
     selector: 'app-admin',
@@ -28,7 +29,7 @@ export class AdminComponent implements OnInit, OnDestroy {
         {group: '关于系统', name: '使用帮助', link: '/admin/about/help', icon: 'help'},
     ];
 
-    constructor(public parse: ParseService, private router: Router, private snackBar: MdSnackBar) {
+    constructor(public parse: ParseService, private router: Router, private dialog: MdDialog, private snackBar: MdSnackBar) {
     }
 
     ngOnInit() {
@@ -67,5 +68,9 @@ export class AdminComponent implements OnInit, OnDestroy {
             result.tree[menu.group].push(menu);
         }
         return result;
+    }
+
+    profile() {
+        this.dialog.open(AdminDialogComponent);
     }
 }

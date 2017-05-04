@@ -26,7 +26,7 @@
             <md-icon>account_circle</md-icon>
         </button>
         <md-menu #menu>
-            <button md-menu-item>
+            <button md-menu-item (click)="profile()">
                 <md-icon>perm_identity</md-icon>
                 <span>{{(user | async)?.get('username')}}</span>
             </button>
