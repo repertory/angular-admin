@@ -8,9 +8,10 @@ import {ITdDataTableColumn} from '@covalent/core';
 })
 export class MenuComponent implements OnInit {
     data: any[] = [
-        {sku: '1452-2', item: 'Pork Chops', price: 32.11},
-        {sku: '1421-0', item: 'Prime Rib', price: 41.15},
+        {sku: '1452-2', item: 'Pork Chops', price: 132.11},
+        {sku: '1421-0', item: 'Prime Rib', price: 141.151},
     ];
+
     columns: ITdDataTableColumn[] = [
         {name: 'sku', label: 'SKU #', tooltip: 'Stock Keeping Unit'},
         {name: 'item', label: 'Item name'},
@@ -23,8 +24,8 @@ export class MenuComponent implements OnInit {
     ngOnInit() {
     }
 
-    isScreenSmall(): boolean {
-        return window.matchMedia(`(max-width: 400px)`).matches;
+    showFirstLast(): boolean {
+        return !window.matchMedia(`(max-width: 400px)`).matches;
     }
 
 }
