@@ -4,6 +4,15 @@
     <md-card-title>菜单管理</md-card-title>
     <md-divider></md-divider>
     <md-card-content>
-
+        <td-data-table
+                [data]="data"
+                [columns]="columns"
+                [selectable]="true"
+                [multiple]="true"
+                [sortable]="true">
+        </td-data-table>
+        <td-paging-bar #pagingBar [firstLast]="true" [pageSizeAll]="true" [pageSizes]="[100,200,500,1000,2000]"
+                       [initialPage]="1" [pageSize]="100" [total]="1345">
+        </td-paging-bar>
     </md-card-content>
 </md-card>

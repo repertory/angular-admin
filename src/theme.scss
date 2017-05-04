@@ -1,8 +1,14 @@
 @import 'assets/iconfont/material-icons.css';
 @import '~font-awesome/css/font-awesome.css';
 @import '~@angular/material/theming';
+@import '~@covalent/core/theming/all-theme';
 
 @include mat-core();
+
+// 字体
+.fa {
+  font-size: 24px;
+}
 
 // 正常效果
 $primary: mat-palette($mat-indigo);
@@ -11,6 +17,7 @@ $warn: mat-palette($mat-red);
 
 $theme: mat-light-theme($primary, $accent, $warn);
 
+@include covalent-theme($theme);
 @include angular-material-theme($theme);
 
 // 夜间模式
@@ -21,10 +28,25 @@ $theme: mat-light-theme($primary, $accent, $warn);
 
   $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 
+  @include covalent-theme($dark-theme);
   @include angular-material-theme($dark-theme);
 }
 
-// 字体
-.fa {
-  font-size: 24px;
+md-card {
+  margin: 8px;
+
+  md-card-content {
+    overflow-x: auto;
+    padding: 8px 0;
+  }
+}
+
+td-paging-bar {
+  .td-paging-bar {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
