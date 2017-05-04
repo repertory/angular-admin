@@ -14,13 +14,17 @@ export class MenuComponent implements OnInit {
     columns: ITdDataTableColumn[] = [
         {name: 'sku', label: 'SKU #', tooltip: 'Stock Keeping Unit'},
         {name: 'item', label: 'Item name'},
-        {name: 'price', label: 'Price (US$)', numeric: true, format: v => v.toFixed(2) },
+        {name: 'price', label: 'Price (US$)', numeric: true, format: v => v.toFixed(2)},
     ];
 
     constructor() {
     }
 
     ngOnInit() {
+    }
+
+    isScreenSmall(): boolean {
+        return window.matchMedia(`(max-width: 400px)`).matches;
     }
 
 }

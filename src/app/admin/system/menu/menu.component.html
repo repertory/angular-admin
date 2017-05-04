@@ -11,8 +11,13 @@
                 [multiple]="true"
                 [sortable]="true">
         </td-data-table>
-        <td-paging-bar #pagingBar [firstLast]="true" [pageSizeAll]="true" [pageSizes]="[100,200,500,1000,2000]"
-                       [initialPage]="1" [pageSize]="100" [total]="1345">
+        <td-paging-bar #pagingBar
+                       [firstLast]="!isScreenSmall()"
+                       [pageSizeAll]="false"
+                       [pageSizes]="[10, 20, 30, 50, 100]"
+                       [initialPage]="1"
+                       [pageSize]="10"
+                       [total]="500">
         </td-paging-bar>
     </md-card-content>
 </md-card>
