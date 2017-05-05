@@ -42,6 +42,7 @@
             <md-sidenav class="mat-elevation-z6"
                         [opened]="!isScreenSmall()"
                         [mode]="isScreenSmall() ? 'push' : 'side'"
+                        [style.width.px]="240"
                         #sidenav>
 
                 <div fxFlex fxLayout="column" fxFill>
@@ -52,7 +53,7 @@
                             <p style="font-size: 14px;font-style: italic;">没有数据</p>
                         </div>
 
-                        <div *ngFor="let group of getMenus().groups; let first=first">
+                        <div *ngFor="let group of getMenus().groups; let first=first" [style.width.px]="240">
                             <!--分隔符-->
                             <md-divider *ngIf="!first"></md-divider>
 
