@@ -10,7 +10,10 @@
                 [columns]="columns"
                 [selectable]="true"
                 [multiple]="true"
-                [sortable]="true">
+                [sortable]="true"
+                (sortChange)="sortChange($event)"
+                (rowSelect)="rowSelect($event)"
+                (selectAll)="selectAll($event)">
         </td-data-table>
         <td-paging-bar #pagingBar
                        [firstLast]="showFirstLast()"
@@ -19,7 +22,7 @@
                        [initialPage]="search.page"
                        [pageSize]="search.limit"
                        [total]="search.total"
-                       (change)="change($event)">
+                       (change)="pageChange($event)">
         </td-paging-bar>
     </md-card-content>
 </md-card>

@@ -13,6 +13,8 @@ export class UserComponent implements OnInit {
         page: 1,
         pageSize: 10,
         pageSizes: [10, 20, 30, 50, 100],
+        orderName: 'updatedAt',
+        orderBy: 'DESC',
     };
     data: any[] = [];
 
@@ -33,15 +35,30 @@ export class UserComponent implements OnInit {
         return !window.matchMedia(`(max-width: 400px)`).matches;
     }
 
-    change(event) {
+    pageChange(event) {
         this.search.pageSize = event.pageSize;
         this.search.page = event.page;
         this.getData();
     }
 
+    sortChange(event) {
+        this.search.orderName = event.name;
+        this.search.orderBy = event.order;
+        this.getData();
+    }
+
+    rowSelect(event) {
+        console.log('rowSelect', event);
+    }
+
+    selectAll(event) {
+        console.log('selectAll', event);
+    }
+
     getData() {
         this.parse.query('User', query => {
             query.count().then(res => this.search.total = res, err => this.search.total = 0);
+            this.search.orderBy === 'ASC' ? query.ascending(this.search.orderName) : query.descending(this.search.orderName);
             query.skip((this.search.page - 1) * this.search.pageSize);
             query.limit(this.search.pageSize);
         }).subscribe(
