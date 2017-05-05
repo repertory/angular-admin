@@ -1,4 +1,5 @@
 @import 'assets/iconfont/material-icons.css';
+@import 'assets/iconfont/iconfont.css';
 @import '~font-awesome/css/font-awesome.css';
 @import '~@angular/material/theming';
 @import '~@covalent/core/theming/all-theme';
@@ -6,7 +7,7 @@
 @include mat-core();
 
 // 字体
-.fa {
+.fa, .iconfont {
   font-size: 24px;
 }
 
