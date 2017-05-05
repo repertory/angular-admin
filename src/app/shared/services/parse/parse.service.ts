@@ -123,7 +123,7 @@ export class ParseService {
     }
 
     // 查询数据
-    query(className: string, callback?: Function): Observable<any> {
+    query(className: string, callback?: Function, isSocket?: boolean): Observable<any> {
         const subject = new Subject();
         const query = new this.Query(className);
 
@@ -131,19 +131,21 @@ export class ParseService {
             callback(query);
         }
 
-        query.find().then(
-            res => subject.next({type: 'result', result: res}),
-            err => subject.error(err)
-        );
+        query.find({
+            success: res => subject.next({type: 'result', result: res}),
+            error: err => subject.error(err)
+        });
 
-        query.subscribe()
-            .on('open', () => subject.next({type: 'event', event: 'open'}))
-            .on('close', () => subject.next({type: 'event', event: 'close'}))
-            .on('create', data => subject.next({type: 'event', event: 'create', data: data}))
-            .on('update', data => subject.next({type: 'event', event: 'update', data: data}))
-            .on('delete', data => subject.next({type: 'event', event: 'delete', data: data}))
-            .on('enter', data => subject.next({type: 'event', event: 'enter', data: data}))
-            .on('leave', data => subject.next({type: 'event', event: 'leave', data: data}));
+        if (isSocket) {
+            query.subscribe()
+                .on('open', () => subject.next({type: 'event', event: 'open'}))
+                .on('close', () => subject.next({type: 'event', event: 'close'}))
+                .on('create', data => subject.next({type: 'event', event: 'create', data: data}))
+                .on('update', data => subject.next({type: 'event', event: 'update', data: data}))
+                .on('delete', data => subject.next({type: 'event', event: 'delete', data: data}))
+                .on('enter', data => subject.next({type: 'event', event: 'enter', data: data}))
+                .on('leave', data => subject.next({type: 'event', event: 'leave', data: data}));
+        }
 
         return subject;
     }

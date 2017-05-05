@@ -9,7 +9,7 @@ export const environment = {
     // 路由配置
     router: {
         useHash: false,
-        enableTracing: true
+        enableTracing: false
     },
 
     // Parse服务

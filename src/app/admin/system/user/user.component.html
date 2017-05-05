@@ -1,9 +1,25 @@
 <app-header title="用户管理"></app-header>
 
 <md-card>
-  <md-card-title>用户管理</md-card-title>
-  <md-divider></md-divider>
-  <md-card-content>
-
-  </md-card-content>
+    <md-card-title>用户管理</md-card-title>
+    <md-card-subtitle align="end">{{pagingBar.page}} / {{pagingBar.maxPage}} of {{pagingBar.total}}</md-card-subtitle>
+    <md-divider></md-divider>
+    <md-card-content>
+        <td-data-table
+                [data]="data"
+                [columns]="columns"
+                [selectable]="true"
+                [multiple]="true"
+                [sortable]="true">
+        </td-data-table>
+        <td-paging-bar #pagingBar
+                       [firstLast]="showFirstLast()"
+                       [pageSizeAll]="false"
+                       [pageSizes]="[10, 20, 30, 50, 100]"
+                       [initialPage]="search.page"
+                       [pageSize]="search.limit"
+                       [total]="search.total"
+                       (change)="change($event)">
+        </td-paging-bar>
+    </md-card-content>
 </md-card>
