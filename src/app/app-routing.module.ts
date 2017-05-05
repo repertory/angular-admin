@@ -1,19 +1,17 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Route} from '@angular/router';
-import {PathLocationStrategy, Location, LocationStrategy} from '@angular/common';
+
+import {environment} from '../environments/environment';
+import {AppComponent} from './app.component';
 
 export const routerConfig: Route[] = [
-    {path: '', loadChildren: './app-children.module#AppChildrenModule'},
+    {path: '', component: AppComponent, loadChildren: './app-children.module#AppChildrenModule'},
     {path: '**', redirectTo: '/error/404', pathMatch: 'full'}
 ];
 
 @NgModule({
-    providers: [
-        Location,
-        {provide: LocationStrategy, useClass: PathLocationStrategy}
-    ],
     imports: [
-        RouterModule.forRoot(routerConfig)
+        RouterModule.forRoot(routerConfig, environment.router)
     ],
     exports: [RouterModule]
 })

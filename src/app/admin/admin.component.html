@@ -15,14 +15,11 @@
         </div>
 
         <!--底部按钮-->
-        <button md-icon-button (click)="isDarkTheme = !isDarkTheme" mdTooltip="主题模式" mdTooltipPosition="right">
+        <button md-icon-button (click)="isDarkTheme = !isDarkTheme">
             <md-icon [textContent]="isDarkTheme ? 'brightness_4' : 'brightness_5'"></md-icon>
         </button>
-        <a routerLink="/login" md-icon-button *ngIf="!(user | async)" mdTooltip="用户登录" mdTooltipPosition="right">
-            登录
-        </a>
-        <button md-icon-button [mdMenuTriggerFor]="menu" *ngIf="user | async" mdTooltip="用户中心"
-                mdTooltipPosition="right">
+        <a routerLink="/login" md-icon-button *ngIf="!(user | async)">登录</a>
+        <button md-icon-button [mdMenuTriggerFor]="menu" *ngIf="user | async">
             <md-icon>account_circle</md-icon>
         </button>
         <md-menu #menu>
@@ -80,7 +77,7 @@
                             </div>
                             <input mdInput placeholder="搜索关键字" [(ngModel)]="keyword">
                             <div mdSuffix *ngIf="keyword">
-                                <md-icon (click)="keyword = ''">close</md-icon>
+                                <md-icon (click)="keyword = ''" [style.cursor]="'pointer'">close</md-icon>
                             </div>
                         </md-input-container>
                     </div>

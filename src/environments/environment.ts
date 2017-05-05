@@ -6,6 +6,13 @@
 export const environment = {
     production: false,
 
+    // 路由配置
+    router: {
+        useHash: false,
+        enableTracing: true
+    },
+
+    // Parse服务
     parse: {
         appId: '7afa28e6-ff85-11e6-9766-0242ac110002',
         javascriptKey: '7b004cd0-ff85-11e6-9766-0242ac110002',
