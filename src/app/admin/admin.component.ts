@@ -1,7 +1,7 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {Observable, Subscription} from 'rxjs/Rx';
-import {MdSnackBar, MdDialog} from '@angular/material';
+import {MdSnackBar, MdDialog, MdSidenav} from '@angular/material';
 
 import {ParseService} from '../shared/shared.module';
 import {AdminDialogComponent} from './admin-dialog.component';
@@ -32,8 +32,17 @@ export class AdminComponent implements OnInit, OnDestroy {
     constructor(public parse: ParseService, private router: Router, private dialog: MdDialog, private snackBar: MdSnackBar) {
     }
 
+    @ViewChild(MdSidenav) sidenav: MdSidenav;
+
     ngOnInit() {
         this.user = this.parse.userInfo();
+
+        const sidenav = this.router.events.subscribe(() => {
+            if (this.isScreenSmall()) {
+                this.sidenav.close();
+            }
+        });
+        this.subscriptions.push(sidenav);
 
         const checkLogin = this.user
             .filter(x => !x)

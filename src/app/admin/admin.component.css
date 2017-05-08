@@ -15,3 +15,7 @@ a {
     padding: 4px 8px;
     cursor: default;
 }
+
+input::-ms-clear, input::-webkit-search-cancel-button {
+    display: none;
+}
