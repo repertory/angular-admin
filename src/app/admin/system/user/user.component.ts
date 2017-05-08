@@ -1,6 +1,8 @@
 import {Component, OnInit, ViewContainerRef} from '@angular/core';
 import {ITdDataTableColumn, TdDialogService} from '@covalent/core';
 import {ParseService} from '../../../shared/shared.module';
+import * as moment from 'moment';
+import 'moment/locale/zh-cn';
 
 @Component({
     selector: 'app-user',
@@ -21,7 +23,7 @@ export class UserComponent implements OnInit {
     columns: ITdDataTableColumn[] = [
         {name: 'objectId', label: 'ID'},
         {name: 'username', label: '用户名'},
-        {name: 'createdAt', label: '注册时间'},
+        {name: 'createdAt', label: '注册时间', format: v => moment(v).format('YYYY-MM-DD HH:mm:ss')},
     ];
 
     constructor(public parse: ParseService, private dialog: TdDialogService, private view: ViewContainerRef) {
@@ -39,8 +41,7 @@ export class UserComponent implements OnInit {
             title: '确认离开吗',
             cancelButton: '否',
             acceptButton: '是',
-        })
-            .afterClosed().toPromise();
+        }).afterClosed().toPromise();
     }
 
     showFirstLast(): boolean {
