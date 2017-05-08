@@ -86,11 +86,8 @@ export class AdminComponent implements OnInit, OnDestroy {
                 if (accept) {
                     this.parse.logout().subscribe(
                         res => {
-                            this.snackBar.open('请重新登录', '关闭', {duration: 2000});
+                            this.snackBar.open('已退出登录', '关闭', {duration: 2000});
                             this.router.navigate(['/login']);
-                        },
-                        err => {
-                            this.snackBar.open('退出失败，请重试', '关闭', {duration: 2000});
                         }
                     );
                 }
