@@ -53,9 +53,8 @@ export class AdminComponent implements OnInit, OnDestroy {
     }
 
     gotoLogin() {
-        console.log('请先登录');
         this.snackBar.open('请先登录', '关闭', {duration: 2000});
-        this.router.navigateByUrl('/login');
+        this.router.navigate(['/login']);
     }
 
     getMenus() {

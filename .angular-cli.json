@@ -21,7 +21,7 @@
       "styles": [
         "../node_modules/normalize.css/normalize.css",
         "theme.scss",
-        "styles.css"
+        "style.scss"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
