@@ -1,10 +1,10 @@
-import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewChild, ViewContainerRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {Observable, Subscription} from 'rxjs/Rx';
-import {MdSnackBar, MdDialog, MdSidenav} from '@angular/material';
+import {MdSnackBar, MdSidenav} from '@angular/material';
+import {TdDialogService} from '@covalent/core';
 
 import {ParseService} from '../shared/shared.module';
-import {AdminDialogComponent} from './admin-dialog.component';
 
 @Component({
     selector: 'app-admin',
@@ -29,7 +29,11 @@ export class AdminComponent implements OnInit, OnDestroy {
         {group: '关于系统', name: '使用帮助', link: '/admin/about/help', icon: 'help'},
     ];
 
-    constructor(public parse: ParseService, private router: Router, private dialog: MdDialog, private snackBar: MdSnackBar) {
+    constructor(public parse: ParseService,
+                private router: Router,
+                private snackBar: MdSnackBar,
+                private dialog: TdDialogService,
+                private view: ViewContainerRef) {
     }
 
     @ViewChild(MdSidenav) sidenav: MdSidenav;
@@ -37,18 +41,13 @@ export class AdminComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.user = this.parse.userInfo();
 
+        // 菜单收缩
         const sidenav = this.router.events.subscribe(() => {
             if (this.isScreenSmall()) {
                 this.sidenav.close();
             }
         });
         this.subscriptions.push(sidenav);
-
-        const checkLogin = this.user
-            .filter(x => !x)
-            .subscribe(x => this.gotoLogin());
-
-        this.subscriptions.push(checkLogin);
     }
 
     ngOnDestroy() {
@@ -59,11 +58,6 @@ export class AdminComponent implements OnInit, OnDestroy {
 
     isScreenSmall(): boolean {
         return window.matchMedia(`(max-width: 768px)`).matches;
-    }
-
-    gotoLogin() {
-        this.snackBar.open('请先登录', '关闭', {duration: 2000});
-        this.router.navigate(['/login']);
     }
 
     getMenus() {
@@ -78,7 +72,38 @@ export class AdminComponent implements OnInit, OnDestroy {
         return result;
     }
 
+    logout() {
+        this.dialog.openConfirm({
+            message: '确定要退出吗？',
+            disableClose: false,
+            viewContainerRef: this.view,
+            title: '系统提示',
+            cancelButton: '取消',
+            acceptButton: '确定',
+        })
+            .afterClosed()
+            .subscribe((accept: boolean) => {
+                if (accept) {
+                    this.parse.logout().subscribe(
+                        res => {
+                            this.snackBar.open('请重新登录', '关闭', {duration: 2000});
+                            this.router.navigate(['/login']);
+                        },
+                        err => {
+                            this.snackBar.open('退出失败，请重试', '关闭', {duration: 2000});
+                        }
+                    );
+                }
+            });
+    }
+
     profile() {
-        this.dialog.open(AdminDialogComponent);
+        this.dialog.openAlert({
+            message: '功能完善中',
+            disableClose: false,
+            viewContainerRef: this.view,
+            title: '个人资料',
+            closeButton: '关闭',
+        });
     }
 }

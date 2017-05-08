@@ -27,7 +27,7 @@
                 <md-icon>perm_identity</md-icon>
                 <span>{{(user | async)?.get('username')}}</span>
             </button>
-            <button md-menu-item (click)="parse.logout()">
+            <button md-menu-item (click)="logout()">
                 <md-icon>exit_to_app</md-icon>
                 <span>注销</span>
             </button>
