@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {ITdDataTableColumn} from '@covalent/core';
+import {Component, OnInit, ViewContainerRef} from '@angular/core';
+import {ITdDataTableColumn, TdDialogService} from '@covalent/core';
 import {ParseService} from '../../../shared/shared.module';
 
 @Component({
@@ -24,11 +24,23 @@ export class UserComponent implements OnInit {
         {name: 'createdAt', label: '注册时间'},
     ];
 
-    constructor(public parse: ParseService) {
+    constructor(public parse: ParseService, private dialog: TdDialogService, private view: ViewContainerRef) {
     }
 
     ngOnInit() {
         this.getData();
+    }
+
+    leaveConfirm(): Promise<boolean> {
+        return this.dialog.openConfirm({
+            message: '测试页面离开事件',
+            disableClose: false,
+            viewContainerRef: this.view,
+            title: '确认离开吗',
+            cancelButton: '否',
+            acceptButton: '是',
+        })
+            .afterClosed().toPromise();
     }
 
     showFirstLast(): boolean {
