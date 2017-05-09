@@ -5,15 +5,16 @@ import {
     Router,
     CanActivateChild,
 } from '@angular/router';
-import {ParseService} from '../parse/parse.module';
+import {ParseService} from './shared/shared.module';
 
 @Injectable()
-export class GuardService implements CanActivateChild {
+export class AppGuardService implements CanActivateChild {
+
     constructor(private parse: ParseService, private router: Router) {
     }
 
     canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-        console.log('GuardService#canActivateChild called', state.url, '验证登录和权限功能');
+        console.log('AppGuardService#canActivateChild called', state.url, '验证登录和权限功能');
 
         return this.checkLogin(route, state);
     }
@@ -32,4 +33,5 @@ export class GuardService implements CanActivateChild {
         this.router.navigate(['/login']);
         return false;
     }
+
 }

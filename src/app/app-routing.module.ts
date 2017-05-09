@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Route} from '@angular/router';
 
 import {environment} from '../environments/environment';
-import {GuardService} from './shared/shared.module';
+import {AppGuardService} from './app-guard.service';
 
 import {AppComponent} from './app.component';
 
@@ -10,7 +10,7 @@ export const routerConfig: Route[] = [
     {
         path: '',
         component: AppComponent,
-        canActivateChild: [GuardService],
+        canActivateChild: [AppGuardService],
         loadChildren: './app-children.module#AppChildrenModule'
     },
     {path: '**', redirectTo: '/error/404', pathMatch: 'full'}

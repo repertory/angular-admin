@@ -5,6 +5,7 @@ import {NgModule} from '@angular/core';
 import {SharedModule} from './shared/shared.module';
 import {AppRoutingModule} from './app-routing.module';
 import {AppParseModule} from './app-parse.module';
+import {AppGuardService} from './app-guard.service';
 import {AppComponent} from './app.component';
 
 @NgModule({
@@ -18,7 +19,9 @@ import {AppComponent} from './app.component';
         AppRoutingModule,
         AppParseModule,
     ],
-    providers: [],
+    providers: [
+        AppGuardService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {
