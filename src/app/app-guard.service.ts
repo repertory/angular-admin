@@ -1,10 +1,5 @@
 import {Injectable} from '@angular/core';
-import {
-    ActivatedRouteSnapshot,
-    RouterStateSnapshot,
-    Router,
-    CanActivateChild,
-} from '@angular/router';
+import {ActivatedRouteSnapshot, RouterStateSnapshot, Router, CanActivateChild} from '@angular/router';
 import {ParseService} from './shared/shared.module';
 
 @Injectable()

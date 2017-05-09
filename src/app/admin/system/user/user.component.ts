@@ -35,10 +35,10 @@ export class UserComponent implements OnInit {
 
     leaveConfirm(): Promise<boolean> {
         return this.dialog.openConfirm({
-            message: '测试页面离开事件',
+            message: '确定要离开用户管理页面吗？',
             disableClose: false,
             viewContainerRef: this.view,
-            title: '确认离开吗',
+            title: '离开提示',
             cancelButton: '否',
             acceptButton: '是',
         }).afterClosed().toPromise();

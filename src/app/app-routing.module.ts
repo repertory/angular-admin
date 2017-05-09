@@ -3,7 +3,6 @@ import {RouterModule, Route} from '@angular/router';
 
 import {environment} from '../environments/environment';
 import {AppGuardService} from './app-guard.service';
-
 import {AppComponent} from './app.component';
 
 export const routerConfig: Route[] = [
