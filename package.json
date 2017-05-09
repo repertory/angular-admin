@@ -31,7 +31,7 @@
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
-    "@angular/cli": "1.0.1",
+    "@angular/cli": "1.0.2",
     "@angular/compiler-cli": "^4.0.0",
     "@angular/flex-layout": "git+https://github.com/angular/flex-layout-builds.git",
     "@angular/material": "git+https://github.com/angular/material2-builds.git",
