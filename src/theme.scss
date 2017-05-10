@@ -1,9 +1,9 @@
 @import 'assets/iconfont/material-icons.css';
 @import 'assets/iconfont/iconfont.css';
 @import '~font-awesome/css/font-awesome.css';
-@import '~@angular/material/theming';
-@import '~@covalent/core/theming/all-theme';
-@import '~@covalent/core/common/styles/layout';
+@import '~@angular/material/_theming.scss';
+@import '~@covalent/core/common/styles/_layout.scss';
+@import '~@covalent/core/theming/_all-theme.scss';
 
 @include mat-core();
 
