@@ -5,5 +5,8 @@
     <md-divider></md-divider>
     <md-card-content>
         <pre>{{user | async | json}}</pre>
+        <input type="text" [(ngModel)]="binding">
+
+        <app-qrcode value="{{binding}}" size="300"></app-qrcode>
     </md-card-content>
 </md-card>
