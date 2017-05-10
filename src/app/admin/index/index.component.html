@@ -5,8 +5,13 @@
     <md-divider></md-divider>
     <md-card-content>
         <pre>{{user | async | json}}</pre>
-        <input type="text" [(ngModel)]="binding">
+    </md-card-content>
+</md-card>
 
-        <app-qrcode value="{{binding}}" size="300"></app-qrcode>
+<md-card>
+    <md-card-title>二维码测试</md-card-title>
+    <md-divider></md-divider>
+    <md-card-content>
+        <app-qrcode value="https://wangdong.io" size="200"></app-qrcode>
     </md-card-content>
 </md-card>
