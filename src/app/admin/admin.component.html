@@ -62,7 +62,7 @@
 
                             <!--菜单列表-->
                             <a md-list-item *ngFor="let menu of getMenus().tree[group]" [routerLink]="menu.link">
-                                <md-icon md-list-icon>{{menu.icon}}</md-icon>
+                                <md-icon md-list-icon [class]="menu?.iconClass">{{menu?.icon}}</md-icon>
                                 <span md-line>{{menu.name}}</span>
                             </a>
                         </div>

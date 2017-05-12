@@ -1,15 +1,15 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, RouterStateSnapshot, Router, CanActivateChild} from '@angular/router';
-import {ParseService} from './shared/shared.module';
+import {ParseService} from '../shared/shared.module';
 
 @Injectable()
-export class AppGuardService implements CanActivateChild {
+export class AdminGuardService implements CanActivateChild {
 
     constructor(private parse: ParseService, private router: Router) {
     }
 
     canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-        console.log('AppGuardService#canActivateChild called', state.url, '验证登录和权限功能');
+        console.log('AdminGuardService#canActivateChild called', state.url, '验证登录和权限功能');
 
         return this.checkLogin(route, state);
     }

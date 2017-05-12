@@ -38,6 +38,6 @@ export class LoginComponent implements OnInit {
     }
 
     goto() {
-        this.router.navigateByUrl('/admin');
+        this.router.navigateByUrl('/');
     }
 }
