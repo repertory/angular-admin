@@ -11,7 +11,7 @@ export const routerConfig: Route[] = [
         canActivateChild: [AdminGuardService],
         loadChildren: './admin-children.module#AdminChildrenModule'
     },
-    {path: '', redirectTo: '/admin/index', pathMatch: 'full'}
+    {path: '', redirectTo: 'admin/index', pathMatch: 'full'}
 ];
 
 @NgModule({

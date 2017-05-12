@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ElementRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {MdSnackBar} from '@angular/material';
 import {ParseService} from '../shared/shared.module';
@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
     username: string;
     password: string;
 
-    constructor(public parse: ParseService, private router: Router, private snackBar: MdSnackBar) {
+    constructor(public parse: ParseService, private router: Router, private snackBar: MdSnackBar, private ER: ElementRef) {
     }
 
     ngOnInit() {
@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
     }
 
     goto() {
-        this.router.navigateByUrl('/');
+        this.ER.nativeElement.lastElementChild.click();
+        // this.router.navigate(['/']);
     }
 }
