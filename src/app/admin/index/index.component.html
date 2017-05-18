@@ -1,10 +1,14 @@
 <app-header title="后台首页"></app-header>
 
 <md-card>
-    <md-card-title>当前登录用户</md-card-title>
+    <md-card-title>MarkDown</md-card-title>
     <md-divider></md-divider>
     <md-card-content>
-        <pre style="max-height: 240px">{{user | async | json}}</pre>
+        <app-markdown [content]="markdown"></app-markdown>
+        <hr>
+        <md-input-container style="width:100%">
+            <textarea mdInput [(ngModel)]="markdown" style="height: 160px"></textarea>
+        </md-input-container>
     </md-card-content>
 </md-card>
 

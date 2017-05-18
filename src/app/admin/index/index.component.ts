@@ -11,6 +11,7 @@ import {ParseService} from '../../shared/shared.module';
 export class IndexComponent implements OnInit {
     user: Observable<any>;
     qrcode: String = 'https://wangdong.io';
+    markdown: String = '# h1';
 
     constructor(public parse: ParseService) {
     }
