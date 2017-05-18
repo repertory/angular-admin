@@ -53,7 +53,7 @@
                             <p style="font-size: 14px;font-style: italic;">没有数据</p>
                         </div>
 
-                        <div *ngFor="let group of getMenus().groups; let first=first" [style.width.px]="240">
+                        <div *ngFor="let group of getMenus().groups; let first=first" style="width: 100%">
                             <!--分隔符-->
                             <md-divider *ngIf="!first"></md-divider>
 
