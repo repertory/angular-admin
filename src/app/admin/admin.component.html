@@ -88,16 +88,8 @@
             </md-sidenav>
 
             <!--右侧内容区域-->
-            <div fxFlex fxLayout="column" fxFill>
-
-                <div fxFlex>
-                    <router-outlet></router-outlet>
-                </div>
-
-                <div fxFlex="56px">
-                    <md-divider></md-divider>
-                    <app-footer></app-footer>
-                </div>
+            <div fxFlex fxLayout="column">
+                <router-outlet></router-outlet>
             </div>
 
         </md-sidenav-container>
