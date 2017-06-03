@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy, ViewChild, ViewContainerRef, ElementRef} from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewChild, ViewContainerRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {Observable, Subscription} from 'rxjs/Rx';
 import {MdSnackBar, MdSidenav} from '@angular/material';
@@ -33,8 +33,7 @@ export class AdminComponent implements OnInit, OnDestroy {
                 private router: Router,
                 private snackBar: MdSnackBar,
                 private dialog: TdDialogService,
-                private view: ViewContainerRef,
-                private ER: ElementRef) {
+                private view: ViewContainerRef) {
     }
 
     @ViewChild(MdSidenav) sidenav: MdSidenav;
@@ -88,8 +87,7 @@ export class AdminComponent implements OnInit, OnDestroy {
                     this.parse.logout().subscribe(
                         res => {
                             this.snackBar.open('已退出登录', '关闭', {duration: 2000});
-                            this.ER.nativeElement.lastElementChild.click();
-                            // this.router.navigate(['/login']);
+                            this.router.navigate(['/login']);
                         }
                     );
                 }

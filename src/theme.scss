@@ -3,7 +3,6 @@
 @import '~font-awesome/css/font-awesome.css';
 @import '~@angular/material/_theming.scss';
 @import '~@covalent/core/common/styles/_layout.scss';
-@import '~@covalent/core/theming/_all-theme.scss';
 
 @include mat-core();
 
@@ -19,7 +18,6 @@ $warn: mat-palette($mat-red);
 
 $theme: mat-light-theme($primary, $accent, $warn);
 
-@include covalent-theme($theme);
 @include angular-material-theme($theme);
 
 // 夜间模式
@@ -30,7 +28,6 @@ $theme: mat-light-theme($primary, $accent, $warn);
 
   $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 
-  @include covalent-theme($dark-theme);
   @include angular-material-theme($dark-theme);
 }
 
