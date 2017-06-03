@@ -1,35 +1,37 @@
-<app-header title="用户管理"></app-header>
+<div fxFlex>
+    <app-header title="用户管理"></app-header>
 
-<md-card>
-    <div fxLayout="row" fxLayoutAlign="start center">
-        <span fxFlex class="mat-card-title">用户管理</span>
-        <td-search-box fxFlex placeholder="搜索关键字" [alwaysVisible]="false" [showUnderline]="false"
-                       [debounce]="500">
-        </td-search-box>
-    </div>
-    <md-divider></md-divider>
-    <md-card-content class="no-padding">
-        <td-data-table
-                [data]="data"
-                [columns]="columns"
-                [selectable]="true"
-                [multiple]="true"
-                [sortable]="true"
-                (sortChange)="sortChange($event)"
-                (rowSelect)="rowSelect($event)"
-                (selectAll)="selectAll($event)">
-        </td-data-table>
-        <td-paging-bar #pagingBar
-                       [firstLast]="showFirstLast()"
-                       [pageSizeAll]="false"
-                       [pageSizes]="[10, 20, 30, 50, 100]"
-                       [initialPage]="search.page"
-                       [pageSize]="search.pageSize"
-                       [total]="search.total"
-                       (change)="pageChange($event)">
-            <span td-paging-bar-label hide-xs>每页显示：</span>
-            <span hide-xs>当前：{{pagingBar.page}} / {{pagingBar.maxPage}}页</span>
-            <span hide-xs>总数：{{pagingBar.total}}</span>
-        </td-paging-bar>
-    </md-card-content>
-</md-card>
+    <md-card>
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <span fxFlex class="mat-card-title">用户管理</span>
+            <td-search-box fxFlex placeholder="搜索关键字" [alwaysVisible]="false" [showUnderline]="false"
+                           [debounce]="500">
+            </td-search-box>
+        </div>
+        <md-divider></md-divider>
+        <md-card-content class="no-padding">
+            <td-data-table
+                    [data]="data"
+                    [columns]="columns"
+                    [selectable]="true"
+                    [multiple]="true"
+                    [sortable]="true"
+                    (sortChange)="sortChange($event)"
+                    (rowSelect)="rowSelect($event)"
+                    (selectAll)="selectAll($event)">
+            </td-data-table>
+            <td-paging-bar #pagingBar
+                           [firstLast]="showFirstLast()"
+                           [pageSizeAll]="false"
+                           [pageSizes]="[10, 20, 30, 50, 100]"
+                           [initialPage]="search.page"
+                           [pageSize]="search.pageSize"
+                           [total]="search.total"
+                           (change)="pageChange($event)">
+                <span td-paging-bar-label hide-xs>每页显示：</span>
+                <span hide-xs>当前：{{pagingBar.page}} / {{pagingBar.maxPage}}页</span>
+                <span hide-xs>总数：{{pagingBar.total}}</span>
+            </td-paging-bar>
+        </md-card-content>
+    </md-card>
+</div>
