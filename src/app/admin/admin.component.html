@@ -15,7 +15,7 @@
         </div>
 
         <!--底部按钮-->
-        <button md-icon-button (click)="isDarkTheme = !isDarkTheme">
+        <button md-icon-button (click)="changeTheme()">
             <md-icon [textContent]="isDarkTheme ? 'brightness_4' : 'brightness_5'"></md-icon>
         </button>
         <a routerLink="/login" md-icon-button *ngIf="!(user | async)">登录</a>

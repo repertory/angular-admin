@@ -1,7 +1,7 @@
 import {Component, OnInit, OnDestroy, ViewChild, ViewContainerRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {Observable, Subscription} from 'rxjs/Rx';
-import {MdSnackBar, MdSidenav} from '@angular/material';
+import {MdSnackBar, MdSidenav, OverlayContainer} from '@angular/material';
 import {TdDialogService} from '@covalent/core';
 
 import {ParseService} from '../shared/shared.module';
@@ -30,6 +30,7 @@ export class AdminComponent implements OnInit, OnDestroy {
     ];
 
     constructor(public parse: ParseService,
+                private overlayContainer: OverlayContainer,
                 private router: Router,
                 private snackBar: MdSnackBar,
                 private dialog: TdDialogService,
@@ -58,6 +59,11 @@ export class AdminComponent implements OnInit, OnDestroy {
 
     isScreenSmall(): boolean {
         return window.matchMedia(`(max-width: 768px)`).matches;
+    }
+
+    changeTheme() {
+        this.isDarkTheme = !this.isDarkTheme;
+        this.overlayContainer.themeClass = this.isDarkTheme ? 'dark-theme' : 'light-theme';
     }
 
     getMenus() {
