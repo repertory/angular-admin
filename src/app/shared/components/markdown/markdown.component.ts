@@ -1,4 +1,4 @@
-import {Component, AfterViewInit, ElementRef, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, ViewEncapsulation, AfterViewInit, ElementRef, Input, OnChanges, SimpleChanges} from '@angular/core';
 import * as markdown from 'markdown-it';
 
 @Component({
@@ -8,6 +8,7 @@ import * as markdown from 'markdown-it';
     host: {
         '[class.markdown]': 'showMarkdown',
     },
+    encapsulation: ViewEncapsulation.None,
 })
 export class MarkdownComponent implements AfterViewInit, OnChanges {
     showMarkdown = true;
