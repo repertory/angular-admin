@@ -5,9 +5,12 @@ import * as markdown from 'markdown-it';
     selector: 'app-markdown',
     templateUrl: './markdown.component.html',
     styleUrls: ['./markdown.component.css'],
+    host: {
+        '[class.markdown]': 'showMarkdown',
+    },
 })
 export class MarkdownComponent implements AfterViewInit, OnChanges {
-
+    showMarkdown = true;
     private markdown: any;
 
     @Input() content: String = '';
