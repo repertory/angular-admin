@@ -89,7 +89,15 @@
 
             <!--右侧内容区域-->
             <div fxFlex fxLayout="column">
-                <router-outlet></router-outlet>
+                <div fxFlex>
+                    <router-outlet></router-outlet>
+                </div>
+
+                <md-divider></md-divider>
+
+                <div fxFlex="56px">
+                    <app-footer></app-footer>
+                </div>
             </div>
 
         </md-sidenav-container>
