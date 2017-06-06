@@ -3,6 +3,7 @@ import * as markdown from 'markdown-it';
 import * as markdownAttrs from 'markdown-it-attrs';
 import * as markdownCheckbox from 'markdown-it-checkbox';
 import * as markdownEmoji from 'markdown-it-emoji';
+import * as markdownFontawesome from 'markdown-it-fontawesome';
 
 @Component({
     selector: 'app-markdown',
@@ -44,7 +45,8 @@ export class MarkdownComponent implements AfterViewInit, OnChanges {
         })
             .use(markdownCheckbox)
             .use(markdownEmoji)
-            .use(markdownAttrs);
+            .use(markdownAttrs)
+            .use(markdownFontawesome);
     }
 
     ngAfterViewInit() {

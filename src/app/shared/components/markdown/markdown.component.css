@@ -13,6 +13,10 @@ app-markdown {
     word-wrap: break-word;
 }
 
+app-markdown .fa {
+    font-size: 16px;
+}
+
 app-markdown a {
     background-color: transparent;
 }
