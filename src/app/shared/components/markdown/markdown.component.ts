@@ -1,17 +1,16 @@
 import {Component, ViewEncapsulation, AfterViewInit, ElementRef, Input, OnChanges, SimpleChanges} from '@angular/core';
 import * as markdown from 'markdown-it';
+import * as markdownAttrs from 'markdown-it-attrs';
+import * as markdownCheckbox from 'markdown-it-checkbox';
+import * as markdownEmoji from 'markdown-it-emoji';
 
 @Component({
     selector: 'app-markdown',
     templateUrl: './markdown.component.html',
     styleUrls: ['./markdown.component.css'],
-    host: {
-        '[class.markdown]': 'showMarkdown',
-    },
     encapsulation: ViewEncapsulation.None,
 })
 export class MarkdownComponent implements AfterViewInit, OnChanges {
-    showMarkdown = true;
     private markdown: any;
 
     @Input() content: String = '';
@@ -42,7 +41,10 @@ export class MarkdownComponent implements AfterViewInit, OnChanges {
             highlight: function (/*str, lang*/) {
                 return '';
             }
-        });
+        })
+            .use(markdownCheckbox)
+            .use(markdownEmoji)
+            .use(markdownAttrs);
     }
 
     ngAfterViewInit() {
