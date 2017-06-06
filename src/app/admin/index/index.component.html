@@ -2,19 +2,19 @@
     <app-header title="后台首页"></app-header>
 
     <md-card>
-        <md-card-title>MarkDown</md-card-title>
+        <md-card-title>markdown组件</md-card-title>
         <md-divider></md-divider>
         <md-card-content>
             <app-markdown [content]="markdown"></app-markdown>
             <hr>
             <md-input-container style="width:100%">
-                <textarea mdInput [(ngModel)]="markdown" style="height: 160px"></textarea>
+                <textarea mdInput [(ngModel)]="markdown" style="height: 100px"></textarea>
             </md-input-container>
         </md-card-content>
     </md-card>
 
     <md-card>
-        <md-card-title>二维码测试</md-card-title>
+        <md-card-title>二维码组件</md-card-title>
         <md-divider></md-divider>
         <md-card-content>
             <app-qrcode [value]="qrcode" size="200"></app-qrcode>
