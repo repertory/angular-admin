@@ -6,7 +6,7 @@
 app-markdown {
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
-    color: #333;
+    /*color: #333;*/
     font-family: "Roboto", sans-serif;
     font-size: 16px;
     line-height: 1.6;
@@ -15,6 +15,12 @@ app-markdown {
 
 app-markdown .fa {
     font-size: 16px;
+}
+
+app-markdown pre, app-markdown code {
+    background: #333;
+    color: #fff;
+    font-family: Menlo, 'Bitstream Vera Sans Mono', 'DejaVu Sans Mono', Monaco, Consolas, monospace;
 }
 
 app-markdown a {
@@ -88,13 +94,13 @@ app-markdown input {
 }
 
 app-markdown a {
-    color: #4078c0;
+    /*color: #4078c0;*/
     text-decoration: none;
 }
 
 app-markdown a:hover,
 app-markdown a:active {
-    text-decoration: underline;
+    /*text-decoration: underline;*/
 }
 
 app-markdown hr {
@@ -216,7 +222,7 @@ app-markdown > *:last-child {
 }
 
 app-markdown a:not([href]) {
-    color: inherit;
+    /*color: inherit;*/
     text-decoration: none;
 }
 
@@ -240,7 +246,7 @@ app-markdown h6 {
     margin-bottom: 16px;
     font-weight: 400;
     line-height: 1.4;
-    color: rgba(0, 0, 0, 0.87);
+    /*color: rgba(0, 0, 0, 0.87);*/
 }
 
 app-markdown h1 .octicon-link,
@@ -249,7 +255,7 @@ app-markdown h3 .octicon-link,
 app-markdown h4 .octicon-link,
 app-markdown h5 .octicon-link,
 app-markdown h6 .octicon-link {
-    color: #000;
+    /*color: #000;*/
     vertical-align: middle;
     visibility: hidden;
 }
@@ -324,7 +330,7 @@ app-markdown h5 .anchor {
 
 app-markdown h6 {
     font-size: 0.75em;
-    color: #777;
+    /*color: #777;*/
 }
 
 app-markdown h6 .anchor {
@@ -346,7 +352,7 @@ app-markdown hr {
     height: 4px;
     padding: 0;
     margin: 16px 0;
-    background-color: #e7e7e7;
+    /*background-color: #e7e7e7;*/
     border: 0 none;
 }
 
@@ -386,7 +392,7 @@ app-markdown dl dd {
 
 app-markdown blockquote {
     padding: 0 15px;
-    color: #777;
+    /*color: #777;*/
     border-left: 4px solid #ddd;
 }
 
@@ -417,18 +423,18 @@ app-markdown table td {
 }
 
 app-markdown table tr {
-    background-color: #fff;
+    /*background-color: #fff;*/
     border-top: 1px solid #ccc;
 }
 
 app-markdown table tr:nth-child(2n) {
-    background-color: #f8f8f8;
+    /*background-color: #f8f8f8;*/
 }
 
 app-markdown img {
     max-width: 100%;
     box-sizing: content-box;
-    background-color: #fff;
+    /*background-color: #fff;*/
 }
 
 app-markdown code {
@@ -437,7 +443,7 @@ app-markdown code {
     padding-bottom: 0.2em;
     margin: 0;
     font-size: 85%;
-    background-color: rgba(0, 0, 0, 0.04);
+    /*background-color: rgba(0, 0, 0, 0.04);*/
     border-radius: 3px;
 }
 
@@ -467,7 +473,7 @@ app-markdown pre {
     overflow: auto;
     font-size: 85%;
     line-height: 1.45;
-    background-color: #f7f7f7;
+    /*background-color: #f7f7f7;*/
     border-radius: 3px;
 }
 
@@ -488,7 +494,7 @@ app-markdown pre code {
     overflow: initial;
     line-height: inherit;
     word-wrap: normal;
-    background-color: transparent;
+    /*background-color: transparent;*/
     border: 0;
 }
 
@@ -502,112 +508,13 @@ app-markdown kbd {
     padding: 3px 5px;
     font-size: 11px;
     line-height: 10px;
-    color: #555;
+    /*color: #555;*/
     vertical-align: middle;
-    background-color: #fcfcfc;
+    /*background-color: #fcfcfc;*/
     border: solid 1px #ccc;
     border-bottom-color: #bbb;
     border-radius: 3px;
     box-shadow: inset 0 -1px 0 #bbb;
-}
-
-app-markdown .pl-c {
-    color: #969896;
-}
-
-app-markdown .pl-c1,
-app-markdown .pl-s .pl-v {
-    color: #0086b3;
-}
-
-app-markdown .pl-e,
-app-markdown .pl-en {
-    color: #795da3;
-}
-
-app-markdown .pl-s .pl-s1,
-app-markdown .pl-smi {
-    color: #333;
-}
-
-app-markdown .pl-ent {
-    color: #63a35c;
-}
-
-app-markdown .pl-k {
-    color: #a71d5d;
-}
-
-app-markdown .pl-pds,
-app-markdown .pl-s,
-app-markdown .pl-s .pl-pse .pl-s1,
-app-markdown .pl-sr,
-app-markdown .pl-sr .pl-cce,
-app-markdown .pl-sr .pl-sra,
-app-markdown .pl-sr .pl-sre {
-    color: #183691;
-}
-
-app-markdown .pl-v {
-    color: #ed6a43;
-}
-
-app-markdown .pl-id {
-    color: #b52a1d;
-}
-
-app-markdown .pl-ii {
-    background-color: #b52a1d;
-    color: #f8f8f8;
-}
-
-app-markdown .pl-sr .pl-cce {
-    color: #63a35c;
-    font-weight: bold;
-}
-
-app-markdown .pl-ml {
-    color: #693a17;
-}
-
-app-markdown .pl-mh,
-app-markdown .pl-mh .pl-en,
-app-markdown .pl-ms {
-    color: #1d3e81;
-    font-weight: bold;
-}
-
-app-markdown .pl-mq {
-    color: #008080;
-}
-
-app-markdown .pl-mi {
-    color: #333;
-    font-style: italic;
-}
-
-app-markdown .pl-mb {
-    color: #333;
-    font-weight: bold;
-}
-
-app-markdown .pl-md {
-    background-color: #ffecec;
-    color: #bd2c00;
-}
-
-app-markdown .pl-mi1 {
-    background-color: #eaffea;
-    color: #55a532;
-}
-
-app-markdown .pl-mdr {
-    color: #795da3;
-    font-weight: bold;
-}
-
-app-markdown .pl-mo {
-    color: #1d3e81;
 }
 
 app-markdown kbd {
@@ -615,9 +522,9 @@ app-markdown kbd {
     padding: 3px 5px;
     font: 11px Consolas, "Liberation Mono", Menlo, Courier, monospace;
     line-height: 10px;
-    color: #555;
+    /*color: #555;*/
     vertical-align: middle;
-    background-color: #fcfcfc;
+    /*background-color: #fcfcfc;*/
     border: solid 1px #ccc;
     border-bottom-color: #bbb;
     border-radius: 3px;
