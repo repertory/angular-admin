@@ -12,11 +12,12 @@ import * as markdownFontawesome from 'markdown-it-fontawesome';
     encapsulation: ViewEncapsulation.None,
 })
 export class MarkdownComponent implements AfterViewInit, OnChanges {
+
     private markdown: any;
 
     @Input() content: String = '';
 
-    constructor(private ER: ElementRef) {
+    constructor(private element: ElementRef) {
         this.markdown = new markdown({
             html: true,        // Enable HTML tags in source
             xhtmlOut: false,        // Use '/' to close single tags (<br />).
@@ -51,7 +52,7 @@ export class MarkdownComponent implements AfterViewInit, OnChanges {
 
     ngAfterViewInit() {
         if (!this.content) {
-            this.content = this.ER.nativeElement.textContent;
+            this.content = this.element.nativeElement.textContent;
             this.generate();
         }
     }
@@ -63,6 +64,7 @@ export class MarkdownComponent implements AfterViewInit, OnChanges {
     }
 
     generate() {
-        this.ER.nativeElement.innerHTML = this.markdown.render(this.content);
+        this.element.nativeElement.innerHTML = this.markdown.render(this.content);
     }
+
 }

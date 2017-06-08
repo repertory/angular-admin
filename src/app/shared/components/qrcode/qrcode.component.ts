@@ -3,9 +3,10 @@ import * as QRious from 'qrious';
 
 @Component({
     selector: 'app-qrcode',
-    template: '',
+    template: ' ',
 })
 export class QrcodeComponent implements OnInit, OnChanges {
+
     @Input() background: String = 'white';
     @Input() backgroundAlpha: Number = 1.0;
     @Input() foreground: String = 'black';
@@ -85,4 +86,5 @@ export class QrcodeComponent implements OnInit, OnChanges {
         }
         return out;
     }
+
 }
