@@ -36,7 +36,7 @@
 
     <!--内容区域-->
     <div fxFlex [style.position]="'relative'">
-        <md-sidenav-container fullscreen>
+        <md-sidenav-container fullscreen style="width: 100%;">
 
             <!--左侧菜单-->
             <md-sidenav class="mat-elevation-z6"
@@ -88,7 +88,7 @@
             </md-sidenav>
 
             <!--右侧内容区域-->
-            <div fxFlex fxLayout="column">
+            <div fxFlex fxFill fxLayout="column">
                 <div fxFlex>
                     <router-outlet></router-outlet>
                 </div>
