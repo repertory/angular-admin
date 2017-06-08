@@ -14,7 +14,7 @@ export class EchartsComponent implements OnInit, OnDestroy, OnChanges {
 
     constructor(private element: ElementRef) {
         element.nativeElement.style.display = 'inline-block';
-        this.chart = echarts.init(element.nativeElement, this.theme);
+        this.chart = echarts.init(element.nativeElement, this.theme, {width: 'auto', height: 'auto'});
     }
 
     ngOnInit() {
@@ -22,7 +22,10 @@ export class EchartsComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     ngOnDestroy() {
-        this.chart.dispose();
+        try {
+            this.chart.dispose();
+        } catch (e) {
+        }
     }
 
     ngOnChanges(changes: SimpleChanges) {

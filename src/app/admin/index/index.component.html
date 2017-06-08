@@ -2,6 +2,14 @@
     <app-header title="后台首页"></app-header>
 
     <md-card>
+        <md-card-title>Echarts组件</md-card-title>
+        <md-divider></md-divider>
+        <md-card-content>
+            <app-echarts [option]="echarts" style="width: 600px;height:400px"></app-echarts>
+        </md-card-content>
+    </md-card>
+
+    <md-card>
         <md-card-title>markdown组件</md-card-title>
         <md-divider></md-divider>
         <md-card-content>
@@ -22,14 +30,6 @@
             <md-input-container style="width:100%">
                 <input mdInput placeholder="二维码测试" [(ngModel)]="qrcode">
             </md-input-container>
-        </md-card-content>
-    </md-card>
-
-    <md-card>
-        <md-card-title>Echarts组件</md-card-title>
-        <md-divider></md-divider>
-        <md-card-content>
-            <app-echarts [option]="echarts" style="width: 600px;height:400px"></app-echarts>
         </md-card-content>
     </md-card>
 </div>
