@@ -9,10 +9,11 @@ import {ParseService} from '../../shared/shared.module';
     styleUrls: ['./index.component.css']
 })
 export class IndexComponent implements OnInit {
+
     user: Observable<any>;
     qrcode: String = 'https://wangdong.io';
     markdown: String = '# markdown \n :+1: | :-1: | :) | :( | :fa-github: \n ![logo](assets/svg/logo.svg){width=100} \n[ ] 多选框 \n[x] 多选框';
-    echarts: Object = {
+    echarts = {
         title: {text: 'ECharts 入门示例'},
         tooltip: {},
         xAxis: {
