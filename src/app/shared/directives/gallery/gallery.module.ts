@@ -1,9 +1,9 @@
 import {NgModule} from '@angular/core';
-import {GalleryDirective} from './gallery.directive';
+import {GalleryDirective, GalleryItemDirective} from './gallery.directive';
 
 @NgModule({
-    declarations: [GalleryDirective],
-    exports: [GalleryDirective],
+    declarations: [GalleryDirective, GalleryItemDirective],
+    exports: [GalleryDirective, GalleryItemDirective],
 })
 export class GalleryModule {
 }
