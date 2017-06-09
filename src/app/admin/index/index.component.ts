@@ -26,6 +26,16 @@ export class IndexComponent implements OnInit {
             data: [5, 20, 36, 10, 10, 20]
         }]
     };
+    gallery = [
+        'http://upload.art.ifeng.com/2015/0811/1439261016228.jpg',
+        'http://upload.art.ifeng.com/2015/0811/1439261016833.jpg',
+        'http://upload.art.ifeng.com/2015/0811/1439261016273.jpg',
+        'http://upload.art.ifeng.com/2015/0811/1439261016360.jpg',
+        'http://upload.art.ifeng.com/2015/0811/1439261016443.jpg',
+        'http://upload.art.ifeng.com/2015/0811/1439261016700.jpg',
+        'http://upload.art.ifeng.com/2015/0811/1439261016241.jpg',
+        'http://upload.art.ifeng.com/2015/0811/1439261016497.jpg'
+    ];
 
     constructor(public parse: ParseService) {
     }

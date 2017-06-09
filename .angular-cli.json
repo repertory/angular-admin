@@ -20,10 +20,17 @@
       "prefix": "app",
       "styles": [
         "../node_modules/normalize.css/normalize.css",
+        "../node_modules/lightgallery.js/dist/css/lightgallery.css",
         "theme.scss",
         "style.scss"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/lightgallery.js/dist/js/lightgallery.min.js",
+        "../node_modules/lg-autoplay.js/dist/lg-autoplay.min.js",
+        "../node_modules/lg-fullscreen.js/dist/lg-fullscreen.min.js",
+        "../node_modules/lg-thumbnail.js/dist/lg-thumbnail.min.js",
+        "../node_modules/lg-zoom.js/dist/lg-zoom.min.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

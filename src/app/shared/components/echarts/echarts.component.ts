@@ -24,10 +24,7 @@ export class EchartsComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     ngOnDestroy() {
-        try {
-            this.chart.dispose();
-        } catch (e) {
-        }
+        this.dispose();
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -48,5 +45,9 @@ export class EchartsComponent implements OnInit, OnDestroy, OnChanges {
             width: this.width,
             height: this.height,
         })
+    }
+
+    dispose() {
+        this.chart.dispose();
     }
 }
