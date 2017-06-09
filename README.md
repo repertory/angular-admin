@@ -2,12 +2,12 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.1.0.
 
-## 预览效果
+## Screenshot
 
 ![light theme](screenshot/light-theme.png)
 ![dark theme](screenshot/dark-theme.png)
 
-## 更新计划
+## Progress
 
 - [x] 二维码组件
 - [x] markdown组件
