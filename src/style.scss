@@ -5,6 +5,47 @@ html, body {
   padding: 0;
 }
 
+@keyframes rotator {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(270deg);
+  }
+}
+
+@keyframes colors {
+  0% {
+    stroke: #4285F4;
+  }
+  25% {
+    stroke: #DE3E35;
+  }
+  50% {
+    stroke: #F7C223;
+  }
+  75% {
+    stroke: #1B9A59;
+  }
+  100% {
+    stroke: #4285F4;
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 187;
+  }
+  50% {
+    stroke-dashoffset: 46.75;
+    transform: rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: 187;
+    transform: rotate(450deg);
+  }
+}
+
 app-root {
   width: 100%;
   height: 100%;
@@ -18,6 +59,16 @@ app-root {
     flex-direction: column;
   }
 
+  .spinner {
+    animation: rotator 1.5s linear infinite;
+
+    .path {
+      stroke-dasharray: 187;
+      stroke-dashoffset: 0;
+      transform-origin: center;
+      animation: dash 1.5s ease-in-out infinite, colors 6s ease-in-out infinite;
+    }
+  }
   .centre {
     width: 100%;
     height: 100%;
