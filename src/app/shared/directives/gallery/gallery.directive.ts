@@ -10,6 +10,8 @@ export class GalleryDirective {
 
     @HostListener('mouseenter') onMouseEnter() {
         window['lightGallery'](this.element.nativeElement, {
+            subHtmlSelectorRelative: true,
+            selector: 'img',
             cssEasing: 'cubic-bezier(0.680, -0.550, 0.265, 1.550)'
         });
     }

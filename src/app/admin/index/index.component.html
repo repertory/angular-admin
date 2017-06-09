@@ -4,13 +4,14 @@
     <md-card>
         <md-card-title>gallery组件</md-card-title>
         <md-divider></md-divider>
-        <md-card-content appGallery>
-            <a [href]="img" *ngFor="let img of gallery"><img [src]="img" height="90"></a>
-            <!--<md-grid-list cols="4" rowHeight="16:9">-->
-                <!--<md-grid-tile *ngFor="let img of gallery" appGallery>-->
-                    <!--<a [href]="img"><img [src]="img"></a>-->
-                <!--</md-grid-tile>-->
-            <!--</md-grid-list>-->
+        <md-card-content>
+            <md-grid-list cols="4" rowHeight="16:9">
+                <md-grid-tile *ngFor="let img of gallery">
+                    <div appGallery>
+                        <a [href]="img" target="_blank"><img [src]="img"></a>
+                    </div>
+                </md-grid-tile>
+            </md-grid-list>
         </md-card-content>
     </md-card>
 
