@@ -2,10 +2,22 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.1.0.
 
-## Screenshot
+## 预览效果
 
 ![light theme](screenshot/light-theme.png)
 ![dark theme](screenshot/dark-theme.png)
+
+## 更新计划
+
+- [x] 二维码组件
+- [x] markdown组件
+- [x] echarts组件
+- [ ] 图片预览组件
+- [ ] 移除@covalent/core模块
+- [ ] 用户管理功能
+- [ ] 角色管理功能
+- [ ] 配置管理功能
+- [ ] 菜单管理功能
 
 ## Development server
 
