@@ -24,6 +24,10 @@ $theme: mat-light-theme($primary, $accent, $warn);
   @include angular-material-theme($dark-theme);
 }
 
+md-icon.fa {
+  font-size: 24px;
+}
+
 md-card {
   margin: 8px;
 
@@ -31,9 +35,4 @@ md-card {
     overflow-x: auto;
     padding: 8px 0;
   }
-}
-
-// 字体
-.fa {
-  font-size: 24px;
 }
