@@ -12,7 +12,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - [x] 二维码组件
 - [x] markdown组件
 - [x] echarts组件
-- [ ] 图片预览组件
+- [x] 图片预览组件
 - [ ] 移除@covalent/core模块
 - [ ] 用户管理功能
 - [ ] 角色管理功能
