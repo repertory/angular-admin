@@ -9,9 +9,10 @@ import {ParseService} from '../shared/shared.module';
     styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-    username: string;
-    password: string;
-    email: string;
+
+    public username: string;
+    public password: string;
+    public email: string;
 
     constructor(public parse: ParseService, private router: Router, private snackBar: MdSnackBar) {
     }

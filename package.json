@@ -47,7 +47,6 @@
     "@angular/language-service": "^4.0.0",
     "@angular/flex-layout": "^2.0.0-beta.8",
     "@angular/material": "^2.0.0-beta.6",
-    "@covalent/core": "^1.0.0-beta.4",
     "@types/jasmine": "2.5.45",
     "@types/node": "~6.0.60",
     "codelyzer": "~3.0.1",

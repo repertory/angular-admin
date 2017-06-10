@@ -13,9 +13,9 @@ import * as markdownFontawesome from 'markdown-it-fontawesome';
 })
 export class MarkdownComponent implements AfterViewInit, OnChanges {
 
-    private markdown: any;
-
     @Input() content: String = '';
+
+    private markdown: any;
 
     constructor(private element: ElementRef) {
         this.markdown = new markdown({

@@ -9,8 +9,9 @@ import {ParseService} from '../shared/shared.module';
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-    username: string;
-    password: string;
+
+    public username: string;
+    public password: string;
 
     constructor(public parse: ParseService, private router: Router, private snackBar: MdSnackBar) {
     }
@@ -40,4 +41,5 @@ export class LoginComponent implements OnInit {
     goto() {
         this.router.navigate(['/']);
     }
+
 }

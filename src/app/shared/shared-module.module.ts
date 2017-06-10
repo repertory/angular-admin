@@ -6,13 +6,6 @@ import {RouterModule} from '@angular/router';
 
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MaterialModule} from '@angular/material';
-import {
-    CovalentDataTableModule,
-    CovalentDialogsModule,
-    CovalentNotificationsModule,
-    CovalentPagingModule,
-    CovalentSearchModule
-} from '@covalent/core';
 
 @NgModule({
     imports: [
@@ -26,11 +19,6 @@ import {
         HttpModule,
         FlexLayoutModule,
         MaterialModule,
-        CovalentDataTableModule,
-        CovalentDialogsModule,
-        CovalentNotificationsModule,
-        CovalentPagingModule,
-        CovalentSearchModule
     ]
 })
 export class SharedModuleModule {

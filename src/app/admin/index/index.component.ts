@@ -10,10 +10,11 @@ import {ParseService} from '../../shared/shared.module';
 })
 export class IndexComponent implements OnInit {
 
-    user: Observable<any>;
-    qrcode: String = 'https://wangdong.io';
-    markdown: String = '# markdown \n :+1: | :-1: | :) | :( | :fa-github: \n ![logo](assets/svg/logo.svg){width=100} \n[ ] 多选框 \n[x] 多选框';
-    echarts = {
+    public user: Observable<any>;
+    public qrcode: String = 'https://wangdong.io';
+    public markdown: String = '# markdown \n :+1: | :-1: | :) | :( | :fa-github: \n ' +
+        '![logo](http://upload.art.ifeng.com/2015/0811/1439261016228.jpg){width=100} \n[ ] 多选框 \n[x] 多选框';
+    public echarts = {
         title: {text: 'ECharts 入门示例'},
         tooltip: {},
         xAxis: {
@@ -26,7 +27,7 @@ export class IndexComponent implements OnInit {
             data: [5, 20, 36, 10, 10, 20]
         }]
     };
-    gallery = [
+    public gallery = [
         'http://upload.art.ifeng.com/2015/0811/1439261016228.jpg',
         'http://upload.art.ifeng.com/2015/0811/1439261016833.jpg',
         'http://upload.art.ifeng.com/2015/0811/1439261016273.jpg',

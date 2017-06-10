@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy, OnChanges, SimpleChanges, ElementRef, Input} from '@angular/core';
+import {Component, HostBinding, OnInit, OnDestroy, OnChanges, SimpleChanges, ElementRef, Input} from '@angular/core';
 import * as echarts from 'echarts';
 
 @Component({
@@ -6,6 +6,8 @@ import * as echarts from 'echarts';
     template: ' '
 })
 export class EchartsComponent implements OnInit, OnDestroy, OnChanges {
+
+    @HostBinding('style.display') display = 'inline-block';
 
     @Input() option: object;
     @Input() width: Number | String = 'auto';
@@ -15,7 +17,6 @@ export class EchartsComponent implements OnInit, OnDestroy, OnChanges {
     private chart: any;
 
     constructor(private element: ElementRef) {
-        element.nativeElement.style.display = 'inline-block';
         this.chart = echarts.init(element.nativeElement, this.theme, {width: this.width, height: this.height});
     }
 
@@ -24,7 +25,7 @@ export class EchartsComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     ngOnDestroy() {
-        this.dispose();
+        this.chart.dispose();
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -47,7 +48,4 @@ export class EchartsComponent implements OnInit, OnDestroy, OnChanges {
         })
     }
 
-    dispose() {
-        this.chart.dispose();
-    }
 }

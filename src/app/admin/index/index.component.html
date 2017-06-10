@@ -5,7 +5,7 @@
         <md-card-title>gallery组件</md-card-title>
         <md-divider></md-divider>
         <md-card-content appGallery>
-            <md-grid-list cols="5" rowHeight="16:9">
+            <md-grid-list cols="4" rowHeight="16:9">
                 <md-grid-tile *ngFor="let img of gallery">
                     <a appGalleryItem [href]="img" target="_blank"><img [src]="img"></a>
                 </md-grid-tile>

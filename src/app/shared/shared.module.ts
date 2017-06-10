@@ -5,7 +5,6 @@ import {ComponentsModule} from './components/components.module'
 import {DirectivesModule} from './directives/directives.module'
 import {ServicesModule} from './services/services.module';
 
-export * from './animations/animations.module';
 export * from './services/services.module';
 
 @NgModule({

@@ -1,8 +1,7 @@
-import {Component, OnInit, OnDestroy, ViewChild, ViewContainerRef} from '@angular/core';
+import {Component, HostBinding, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {Observable, Subscription} from 'rxjs/Rx';
 import {MdSnackBar, MdSidenav, OverlayContainer} from '@angular/material';
-import {TdDialogService} from '@covalent/core';
 
 import {ParseService} from '../shared/shared.module';
 
@@ -10,15 +9,16 @@ import {ParseService} from '../shared/shared.module';
     selector: 'app-admin',
     templateUrl: './admin.component.html',
     styleUrls: ['./admin.component.css'],
-    host: {
-        '[class.dark-theme]': 'isDarkTheme',
-    },
 })
 export class AdminComponent implements OnInit, OnDestroy {
+
+    @HostBinding('class.dark-theme') isDarkTheme = false;
+    @ViewChild(MdSidenav) sidenav: MdSidenav;
+
     private subscriptions: Array<Subscription> = [];
-    isDarkTheme = false;    // 夜间模式
-    user: Observable<any>;   // 用户信息
-    keyword: string;        // 菜单搜索
+
+    public user: Observable<any>;   // 用户信息
+    public keyword: string;         // 菜单搜索
 
     menus: any[] = [
         {group: '系统设置', name: '配置管理', link: '/admin/system/setting', icon: 'settings'},
@@ -32,12 +32,8 @@ export class AdminComponent implements OnInit, OnDestroy {
     constructor(public parse: ParseService,
                 private overlayContainer: OverlayContainer,
                 private router: Router,
-                private snackBar: MdSnackBar,
-                private dialog: TdDialogService,
-                private view: ViewContainerRef) {
+                private snackBar: MdSnackBar) {
     }
-
-    @ViewChild(MdSidenav) sidenav: MdSidenav;
 
     ngOnInit() {
         this.user = this.parse.userInfo();
@@ -79,34 +75,18 @@ export class AdminComponent implements OnInit, OnDestroy {
     }
 
     logout() {
-        this.dialog.openConfirm({
-            message: '确定要退出吗？',
-            disableClose: false,
-            viewContainerRef: this.view,
-            title: '系统提示',
-            cancelButton: '取消',
-            acceptButton: '确定',
-        })
-            .afterClosed()
-            .subscribe((accept: boolean) => {
-                if (accept) {
-                    this.parse.logout().subscribe(
-                        res => {
-                            this.snackBar.open('已退出登录', '关闭', {duration: 2000});
-                            this.router.navigate(['/login']);
-                        }
-                    );
+        if (confirm('确定要退出吗？')) {
+            this.parse.logout().subscribe(
+                res => {
+                    this.snackBar.open('已退出登录', '关闭', {duration: 2000});
+                    this.router.navigate(['/login']);
                 }
-            });
+            );
+        }
     }
 
     profile() {
-        this.dialog.openAlert({
-            message: '功能完善中',
-            disableClose: false,
-            viewContainerRef: this.view,
-            title: '个人资料',
-            closeButton: '关闭',
-        });
+        alert('功能完善中');
     }
+
 }

@@ -4,19 +4,20 @@ import {Parse} from 'parse';
 
 @Injectable()
 export class ParseService {
-    ACL: Parse.ACL = Parse.ACL;
-    Analytics: Parse.Analytics = Parse.Analytics;
-    Config: Parse.Config = Parse.Config;
-    Cloud: Parse.Cloud = Parse.Cloud;
-    Error: Parse.Error = Parse.Error;
-    File: Parse.File = Parse.File;
-    GeoPoint: Parse.GeoPoint = Parse.GeoPoint;
-    Object: Parse.Object = Parse.Object;
-    Push: Parse.Push = Parse.Push;
-    Query: Parse.Query = Parse.Query;
-    Role: Parse.Role = Parse.Role;
-    Session: Parse.Session = Parse.Session;
-    User: Parse.User = Parse.User;
+
+    public ACL = Parse.ACL;
+    public Analytics = Parse.Analytics;
+    public Config = Parse.Config;
+    public Cloud = Parse.Cloud;
+    public Error = Parse.Error;
+    public File = Parse.File;
+    public GeoPoint = Parse.GeoPoint;
+    public Object = Parse.Object;
+    public Push = Parse.Push;
+    public Query = Parse.Query;
+    public Role = Parse.Role;
+    public Session = Parse.Session;
+    public User = Parse.User;
 
     // 初始化配置
     initialize(parseConfig) {
@@ -38,11 +39,6 @@ export class ParseService {
     // 运行自定义函数
     run(name: string, data?: Object, options?: Object): Observable<any> {
         return Observable.fromPromise(this.Cloud.run(name, data, options));
-    }
-
-    // 运行自定义作业
-    job(name: string, func: Function): Observable<any> {
-        return Observable.fromPromise(this.Cloud.job(name, func));
     }
 
     // 文件上传
@@ -72,6 +68,8 @@ export class ParseService {
 
     // base64上传
     base64(base64: string, name?: string): Observable<any> {
+        const subject = new Subject();
+
         name = encodeURIComponent(name || 'base64.png')
             .replace(/!/g, '%21')
             .replace(/'/g, '%27')
@@ -81,7 +79,12 @@ export class ParseService {
             .replace(/\+/g, '%20')
             .replace(/\%/g, '');
 
-        return Observable.fromPromise(this.File(name, {base64: base64}).save());
+        new this.File(name, {base64: base64}).save().then(
+            res => subject.next(res),
+            err => subject.error(err)
+        );
+
+        return subject;
     }
 
     // 当前用户信息
@@ -185,4 +188,5 @@ export class ParseService {
     delete(object: Parse.Object): Observable<any> {
         return Observable.fromPromise(object.destroy());
     }
+
 }

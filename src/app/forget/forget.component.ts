@@ -8,7 +8,8 @@ import {ParseService} from '../shared/shared.module';
     styleUrls: ['./forget.component.css']
 })
 export class ForgetComponent implements OnInit {
-    email: string;
+
+    public email: string;
 
     constructor(public parse: ParseService, private snackBar: MdSnackBar) {
     }

@@ -1,15 +1,8 @@
 @import 'assets/iconfont/material-icons.css';
-@import 'assets/iconfont/iconfont.css';
 @import '~font-awesome/css/font-awesome.css';
 @import '~@angular/material/_theming.scss';
-@import '~@covalent/core/common/styles/_layout.scss';
 
 @include mat-core();
-
-// 字体
-.fa, .iconfont {
-  font-size: 24px;
-}
 
 // 正常效果
 $primary: mat-palette($mat-indigo);
@@ -38,4 +31,9 @@ md-card {
     overflow-x: auto;
     padding: 8px 0;
   }
+}
+
+// 字体
+.fa {
+  font-size: 24px;
 }
