@@ -15,8 +15,7 @@ export class UserComponent implements OnInit {
 
     leaveConfirm(): Promise<boolean> {
         return new Promise((resolve, reject) => {
-            const res = confirm('确定要离开用户管理页面吗？');
-            res ? resolve(true) : reject(false);
+            resolve(confirm('确定要离开用户管理页面吗？'));
         });
     }
 
