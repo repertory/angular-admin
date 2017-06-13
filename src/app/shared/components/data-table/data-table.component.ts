@@ -14,14 +14,12 @@ export class DataTableComponent implements OnInit {
     dataSource: DataTableService;
 
     constructor(private dataTable: DataTableService) {
-        // this.dataSource = dataTable;
+        this.dataSource = dataTable;
     }
 
     ngOnInit() {
         this.dataTable.init({
             className: this.className
-        }).then(res => {
-            this.dataSource = this.dataTable;
         });
     }
 
