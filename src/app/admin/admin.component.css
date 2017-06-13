@@ -2,6 +2,15 @@ a {
     outline: none;
 }
 
+.title {
+    margin: 8px auto;
+    width: 30px;
+    /*font-size: 23px;*/
+    line-height: 1.2;
+    text-align: center;
+    outline: none
+}
+
 .padding {
     padding: 8px;
 }

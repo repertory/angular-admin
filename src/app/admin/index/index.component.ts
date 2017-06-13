@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {CollectionViewer, SelectionModel} from '@angular/material';
 import {Observable} from 'rxjs/Rx';
 
 import {ParseService} from '../../shared/shared.module';
@@ -38,6 +39,30 @@ export class IndexComponent implements OnInit {
         'http://upload.art.ifeng.com/2015/0811/1439261016497.jpg'
     ];
 
+    public data = [
+        {
+            id: '1',
+            name: 'aaa',
+            progress: Math.round(Math.random() * 100).toString(),
+            color: 'red'
+        },
+        {
+            id: '2',
+            name: 'bbb',
+            progress: Math.round(Math.random() * 100).toString(),
+            color: 'blue'
+        },
+        {
+            id: '3',
+            name: 'ccc',
+            progress: Math.round(Math.random() * 100).toString(),
+            color: 'orange'
+        }
+    ];
+    selection = new SelectionModel<any[]>(true, []);
+    public dataSource = new test(this.data);
+    public propertiesToDisplay: string[] = ['userId', 'userName', 'progress', 'color'];
+
     constructor(public parse: ParseService) {
     }
 
@@ -45,4 +70,40 @@ export class IndexComponent implements OnInit {
         this.user = this.parse.userInfo();
     }
 
+    getOpacity(progress: number) {
+        const distanceFromMiddle = Math.abs(50 - progress);
+        return distanceFromMiddle / 50 + .3;
+    }
+
+    isAllSelected(): boolean {
+        return !this.selection.isEmpty();
+    }
+
 }
+
+class test {
+    _renderedData: any[] = [];
+    _peopleDatabase = {data: []};
+
+    constructor(data) {
+        this._peopleDatabase['data'] = data;
+    }
+
+    connect(collectionViewer: CollectionViewer): Observable<any[]> {
+        return collectionViewer.viewChange.map((view: {start: number, end: number}) => {
+            // Set the rendered rows length to the virtual page size. Fill in the data provided
+            // from the index start until the end index or pagination size, whichever is smaller.
+            this._renderedData.length = this._peopleDatabase.data.length;
+
+            const buffer = 20;
+            let rangeStart = Math.max(0, view.start - buffer);
+            let rangeEnd = Math.min(this._peopleDatabase.data.length, view.end + buffer);
+
+            for (let i = rangeStart; i < rangeEnd; i++) {
+                this._renderedData[i] = this._peopleDatabase.data[i];
+            }
+
+            return this._renderedData;
+        });
+}
+};
