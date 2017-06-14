@@ -94,7 +94,7 @@ app-root {
   }
 
   .no-input-underline {
-    .mat-input-underline {
+    .mat-input-underline, .mat-select-underline {
       display: none;
     }
   }

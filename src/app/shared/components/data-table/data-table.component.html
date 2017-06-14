@@ -1,3 +1,49 @@
+<!--工具栏-->
+<div class="toolbar" [style.backgroundColor]="selection.hasValue() ? 'rgba(255, 64, 129, .5)' : none">
+    <div class="content" [style.display]="!selection.hasValue() ? '' : 'none'">
+        <div class="title" [style.marginLeft]="'8px'">用户管理</div>
+
+        <div class="actions">
+            <div class="search-container no-input-underline">
+                <md-input-container floatPlaceholder="never"
+                                    [style.width]="searchOpen ? '100%' : ''"
+                                    [style.display]="dataSource.data.length ? '' : 'none'">
+                    <div mdPrefix>
+                        <md-icon class="search-icon">search</md-icon>
+                    </div>
+                    <input mdInput #filter placeholder="搜索关键字"
+                           (blur)="searchOpen = !!dataSource.filter"
+                           (focus)="searchOpen = true"
+                           (keydown.esc)="cancelSearch(filter, $event)">
+                    <button md-icon-button class="cancel-search"
+                            [style.visibility]="searchOpen ? 'visible' : 'hidden'"
+                            (click)="cancelSearch(filter, $event)">
+                        <md-icon>close</md-icon>
+                    </button>
+                </md-input-container>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="content" *ngIf="selection.hasValue()">
+        <div class="title">
+            <button md-icon-button (click)="selection.clear()">
+                <md-icon>close</md-icon>
+            </button>
+            <div>已选择{{selection.selected.length}}条</div>
+        </div>
+
+        <div class="actions">
+            <button md-button>
+                <md-icon>delete</md-icon>
+                Remove
+            </button>
+        </div>
+    </div>
+</div>
+
+<!--数据列表-->
 <cdk-table #table [dataSource]="dataSource">
 
     <ng-container cdkColumnDef="checkbox">
@@ -30,6 +76,35 @@
     </ng-container>
 
     <cdk-header-row *cdkHeaderRowDef="display"></cdk-header-row>
-    <cdk-row *cdkRowDef="let row; columns: display"></cdk-row>
+    <cdk-row *cdkRowDef="let row; columns: display"
+             [class.selected]="row ? selection.isSelected(row) : false"
+             [class.data-row]="!!row"
+             (click)="row ? selection.toggle(row) : null"></cdk-row>
 
 </cdk-table>
+
+<!--分页展示-->
+<div class="pagination">
+    <div class="rows-per-page">
+        每页显示
+        <md-select class="no-input-underline" [ngModel]="dataSource.pagination.pageLength"
+                   (change)="dataSource.setPageLength($event.value)">
+            <md-option *ngFor="let pageSizeOption of pageSizeOptions" [value]="pageSizeOption">
+                {{pageSizeOption}}
+            </md-option>
+        </md-select>
+    </div>
+
+    <div class="range">{{paginationRange()}}</div>
+
+    <button md-icon-button
+            (click)="dataSource.incrementPage(-1)"
+            [disabled]="!dataSource.canIncrementPage(-1)">
+        <md-icon>navigate_before</md-icon>
+    </button>
+    <button md-icon-button
+            (click)="dataSource.incrementPage(1)"
+            [disabled]="!dataSource.canIncrementPage(1)">
+        <md-icon>navigate_next</md-icon>
+    </button>
+</div>

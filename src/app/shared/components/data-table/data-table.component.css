@@ -1,3 +1,4 @@
+/* datatable样式 */
 .cdk-table {
     display: block;
     flex: 1 1 auto;
@@ -32,15 +33,135 @@
     cursor: pointer;
 }
 
-.cdk-row:not(.selected):hover {
+.cdk-row.data-row:not(.selected):hover {
     background: #eeeeee;
 }
 
-.cdk-row.selected,
-.cdk-row:active {
+.cdk-row.data-row.selected,
+.cdk-row.data-row:active {
     background: #f5f5f5;
 }
 
 .cdk-column-checkbox {
     max-width: 24px;
 }
+
+/*分页显示*/
+.pagination {
+    height: 56px;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    font-size: 12px;
+    justify-content: flex-end;
+}
+
+.pagination .rows-per-page {
+    display: flex;
+    align-items: center;
+}
+
+.pagination .mat-select {
+    margin-left: 8px;
+}
+
+.pagination .mat-select /deep/ .mat-select-trigger {
+    font-size: 12px;
+    min-width: 56px;
+}
+
+.pagination .range {
+    margin: 0 32px;
+}
+
+.pagination button[md-icon-button] + button[md-icon-button] {
+    margin-left: 8px;
+}
+
+/*工具栏*/
+.toolbar {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 8px;
+}
+
+.toolbar .content-selection {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    transition: all 500ms ease-in-out;
+    background: #fd9dbe;
+    /* transform: translateY(-100%); */
+}
+
+.toolbar .content {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.toolbar .content /deep/ .mat-button-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toolbar .content .title {
+    display: flex;
+    align-items: center;
+    color: black;
+    margin-right: 32px;
+    font-size: 18px;
+}
+
+.toolbar .content .mat-button {
+    margin: 0 8px;
+}
+
+.toolbar .content .search-container {
+    flex-grow: 1;
+    position: relative;
+    justify-content: flex-end;
+    display: flex;
+}
+
+.toolbar .content .search-container md-input-container {
+    margin-bottom: 4px;
+    margin-top: 10px;
+    max-width: 450px;
+    transition: width 650ms ease-in-out;
+    width: 200px;
+}
+
+.toolbar .content .search-container md-input-container .cancel-search {
+    position: absolute;
+    right: 0;
+    top: -6px;
+}
+
+.toolbar .content .search-container md-input-container .mat-icon {
+    font-size: 20px;
+    /*line-height: 17px;*/
+    color: #666;
+}
+
+.toolbar .content .search-container md-input-container .mat-icon.search-icon {
+    margin-right: 8px;
+    pointer-events: none;
+}
+
+.toolbar .content .actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-grow: 1;
+}
+
+.toolbar .content .actions .mat-button md-icon {
+    margin-right: 4px;
+}
+

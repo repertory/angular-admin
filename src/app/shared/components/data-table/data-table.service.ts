@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {CollectionViewer} from '@angular/material';
 import {Observable} from 'rxjs/Observable';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {ParseService} from '../../services/services.module';
 
 // init参数接口
@@ -23,6 +24,7 @@ export class DataTableService {
             updatedAt: new Date().toISOString(),
         }
     ];
+    public filter: string;
 
     private input: InputInterface;
     private renderedData: any[] = [];
@@ -60,5 +62,30 @@ export class DataTableService {
 
             return this.renderedData;
         });
+    }
+
+    private _pagination = new BehaviorSubject({index: 0, pageLength: 10});
+    set pagination(pagination) {
+        this._pagination.next(pagination);
+    };
+    get pagination() {
+        return this._pagination.value;
+    }
+
+    incrementPage(increment: number) {
+        if (this.canIncrementPage(increment)) {
+            const index = this.pagination.index + this.pagination.pageLength * increment;
+            this.pagination = {index, pageLength: this.pagination.pageLength};
+        }
+    }
+
+    canIncrementPage(increment: number) {
+        const increasedIndex = this.pagination.index + (this.pagination.pageLength * increment);
+        return increasedIndex == 0 ||
+            (increasedIndex >= 0 && increasedIndex < this.data.length);
+    }
+
+    setPageLength(pageLength: number) {
+        this.pagination = {index: 0, pageLength};
     }
 }
