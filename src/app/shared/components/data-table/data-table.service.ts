@@ -11,7 +11,18 @@ export interface InputInterface {
 @Injectable()
 export class DataTableService {
 
-    public data: any[] = [];
+    public data: any[] = [
+        {
+            id: '1',
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+        },
+        {
+            id: '2',
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+        }
+    ];
 
     private input: InputInterface;
     private renderedData: any[] = [];
@@ -19,10 +30,8 @@ export class DataTableService {
     constructor(private parse: ParseService) {
     }
 
-    init(input?: InputInterface): Promise<any> {
-        if (input) {
-            this.input = input;
-        }
+    init(input: InputInterface): Promise<any> {
+        this.input = input;
 
         return new Promise((resolve, reject) => {
             this.parse.query(this.input.className).subscribe(

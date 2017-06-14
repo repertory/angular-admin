@@ -9,7 +9,7 @@ import {DataTableService} from './data-table.service';
 export class DataTableComponent implements OnInit {
 
     @Input() className: string;
-    @Input() display: string[] = ['objectId', 'createdAt', 'updatedAt'];
+    @Input() display: string[] = ['checkbox', 'objectId', 'createdAt', 'updatedAt'];
 
     dataSource: DataTableService;
 
@@ -18,9 +18,9 @@ export class DataTableComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.dataTable.init({
-            className: this.className
-        });
+        // this.dataTable.init({
+        //     className: this.className
+        // });
     }
 
 }

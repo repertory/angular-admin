@@ -22,10 +22,21 @@
 .cdk-header-cell {
     font-size: 12px;
     font-weight: bold;
-    color: rgba(0, 0, 0, 0.54);
 }
 
 .cdk-cell {
     font-size: 13px;
-    color: rgba(0, 0, 0, 0.87);
+}
+
+.cdk-row {
+    cursor: pointer;
+}
+
+.cdk-row:not(.selected):hover {
+    background: #eeeeee;
+}
+
+.cdk-row.selected,
+.cdk-row:active {
+    background: #f5f5f5;
 }

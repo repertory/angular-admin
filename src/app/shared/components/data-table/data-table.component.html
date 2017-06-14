@@ -1,5 +1,14 @@
 <cdk-table #table [dataSource]="dataSource">
 
+    <ng-container cdkColumnDef="checkbox">
+        <cdk-header-cell *cdkHeaderCellDef>
+            <md-checkbox></md-checkbox>
+        </cdk-header-cell>
+        <cdk-cell *cdkCellDef="let row">
+            <md-checkbox></md-checkbox>
+        </cdk-cell>
+    </ng-container>
+
     <ng-container cdkColumnDef="objectId">
         <cdk-header-cell *cdkHeaderCellDef>ID</cdk-header-cell>
         <cdk-cell *cdkCellDef="let row">{{row.id}}</cdk-cell>
@@ -7,12 +16,12 @@
 
     <ng-container cdkColumnDef="createdAt">
         <cdk-header-cell *cdkHeaderCellDef>创建时间</cdk-header-cell>
-        <cdk-cell *cdkCellDef="let row">{{row.get('createdAt')}}</cdk-cell>
+        <cdk-cell *cdkCellDef="let row">{{row.createdAt}}</cdk-cell>
     </ng-container>
 
     <ng-container cdkColumnDef="updatedAt">
         <cdk-header-cell *cdkHeaderCellDef>更新时间</cdk-header-cell>
-        <cdk-cell *cdkCellDef="let row">{{row.get('updatedAt')}}</cdk-cell>
+        <cdk-cell *cdkCellDef="let row">{{row.updatedAt}}</cdk-cell>
     </ng-container>
 
     <cdk-header-row *cdkHeaderRowDef="display"></cdk-header-row>
