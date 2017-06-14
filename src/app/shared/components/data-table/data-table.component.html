@@ -2,10 +2,15 @@
 
     <ng-container cdkColumnDef="checkbox">
         <cdk-header-cell *cdkHeaderCellDef>
-            <md-checkbox></md-checkbox>
+            <md-checkbox (change)="$event ? selectAllToggle() : null"
+                         [checked]="isAllSelected()"
+                         [indeterminate]="selection.hasValue() && !isAllSelected()">
+            </md-checkbox>
         </cdk-header-cell>
         <cdk-cell *cdkCellDef="let row">
-            <md-checkbox></md-checkbox>
+            <md-checkbox (click)="$event.stopPropagation()"
+                         (change)="$event ? selection.toggle(row) : null"
+                         [checked]="selection.isSelected(row)"></md-checkbox>
         </cdk-cell>
     </ng-container>
 

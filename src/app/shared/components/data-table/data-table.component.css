@@ -40,3 +40,7 @@
 .cdk-row:active {
     background: #f5f5f5;
 }
+
+.cdk-column-checkbox {
+    max-width: 24px;
+}
