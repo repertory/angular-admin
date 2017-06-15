@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {CollectionViewer} from '@angular/material';
 import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/observable/interval';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {ParseService} from '../../services/services.module';
 
@@ -12,62 +13,54 @@ export interface InputInterface {
 @Injectable()
 export class DataTableService {
 
-    public data: any[] = [
-        {
-            id: '1',
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-        },
-        {
-            id: '2',
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-        }
-    ];
-    public filter: string;
+    public data: any[] = [];
+    public query: Observable<any>;
 
     private input: InputInterface;
-    private renderedData: any[] = [];
 
     constructor(private parse: ParseService) {
+        console.log('constructor');
     }
 
-    init(input: InputInterface): Promise<any> {
+    init(input: InputInterface) {
+        console.log('init');
         this.input = input;
+        this.query = this.parse.query(this.input.className);
+    }
 
-        return new Promise((resolve, reject) => {
-            this.parse.query(this.input.className).subscribe(
-                res => {
-                    this.data = Array.from(res);
-                    resolve(res);
-                },
-                err => reject(err)
-            );
-        });
+    destroy() {
+        console.log('destroy');
     }
 
     connect(collectionViewer: CollectionViewer): Observable<any[]> {
-        return collectionViewer.viewChange.map((view: { start: number, end: number }) => {
-            // Set the rendered rows length to the virtual page size. Fill in the data provided
-            // from the index start until the end index or pagination size, whichever is smaller.
-            this.renderedData.length = this.data.length;
-
-            const buffer = 20;
-            const rangeStart = Math.max(0, view.start - buffer);
-            const rangeEnd = Math.min(this.data.length, view.end + buffer);
-
-            for (let i = rangeStart; i < rangeEnd; i++) {
-                this.renderedData[i] = this.data[i];
-            }
-
-            return this.renderedData;
+        console.log('connect');
+        return this.query.map(x => {
+            this.data = x.result;
+            return x.result;
         });
+        // return collectionViewer.viewChange
+        //     .map((view: { start: number, end: number }) => {
+        //         // Set the rendered rows length to the virtual page size. Fill in the data provided
+        //         // from the index start until the end index or pagination size, whichever is smaller.
+        //         this.renderedData.length = this.data.length;
+        //
+        //         const buffer = 20;
+        //         const rangeStart = Math.max(0, view.start - buffer);
+        //         const rangeEnd = Math.min(this.data.length, view.end + buffer);
+        //
+        //         for (let i = rangeStart; i < rangeEnd; i++) {
+        //             this.renderedData[i] = this.data[i];
+        //         }
+        //
+        //         return this.renderedData;
+        //     });
     }
 
     private _pagination = new BehaviorSubject({index: 0, pageLength: 10});
     set pagination(pagination) {
         this._pagination.next(pagination);
     };
+
     get pagination() {
         return this._pagination.value;
     }
@@ -81,8 +74,7 @@ export class DataTableService {
 
     canIncrementPage(increment: number) {
         const increasedIndex = this.pagination.index + (this.pagination.pageLength * increment);
-        return increasedIndex == 0 ||
-            (increasedIndex >= 0 && increasedIndex < this.data.length);
+        return increasedIndex === 0 || (increasedIndex >= 0 && increasedIndex < this.data.length);
     }
 
     setPageLength(pageLength: number) {

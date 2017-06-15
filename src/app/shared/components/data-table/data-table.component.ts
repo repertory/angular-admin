@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, OnDestroy, Input} from '@angular/core';
 import {SelectionModel} from '@angular/material';
 import {DataTableService} from './data-table.service';
 
@@ -7,24 +7,38 @@ import {DataTableService} from './data-table.service';
     templateUrl: './data-table.component.html',
     styleUrls: ['./data-table.component.css']
 })
-export class DataTableComponent implements OnInit {
+export class DataTableComponent implements OnInit, OnDestroy {
 
     @Input() className: string;
-    @Input() display: string[] = ['checkbox', 'objectId', 'createdAt', 'updatedAt'];
+    @Input() options: any[] = [];
+    @Input() selectMulti: Boolean = true;
     @Input() pageSizeOptions: number[] = [5, 10, 20, 50, 100, 500, 1000];
 
     dataSource: DataTableService;
-    selection = new SelectionModel(true, []);
-    searchOpen = false;
+    selection = new SelectionModel(!!this.selectMulti, []);
 
     constructor(private dataTable: DataTableService) {
         this.dataSource = dataTable;
     }
 
     ngOnInit() {
-        // this.dataTable.init({
-        //     className: this.className
-        // });
+        this.dataSource.init({
+            className: this.className
+        });
+    }
+
+    ngOnDestroy() {
+        this.dataSource.destroy();
+    }
+
+    // 获取需要显示的字段
+    display() {
+        const display = this.options
+            .filter(x => !!x.operate.query.enabled)
+            .sort((x, y) => x.operate.query.orderBy - y.operate.query.orderBy)
+            .map(x => x.key);
+        display.unshift('__checkbox__'); // 左侧单选框，避免与自定义字段冲突
+        return display;
     }
 
     // 是否为全选状态
@@ -48,16 +62,6 @@ export class DataTableComponent implements OnInit {
         const end = Math.min(start + this.dataSource.pagination.pageLength, dataLength);
 
         return `${start + 1} - ${end} of ${dataLength}`;
-    }
-
-    // 搜索关闭
-    cancelSearch(input: HTMLInputElement, event: Event) {
-        event.stopPropagation();
-
-        this.searchOpen = false;
-
-        input.value = '';
-        input.blur();
     }
 
 }

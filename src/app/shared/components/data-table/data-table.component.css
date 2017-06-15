@@ -42,7 +42,7 @@
     background: #f5f5f5;
 }
 
-.cdk-column-checkbox {
+.cdk-column-__checkbox__ {
     max-width: 24px;
 }
 
@@ -120,38 +120,6 @@
 
 .toolbar .content .mat-button {
     margin: 0 8px;
-}
-
-.toolbar .content .search-container {
-    flex-grow: 1;
-    position: relative;
-    justify-content: flex-end;
-    display: flex;
-}
-
-.toolbar .content .search-container md-input-container {
-    margin-bottom: 4px;
-    margin-top: 10px;
-    max-width: 450px;
-    transition: width 650ms ease-in-out;
-    width: 200px;
-}
-
-.toolbar .content .search-container md-input-container .cancel-search {
-    position: absolute;
-    right: 0;
-    top: -6px;
-}
-
-.toolbar .content .search-container md-input-container .mat-icon {
-    font-size: 20px;
-    /*line-height: 17px;*/
-    color: #666;
-}
-
-.toolbar .content .search-container md-input-container .mat-icon.search-icon {
-    margin-right: 8px;
-    pointer-events: none;
 }
 
 .toolbar .content .actions {

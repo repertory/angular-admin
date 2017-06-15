@@ -4,25 +4,9 @@
         <div class="title" [style.marginLeft]="'8px'">用户管理</div>
 
         <div class="actions">
-            <div class="search-container no-input-underline">
-                <md-input-container floatPlaceholder="never"
-                                    [style.width]="searchOpen ? '100%' : ''"
-                                    [style.display]="dataSource.data.length ? '' : 'none'">
-                    <div mdPrefix>
-                        <md-icon class="search-icon">search</md-icon>
-                    </div>
-                    <input mdInput #filter placeholder="搜索关键字"
-                           (blur)="searchOpen = !!dataSource.filter"
-                           (focus)="searchOpen = true"
-                           (keydown.esc)="cancelSearch(filter, $event)">
-                    <button md-icon-button class="cancel-search"
-                            [style.visibility]="searchOpen ? 'visible' : 'hidden'"
-                            (click)="cancelSearch(filter, $event)">
-                        <md-icon>close</md-icon>
-                    </button>
-                </md-input-container>
-            </div>
-
+            <button md-icon-button>
+                <md-icon>search</md-icon>
+            </button>
         </div>
     </div>
 
@@ -46,7 +30,8 @@
 <!--数据列表-->
 <cdk-table #table [dataSource]="dataSource">
 
-    <ng-container cdkColumnDef="checkbox">
+    <!--左侧单选框-->
+    <ng-container cdkColumnDef="__checkbox__">
         <cdk-header-cell *cdkHeaderCellDef>
             <md-checkbox (change)="$event ? selectAllToggle() : null"
                          [checked]="isAllSelected()"
@@ -60,23 +45,16 @@
         </cdk-cell>
     </ng-container>
 
-    <ng-container cdkColumnDef="objectId">
-        <cdk-header-cell *cdkHeaderCellDef>ID</cdk-header-cell>
-        <cdk-cell *cdkCellDef="let row">{{row.id}}</cdk-cell>
+    <!--自定义字段-->
+    <ng-container *ngFor="let option of options" [cdkColumnDef]="option.key">
+        <cdk-header-cell *cdkHeaderCellDef>{{option.name}}</cdk-header-cell>
+        <cdk-cell *cdkCellDef="let row">{{row[option.key == 'objectId' ? 'id' : option.key] || row.get(option.key)}}
+        </cdk-cell>
     </ng-container>
 
-    <ng-container cdkColumnDef="createdAt">
-        <cdk-header-cell *cdkHeaderCellDef>创建时间</cdk-header-cell>
-        <cdk-cell *cdkCellDef="let row">{{row.createdAt}}</cdk-cell>
-    </ng-container>
-
-    <ng-container cdkColumnDef="updatedAt">
-        <cdk-header-cell *cdkHeaderCellDef>更新时间</cdk-header-cell>
-        <cdk-cell *cdkCellDef="let row">{{row.updatedAt}}</cdk-cell>
-    </ng-container>
-
-    <cdk-header-row *cdkHeaderRowDef="display"></cdk-header-row>
-    <cdk-row *cdkRowDef="let row; columns: display"
+    <!--数据展示-->
+    <cdk-header-row *cdkHeaderRowDef="display()"></cdk-header-row>
+    <cdk-row *cdkRowDef="let row; columns: display()"
              [class.selected]="row ? selection.isSelected(row) : false"
              [class.data-row]="!!row"
              (click)="row ? selection.toggle(row) : null"></cdk-row>

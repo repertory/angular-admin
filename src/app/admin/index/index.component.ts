@@ -42,6 +42,63 @@ export class IndexComponent implements OnInit {
         'http://upload.art.ifeng.com/2015/0811/1439261016497.jpg'
     ];
 
+    public dataTable = {
+        className: 'User',
+        options: [
+            {
+                key: 'objectId',
+                name: 'ID',
+                type: 'String',
+                operate: {
+                    create: {
+                        enabled: false,
+                    },
+                    update: {
+                        enabled: false,
+                    },
+                    query: {
+                        enabled: true,
+                        orderBy: 1,
+                    },
+                }
+            },
+            {
+                key: 'username',
+                name: '用户名',
+                type: 'String',
+                operate: {
+                    create: {
+                        enabled: false,
+                    },
+                    update: {
+                        enabled: false,
+                    },
+                    query: {
+                        enabled: true,
+                        orderBy: 2,
+                    },
+                }
+            },
+            {
+                key: 'createdAt',
+                name: '注册时间',
+                type: 'Date',
+                operate: {
+                    create: {
+                        enabled: false,
+                    },
+                    update: {
+                        enabled: false,
+                    },
+                    query: {
+                        enabled: true,
+                        orderBy: 3,
+                    },
+                }
+            }
+        ]
+    };
+
     constructor(public parse: ParseService) {
     }
 
