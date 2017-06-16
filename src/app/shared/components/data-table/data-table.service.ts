@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/observable/interval';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {ParseService} from '../../services/services.module';
 
 // init参数接口
@@ -12,7 +12,7 @@ export interface InputInterface {
 export class DataTableService {
 
     private input: InputInterface;  // 初始化传入参数
-    private query: Observable<any>; // 数据对象
+    private query: BehaviorSubject<any[]> = new BehaviorSubject([]);
 
     public data: any[] = [];        // 当前数据列表
 
@@ -41,35 +41,33 @@ export class DataTableService {
     });
 
     constructor(private parse: ParseService) {
-        console.log('constructor');
     }
 
     init(input: InputInterface) {
-        console.log('init');
         this.input = input;
         this.setQuery();
     }
 
-    destroy() {
-        console.log('destroy');
-    }
-
-    // 获取查询
+    // 更新数据
     setQuery() {
-        this.query = this.parse.query(this.input.className, query => {
-            query.count().then(res => this.pagination.total = res, err => this.pagination.total = 0);
-            query.skip((this.pagination.page - 1) * this.pagination.pageSize);
-            query.limit(this.pagination.pageSize);
-        });
+        this.parse.query(
+            this.input.className,
+            query => {
+                query.count().then(res => this.pagination.total = res, err => this.pagination.total = 0);
+                query.skip((this.pagination.page - 1) * this.pagination.pageSize);
+                query.limit(this.pagination.pageSize);
+            }
+        )
+            .map(x => x.result)
+            .subscribe(res => {
+                this.data = res;
+                this.query.next(res);
+            });
     }
 
-    // 获取数据列表
+    // 数据列表
     connect(): Observable<any[]> {
-        console.log('connect');
-        return this.query.map(x => {
-            this.data = x.result;
-            return x.result;
-        });
+        return this.query.asObservable();
     }
 
     // 分页操作

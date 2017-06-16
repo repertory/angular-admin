@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy, Input} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {SelectionModel} from '@angular/material';
 import {DataTableService} from './data-table.service';
 
@@ -7,7 +7,7 @@ import {DataTableService} from './data-table.service';
     templateUrl: './data-table.component.html',
     styleUrls: ['./data-table.component.css']
 })
-export class DataTableComponent implements OnInit, OnDestroy {
+export class DataTableComponent implements OnInit {
 
     @Input() className: string;
     @Input() options: any[] = [];
@@ -22,10 +22,6 @@ export class DataTableComponent implements OnInit, OnDestroy {
         this.dataSource.init({
             className: this.className
         });
-    }
-
-    ngOnDestroy() {
-        this.dataSource.destroy();
     }
 
     // 获取需要显示的字段
