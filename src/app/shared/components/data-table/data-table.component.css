@@ -7,7 +7,7 @@
 
 .cdk-row, .cdk-header-row {
     display: flex;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #eeeeee;
     align-items: center;
     height: 48px;
     padding: 0 8px;
@@ -34,12 +34,12 @@
 }
 
 .cdk-row.data-row:not(.selected):hover {
-    background: #eeeeee;
+    background: rgba(0, 0, 0, 0.05);
 }
 
 .cdk-row.data-row.selected,
 .cdk-row.data-row:active {
-    background: #f5f5f5;
+    background: rgba(0, 0, 0, 0.03);
 }
 
 .cdk-column-__checkbox__ {
@@ -62,7 +62,8 @@
 }
 
 .pagination .mat-select {
-    margin-left: 8px;
+    /*margin-left: 8px;*/
+
 }
 
 .pagination .mat-select /deep/ .mat-select-trigger {
@@ -79,23 +80,8 @@
 }
 
 /*工具栏*/
-.toolbar {
-    height: 64px;
-    display: flex;
-    align-items: center;
-    box-sizing: border-box;
-    padding: 0 8px;
-}
-
-.toolbar .content-selection {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    transition: all 500ms ease-in-out;
-    background: #fd9dbe;
-    /* transform: translateY(-100%); */
+.no-background {
+    background: none;
 }
 
 .toolbar .content {
@@ -104,22 +90,10 @@
     flex-grow: 1;
 }
 
-.toolbar .content /deep/ .mat-button-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .toolbar .content .title {
     display: flex;
     align-items: center;
-    color: black;
-    margin-right: 32px;
     font-size: 18px;
-}
-
-.toolbar .content .mat-button {
-    margin: 0 8px;
 }
 
 .toolbar .content .actions {
@@ -128,8 +102,3 @@
     justify-content: flex-end;
     flex-grow: 1;
 }
-
-.toolbar .content .actions .mat-button md-icon {
-    margin-right: 4px;
-}
-

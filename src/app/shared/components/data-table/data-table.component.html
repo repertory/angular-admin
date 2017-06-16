@@ -1,7 +1,8 @@
 <!--工具栏-->
-<div class="toolbar" [style.backgroundColor]="selection.hasValue() ? 'rgba(255, 64, 129, .5)' : ''">
-    <div class="content" [style.display]="!selection.hasValue() ? '' : 'none'">
-        <div class="title" [style.marginLeft]="'8px'">用户管理</div>
+<div class="toolbar mat-toolbar"
+     [ngClass]="{'mat-accent': selection.hasValue(), 'no-background': !selection.hasValue()}">
+    <div class="content" *ngIf="!selection.hasValue()">
+        <div class="title">用户管理</div>
 
         <div class="actions">
             <button md-icon-button>

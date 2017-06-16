@@ -20,7 +20,8 @@ export class DataTableComponent implements OnInit {
 
     ngOnInit() {
         this.dataSource.init({
-            className: this.className
+            className: this.className,
+            selection: this.selection
         });
     }
 

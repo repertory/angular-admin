@@ -6,6 +6,7 @@ import {ParseService} from '../../services/services.module';
 // init参数接口
 export interface InputInterface {
     className: string;
+    selection: any;
 }
 
 @Injectable()
@@ -34,6 +35,10 @@ export class DataTableService {
                 return false;
             }
             if (key === 'page') {
+                // 清空已选项
+                if (this.input.selection) {
+                    this.input.selection.clear();
+                }
                 this.setQuery();
             }
             return true;
