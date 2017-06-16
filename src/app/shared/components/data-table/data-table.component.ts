@@ -11,11 +11,10 @@ export class DataTableComponent implements OnInit, OnDestroy {
 
     @Input() className: string;
     @Input() options: any[] = [];
-    @Input() selectMulti: Boolean = true;
     @Input() pageSizeOptions: number[] = [5, 10, 20, 50, 100, 500, 1000];
 
     dataSource: DataTableService;
-    selection = new SelectionModel(!!this.selectMulti, []);
+    selection = new SelectionModel(true, []);
 
     constructor(private dataTable: DataTableService) {
         this.dataSource = dataTable;
@@ -34,7 +33,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
     // 获取需要显示的字段
     display() {
         const display = this.options
-            .filter(x => !!x.operate.query.enabled)
+            .filter(x => x.operate.query.enabled)
             .sort((x, y) => x.operate.query.orderBy - y.operate.query.orderBy)
             .map(x => x.key);
         display.unshift('__checkbox__'); // 左侧单选框，避免与自定义字段冲突
@@ -53,15 +52,6 @@ export class DataTableComponent implements OnInit, OnDestroy {
         } else {
             this.dataSource.data.forEach(data => this.selection.select(data));
         }
-    }
-
-    // 分页显示
-    paginationRange(): string {
-        const start = this.dataSource.pagination.index;
-        const dataLength = this.dataSource.data.length;
-        const end = Math.min(start + this.dataSource.pagination.pageLength, dataLength);
-
-        return `${start + 1} - ${end} of ${dataLength}`;
     }
 
 }

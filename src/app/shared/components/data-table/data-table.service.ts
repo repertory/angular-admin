@@ -1,8 +1,6 @@
 import {Injectable} from '@angular/core';
-import {CollectionViewer} from '@angular/material';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/interval';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {ParseService} from '../../services/services.module';
 
 // init参数接口
@@ -13,10 +11,34 @@ export interface InputInterface {
 @Injectable()
 export class DataTableService {
 
-    public data: any[] = [];
-    public query: Observable<any>;
+    private input: InputInterface;  // 初始化传入参数
+    private query: Observable<any>; // 数据对象
 
-    private input: InputInterface;
+    public data: any[] = [];        // 当前数据列表
+
+    // 分页配置
+    pagination = new Proxy({page: 1, maxPage: 1, pageSize: 10, total: 0}, {
+        get: (target, key, receiver) => {
+            let value = 0;
+            switch (key) {
+                case 'maxPage':
+                    value = Math.ceil(target.total / target.pageSize);
+                    break;
+                default:
+                    value = Reflect.get(target, key, receiver);
+            }
+            return value;
+        },
+        set: (target, key, value, receiver) => {
+            if (!Reflect.set(target, key, value, receiver)) {
+                return false;
+            }
+            if (key === 'page') {
+                this.setQuery();
+            }
+            return true;
+        }
+    });
 
     constructor(private parse: ParseService) {
         console.log('constructor');
@@ -25,59 +47,48 @@ export class DataTableService {
     init(input: InputInterface) {
         console.log('init');
         this.input = input;
-        this.query = this.parse.query(this.input.className);
+        this.setQuery();
     }
 
     destroy() {
         console.log('destroy');
     }
 
-    connect(collectionViewer: CollectionViewer): Observable<any[]> {
+    // 获取查询
+    setQuery() {
+        this.query = this.parse.query(this.input.className, query => {
+            query.count().then(res => this.pagination.total = res, err => this.pagination.total = 0);
+            query.skip((this.pagination.page - 1) * this.pagination.pageSize);
+            query.limit(this.pagination.pageSize);
+        });
+    }
+
+    // 获取数据列表
+    connect(): Observable<any[]> {
         console.log('connect');
         return this.query.map(x => {
             this.data = x.result;
             return x.result;
         });
-        // return collectionViewer.viewChange
-        //     .map((view: { start: number, end: number }) => {
-        //         // Set the rendered rows length to the virtual page size. Fill in the data provided
-        //         // from the index start until the end index or pagination size, whichever is smaller.
-        //         this.renderedData.length = this.data.length;
-        //
-        //         const buffer = 20;
-        //         const rangeStart = Math.max(0, view.start - buffer);
-        //         const rangeEnd = Math.min(this.data.length, view.end + buffer);
-        //
-        //         for (let i = rangeStart; i < rangeEnd; i++) {
-        //             this.renderedData[i] = this.data[i];
-        //         }
-        //
-        //         return this.renderedData;
-        //     });
     }
 
-    private _pagination = new BehaviorSubject({index: 0, pageLength: 10});
-    set pagination(pagination) {
-        this._pagination.next(pagination);
-    };
-
-    get pagination() {
-        return this._pagination.value;
-    }
-
+    // 分页操作
     incrementPage(increment: number) {
         if (this.canIncrementPage(increment)) {
-            const index = this.pagination.index + this.pagination.pageLength * increment;
-            this.pagination = {index, pageLength: this.pagination.pageLength};
+            this.pagination.page += increment;
         }
     }
 
-    canIncrementPage(increment: number) {
-        const increasedIndex = this.pagination.index + (this.pagination.pageLength * increment);
-        return increasedIndex === 0 || (increasedIndex >= 0 && increasedIndex < this.data.length);
+    // 判断是否可以分页
+    canIncrementPage(increment: number): boolean {
+        const increasedPage = this.pagination.page + increment;
+        return increasedPage >= 1 && increasedPage <= this.pagination.maxPage;
     }
 
-    setPageLength(pageLength: number) {
-        this.pagination = {index: 0, pageLength};
+    // 设置每页显示数
+    setPageSize(pageSize: number) {
+        this.pagination.pageSize = pageSize;
+        this.pagination.page = 1;
     }
+
 }

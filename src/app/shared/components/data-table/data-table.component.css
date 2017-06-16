@@ -56,7 +56,7 @@
     justify-content: flex-end;
 }
 
-.pagination .rows-per-page {
+.pagination .page-size {
     display: flex;
     align-items: center;
 }
