@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CollectionViewer, SelectionModel} from '@angular/material';
-import {Observable} from 'rxjs/Rx';
+import {Observable} from 'rxjs/Observable';
 
 import {ParseService} from '../../shared/shared.module';
 

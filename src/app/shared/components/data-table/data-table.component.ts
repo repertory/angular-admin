@@ -13,11 +13,9 @@ export class DataTableComponent implements OnInit, OnDestroy {
     @Input() options: any[] = [];
     @Input() pageSizeOptions: number[] = [5, 10, 20, 50, 100, 500, 1000];
 
-    dataSource: DataTableService;
     selection = new SelectionModel(true, []);
 
-    constructor(private dataTable: DataTableService) {
-        this.dataSource = dataTable;
+    constructor(public dataSource: DataTableService) {
     }
 
     ngOnInit() {
