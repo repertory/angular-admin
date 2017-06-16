@@ -62,7 +62,7 @@
 </cdk-table>
 
 <!--分页展示-->
-<div class="pagination">
+<div class="pagination" *ngIf="dataSource.pagination.total">
     <div class="page-size">
         <md-select class="no-input-underline" [ngModel]="dataSource.pagination.pageSize"
                    (change)="dataSource.setPageSize($event.value)">
@@ -78,6 +78,11 @@
     </div>
 
     <button md-icon-button
+            (click)="dataSource.pagination.page = 1"
+            [disabled]="dataSource.pagination.page <= 1">
+        <md-icon>first_page</md-icon>
+    </button>
+    <button md-icon-button
             (click)="dataSource.incrementPage(-1)"
             [disabled]="!dataSource.canIncrementPage(-1)">
         <md-icon>navigate_before</md-icon>
@@ -86,5 +91,10 @@
             (click)="dataSource.incrementPage(1)"
             [disabled]="!dataSource.canIncrementPage(1)">
         <md-icon>navigate_next</md-icon>
+    </button>
+    <button md-icon-button
+            (click)="dataSource.pagination.page = dataSource.pagination.maxPage"
+            [disabled]="dataSource.pagination.page >= dataSource.pagination.maxPage">
+        <md-icon>last_page</md-icon>
     </button>
 </div>

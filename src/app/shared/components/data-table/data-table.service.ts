@@ -58,6 +58,7 @@ export class DataTableService {
                 query.limit(this.pagination.pageSize);
             }
         )
+            .filter(x => x.type && x.type === 'result')
             .map(x => x.result)
             .subscribe(res => {
                 this.data = res;
