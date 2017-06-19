@@ -1,7 +1,7 @@
 <!--工具栏-->
 <div class="toolbar mat-toolbar"
-     [ngClass]="{'mat-accent': selection.hasValue(), 'no-background': !selection.hasValue()}">
-    <div class="content" *ngIf="!selection.hasValue()">
+     [ngClass]="{'mat-accent': dataSource.selection.hasValue(), 'no-background': !dataSource.selection.hasValue()}">
+    <div class="content" *ngIf="!dataSource.selection.hasValue()">
         <div class="title">用户管理</div>
 
         <div class="actions">
@@ -17,12 +17,12 @@
         </div>
     </div>
 
-    <div class="content" *ngIf="selection.hasValue()">
+    <div class="content" *ngIf="dataSource.selection.hasValue()">
         <div class="title">
-            <button md-icon-button (click)="selection.clear()">
+            <button md-icon-button (click)="dataSource.selection.clear()">
                 <md-icon>close</md-icon>
             </button>
-            <div>已选择{{selection.selected.length}}条</div>
+            <div>已选择{{dataSource.selection.selected.length}}条</div>
         </div>
 
         <div class="actions">
@@ -44,31 +44,44 @@
     <!--左侧单选框-->
     <ng-container cdkColumnDef="__checkbox__">
         <cdk-header-cell *cdkHeaderCellDef>
-            <md-checkbox (change)="$event ? selectAllToggle() : null"
-                         [checked]="isAllSelected()"
-                         [indeterminate]="selection.hasValue() && !isAllSelected()">
+            <md-checkbox (change)="$event ? dataSource.selectAllToggle() : null"
+                         [checked]="dataSource.isAllSelected()"
+                         [indeterminate]="dataSource.selection.hasValue() && !dataSource.isAllSelected()">
             </md-checkbox>
         </cdk-header-cell>
         <cdk-cell *cdkCellDef="let row">
             <md-checkbox (click)="$event.stopPropagation()"
-                         (change)="$event ? selection.toggle(row) : null"
-                         [checked]="selection.isSelected(row)"></md-checkbox>
+                         (change)="$event ? dataSource.selection.toggle(row) : null"
+                         [checked]="dataSource.selection.isSelected(row)"></md-checkbox>
         </cdk-cell>
     </ng-container>
 
     <!--自定义字段-->
     <ng-container *ngFor="let option of options" [cdkColumnDef]="option.key">
         <cdk-header-cell *cdkHeaderCellDef>{{option.name}}</cdk-header-cell>
-        <cdk-cell *cdkCellDef="let row">{{row[option.key == 'objectId' ? 'id' : option.key] || row.get(option.key)}}
+        <cdk-cell *cdkCellDef="let row" [ngSwitch]="option.type.toLowerCase()">
+            <span *ngSwitchCase="'acl'" [innerHTML]="row[option.key] || row.get(option.key) | parseAcl"></span>
+            <span *ngSwitchCase="'array'" [innerHTML]="row[option.key] || row.get(option.key) | parseArray"></span>
+            <span *ngSwitchCase="'boolean'" [innerHTML]="row[option.key] || row.get(option.key) | parseBoolean"></span>
+            <span *ngSwitchCase="'date'" [innerHTML]="row[option.key] || row.get(option.key) | parseDate"></span>
+            <span *ngSwitchCase="'file'" [innerHTML]="row[option.key] || row.get(option.key) | parseFile"></span>
+            <span *ngSwitchCase="'number'" [innerHTML]="row[option.key] || row.get(option.key) | parseNumber"></span>
+            <span *ngSwitchCase="'object'" [innerHTML]="row[option.key] || row.get(option.key) | parseObject"></span>
+            <span *ngSwitchCase="'pointer'" [innerHTML]="row[option.key] || row.get(option.key) | parsePointer"></span>
+            <span *ngSwitchCase="'relation'"
+                  [innerHTML]="row[option.key] || row.get(option.key) | parseRelation"></span>
+            <span *ngSwitchCase="'string'"
+                  [innerText]="row[option.key == 'objectId' ? 'id' : option.key] || row.get(option.key) | parseString"></span>
+            <span *ngSwitchDefault [innerText]="row[option.key] || row.get(option.key)"></span>
         </cdk-cell>
     </ng-container>
 
     <!--数据展示-->
     <cdk-header-row *cdkHeaderRowDef="display()"></cdk-header-row>
     <cdk-row *cdkRowDef="let row; columns: display()"
-             [class.selected]="row ? selection.isSelected(row) : false"
+             [class.selected]="row ? dataSource.selection.isSelected(row) : false"
              [class.data-row]="!!row"
-             (click)="row ? selection.toggle(row) : null"></cdk-row>
+             (click)="row ? dataSource.selection.toggle(row) : null"></cdk-row>
 
 </cdk-table>
 

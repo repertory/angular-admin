@@ -7,6 +7,8 @@ import {HeaderModule} from './header/header.module';
 import {MarkdownModule} from './markdown/markdown.module';
 import {QrcodeModule} from './qrcode/qrcode.module';
 
+export * from './data-table/data-table.module';
+
 @NgModule({
     exports: [
         DataTableModule,

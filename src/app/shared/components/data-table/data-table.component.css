@@ -14,7 +14,7 @@
 }
 
 .cdk-cell, .cdk-header-cell {
-    width: 150px;
+    width: 100px;
     padding: 10px;
     position: relative;
     flex: 1;

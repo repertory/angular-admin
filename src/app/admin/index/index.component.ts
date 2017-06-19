@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
-import {ParseService} from '../../shared/shared.module';
+import {ParseService, DataTable} from '../../shared/shared.module';
 
 @Component({
     selector: 'app-index',
@@ -41,7 +41,7 @@ export class IndexComponent implements OnInit {
         'http://upload.art.ifeng.com/2015/0811/1439261016497.jpg'
     ];
 
-    public dataTable = {
+    public dataTable: DataTable = {
         className: 'User',
         options: [
             {

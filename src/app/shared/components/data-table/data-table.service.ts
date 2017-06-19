@@ -1,21 +1,19 @@
 import {Injectable} from '@angular/core';
+import {SelectionModel} from '@angular/material';
 import {Observable} from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {ParseService} from '../../services/services.module';
 
-// init参数接口
-export interface InputInterface {
-    className: string;
-    selection: any;
-}
+import {DataTableInput} from './data-table';
 
 @Injectable()
 export class DataTableService {
 
-    private input: InputInterface;  // 初始化传入参数
+    private input: DataTableInput;  // 初始化传入参数
     private query: BehaviorSubject<any[]> = new BehaviorSubject([]);
 
-    public data: any[] = [];        // 当前数据列表
+    public selection = new SelectionModel(true, []);  // 选中列表
+    public data: any[] = [];                           // 当前数据列表
 
     // 分页配置
     pagination = new Proxy({page: 1, maxPage: 1, pageSize: 10, total: 0}, {
@@ -36,8 +34,8 @@ export class DataTableService {
             }
             if (key === 'page') {
                 // 清空已选项
-                if (this.input.selection) {
-                    this.input.selection.clear();
+                if (this.selection) {
+                    this.selection.clear();
                 }
                 this.setQuery();
             }
@@ -48,7 +46,7 @@ export class DataTableService {
     constructor(private parse: ParseService) {
     }
 
-    init(input: InputInterface) {
+    init(input: DataTableInput) {
         this.input = input;
         this.setQuery();
     }
@@ -74,6 +72,20 @@ export class DataTableService {
     // 数据列表
     connect(): Observable<any[]> {
         return this.query.asObservable();
+    }
+
+    // 是否为全选状态
+    isAllSelected(): boolean {
+        return !this.selection.isEmpty() && this.selection.selected.length === this.data.length;
+    }
+
+    // 全选或取消
+    selectAllToggle() {
+        if (this.isAllSelected()) {
+            this.selection.clear();
+        } else {
+            this.data.forEach(data => this.selection.select(data));
+        }
     }
 
     // 分页操作
