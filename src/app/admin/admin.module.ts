@@ -3,6 +3,8 @@ import {NgModule} from '@angular/core';
 import {SharedModule} from '../shared/shared.module';
 import {AdminRoutingModule} from './admin-routing.module';
 import {AdminGuardService} from './admin-guard.service';
+import {AdminMenuService} from './admin-menu.service';
+import {AdminUserService} from './admin-user.service';
 import {AdminComponent} from './admin.component';
 
 @NgModule({
@@ -11,7 +13,9 @@ import {AdminComponent} from './admin.component';
         AdminRoutingModule,
     ],
     providers: [
-        AdminGuardService
+        AdminGuardService,
+        AdminMenuService,
+        AdminUserService,
     ],
     declarations: [AdminComponent],
 })

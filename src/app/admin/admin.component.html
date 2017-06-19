@@ -18,16 +18,16 @@
         <button md-icon-button (click)="changeTheme()">
             <md-icon [textContent]="isDarkTheme ? 'brightness_4' : 'brightness_5'"></md-icon>
         </button>
-        <a routerLink="/login" md-icon-button *ngIf="!(user | async)">登录</a>
-        <button md-icon-button [mdMenuTriggerFor]="menu" *ngIf="user | async">
+        <a routerLink="/login" md-icon-button *ngIf="!(userService.data | async)">登录</a>
+        <button md-icon-button [mdMenuTriggerFor]="userMenu" *ngIf="userService.data | async">
             <md-icon>account_circle</md-icon>
         </button>
-        <md-menu #menu>
-            <button md-menu-item (click)="profile()">
+        <md-menu #userMenu>
+            <button md-menu-item (click)="userService.profile()">
                 <md-icon>perm_identity</md-icon>
-                <span>{{(user | async)?.get('username')}}</span>
+                <span>{{(userService.data | async)?.get('username')}}</span>
             </button>
-            <button md-menu-item (click)="logout()">
+            <button md-menu-item (click)="userService.logout()">
                 <md-icon>exit_to_app</md-icon>
                 <span>注销</span>
             </button>
@@ -49,11 +49,11 @@
 
                     <!--菜单列表-->
                     <md-nav-list fxFlex style="overflow-y: auto">
-                        <div *ngIf="!getMenus().groups.length" fxLayoutAlign="center start">
+                        <div *ngIf="!menuService.getData().groups.length" fxLayoutAlign="center start">
                             <p style="font-size: 14px;font-style: italic;">没有数据</p>
                         </div>
 
-                        <div *ngFor="let group of getMenus().groups; let first=first" style="width: 100%">
+                        <div *ngFor="let group of menuService.getData().groups; let first=first" style="width: 100%">
                             <!--分隔符-->
                             <md-divider *ngIf="!first"></md-divider>
 
@@ -61,7 +61,8 @@
                             <h3 md-subheader>{{group}}</h3>
 
                             <!--菜单列表-->
-                            <a md-list-item *ngFor="let menu of getMenus().tree[group]" [routerLink]="menu.link">
+                            <a md-list-item *ngFor="let menu of menuService.getData().tree[group]"
+                               [routerLink]="menu.link">
                                 <md-icon md-list-icon [class]="menu?.iconClass">{{menu?.icon}}</md-icon>
                                 <span md-line>{{menu.name}}</span>
                             </a>
@@ -76,9 +77,9 @@
                             <div mdPrefix>
                                 <md-icon>search</md-icon>
                             </div>
-                            <input mdInput placeholder="搜索关键字" [(ngModel)]="keyword">
-                            <div mdSuffix *ngIf="keyword">
-                                <md-icon (click)="keyword = ''" [style.cursor]="'pointer'">close</md-icon>
+                            <input mdInput placeholder="搜索关键字" [(ngModel)]="menuService.keyword">
+                            <div mdSuffix *ngIf="menuService.keyword">
+                                <md-icon (click)="menuService.keyword = ''" [style.cursor]="'pointer'">close</md-icon>
                             </div>
                         </md-input-container>
                     </div>
