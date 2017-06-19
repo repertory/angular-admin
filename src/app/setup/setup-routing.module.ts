@@ -1,10 +1,10 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Route} from '@angular/router';
 
-import {HelpComponent} from './help.component';
+import {SetupComponent} from './setup.component';
 
 export const routerConfig: Route[] = [
-    {path: 'help', component: HelpComponent}
+    {path: 'setup', component: SetupComponent},
 ];
 
 @NgModule({
@@ -13,5 +13,5 @@ export const routerConfig: Route[] = [
     ],
     exports: [RouterModule]
 })
-export class HelpRoutingModule {
+export class SetupRoutingModule {
 }

@@ -16,12 +16,20 @@ a {
 
 .search-container {
     width: 100%;
-    margin-top: -8px;
+    margin-top: 4px;
 }
 
-.search-container md-icon {
-    padding: 4px 8px;
+.search-container /deep/ md-icon {
+    padding: 0 8px;
     cursor: default;
+}
+
+.search-container /deep/ .mat-input-flex {
+    align-items: center;
+}
+
+.search-container /deep/ .mat-input-infix {
+    border-top: 0;
 }
 
 input::-ms-clear, input::-webkit-search-cancel-button {

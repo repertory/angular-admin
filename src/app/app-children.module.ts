@@ -5,6 +5,7 @@ import {ErrorModule} from './error/error.module';
 import {ForgetModule} from './forget/forget.module';
 import {LoginModule} from './login/login.module';
 import {RegisterModule} from './register/register.module';
+import {SetupModule} from './setup/setup.module';
 
 @NgModule({
     imports: [
@@ -13,6 +14,7 @@ import {RegisterModule} from './register/register.module';
         ForgetModule,
         LoginModule,
         RegisterModule,
+        SetupModule,
     ]
 })
 export class AppChildrenModule {
