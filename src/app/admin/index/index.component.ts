@@ -94,6 +94,23 @@ export class IndexComponent implements OnInit {
                         orderBy: 3,
                     },
                 }
+            },
+            {
+                key: 'file',
+                name: '文件',
+                type: 'File',
+                operate: {
+                    create: {
+                        enabled: true,
+                    },
+                    update: {
+                        enabled: true,
+                    },
+                    query: {
+                        enabled: true,
+                        orderBy: 4,
+                    },
+                }
             }
         ]
     };

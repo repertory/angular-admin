@@ -2,11 +2,11 @@
 <md-dialog-content style="padding: 0;margin-top: -24px;">
     <md-tab-group *ngIf="data.selection.selected.length > 1">
         <md-tab [label]="item.id" *ngFor="let item of data.selection.selected">
-            <pre class="padding">{{item | json}}</pre>
+            <pre>{{item | json}}</pre>
         </md-tab>
     </md-tab-group>
     <div *ngIf="data.selection.selected.length == 1">
-        <pre class="padding">{{data.selection.selected | json}}</pre>
+        <pre>{{data.selection.selected | json}}</pre>
     </div>
 </md-dialog-content>
 <md-dialog-actions align="end" style="margin-right: -12px">

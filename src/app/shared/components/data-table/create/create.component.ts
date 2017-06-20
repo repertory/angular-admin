@@ -1,6 +1,8 @@
 import {Component, Inject} from '@angular/core';
 import {MD_DIALOG_DATA} from '@angular/material';
 
+import {DataTableOption} from '../data-table';
+
 @Component({
     selector: 'app-create',
     templateUrl: './create.component.html',
@@ -8,8 +10,10 @@ import {MD_DIALOG_DATA} from '@angular/material';
 })
 export class CreateComponent {
 
+    options: DataTableOption[];
+
     constructor(@Inject(MD_DIALOG_DATA) private data: any) {
-        console.log(data.options.filter(x => x.operate.create.enabled));
+        this.options = data.options.filter(x => x.operate.create.enabled);
     }
 
 }
