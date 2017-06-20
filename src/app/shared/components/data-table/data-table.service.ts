@@ -14,6 +14,7 @@ export class DataTableService {
 
     public selection = new SelectionModel(true, []);  // 选中列表
     public data: any[] = [];                           // 当前数据列表
+    public isLoading: Boolean = false;
 
     // 分页配置
     pagination = new Proxy({page: 1, maxPage: 1, pageSize: 10, total: 0}, {
@@ -53,6 +54,7 @@ export class DataTableService {
 
     // 更新数据
     setQuery() {
+        this.isLoading = true;
         this.parse.query(
             this.input.className,
             query => {
@@ -63,10 +65,14 @@ export class DataTableService {
         )
             .filter(x => x.type && x.type === 'result')
             .map(x => x.result)
-            .subscribe(res => {
-                this.data = res;
-                this.query.next(res);
-            });
+            .subscribe(
+                next => {
+                    this.data = next;
+                    this.query.next(next);
+                    this.isLoading = false;
+                },
+                error => this.isLoading = false
+            );
     }
 
     // 数据列表
@@ -105,6 +111,31 @@ export class DataTableService {
     setPageSize(pageSize: number) {
         this.pagination.pageSize = pageSize;
         this.pagination.page = 1;
+    }
+
+    // 删除
+    delete() {
+        console.log('delete', this.selection.selected);
+    }
+
+    // 修改
+    update() {
+        console.log('update', this.selection.selected);
+    }
+
+    // 新增
+    create() {
+        console.log('create');
+    }
+
+    // 筛选
+    filter() {
+        console.log('filter');
+    }
+
+    // 导出数据
+    export() {
+        console.log('export', this.data);
     }
 
 }
