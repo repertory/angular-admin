@@ -32,6 +32,10 @@ a {
     border-top: 0;
 }
 
+.search-container /deep/ .mat-input-underline {
+    display: none;
+}
+
 input::-ms-clear, input::-webkit-search-cancel-button {
     display: none;
 }

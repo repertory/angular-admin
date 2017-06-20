@@ -36,16 +36,18 @@ export class AdminMenuService {
     }
 
     // 获取数据
-    getData() {
+    getData(type: string, index?: string | number): any[] {
         const result = {groups: [], tree: {}};
-        for (const menu of this.data.filter(m => JSON.stringify(m).includes(this.keyword || ''))) {
-            if (!result.tree[menu.group]) {
-                result.tree[menu.group] = [];
-                result.groups.push(menu.group);
-            }
-            result.tree[menu.group].push(menu);
-        }
-        return result;
+        this.data
+            .filter(x => (x.group + '/' + x.name).includes(this.keyword || ''))
+            .forEach((menu: Menu) => {
+                if (!result.tree[menu.group]) {
+                    result.tree[menu.group] = [];
+                    result.groups.push(menu.group);
+                }
+                result.tree[menu.group].push(menu);
+            });
+        return index ? result[type][index] : result[type];
     }
 
 }

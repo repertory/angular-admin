@@ -1,13 +1,12 @@
-import {Component, HostBinding, OnInit, OnDestroy, OnChanges, SimpleChanges, ElementRef, Input} from '@angular/core';
+import {Component, OnInit, OnDestroy, OnChanges, SimpleChanges, ElementRef, Input} from '@angular/core';
 import * as echarts from 'echarts';
 
 @Component({
     selector: 'app-echarts',
-    template: ' '
+    template: ' ',
+    styles: [':host{display: inline-block;}'],
 })
 export class EchartsComponent implements OnInit, OnDestroy, OnChanges {
-
-    @HostBinding('style.display') display = 'inline-block';
 
     @Input() option: object;
     @Input() width: Number | String = 'auto';

@@ -88,7 +88,7 @@
 <!--分页展示-->
 <div class="pagination" *ngIf="dataSource.pagination.total">
     <div class="page-size">
-        <md-select class="no-input-underline" [ngModel]="dataSource.pagination.pageSize"
+        <md-select [ngModel]="dataSource.pagination.pageSize"
                    (change)="dataSource.setPageSize($event.value)">
             <md-option *ngFor="let pageSizeOption of pageSizeOptions" [value]="pageSizeOption">
                 {{pageSizeOption}}
