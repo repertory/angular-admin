@@ -1,6 +1,7 @@
 // service传参接口
 export interface DataTableInput {
     className: string;
+    options: DataTableOption[];
 }
 
 export interface DataTableOption {

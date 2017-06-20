@@ -91,8 +91,8 @@
     </ng-container>
 
     <!--数据展示-->
-    <cdk-header-row *cdkHeaderRowDef="display()"></cdk-header-row>
-    <cdk-row *cdkRowDef="let row; columns: display()"
+    <cdk-header-row *cdkHeaderRowDef="columns()"></cdk-header-row>
+    <cdk-row *cdkRowDef="let row; columns: columns()"
              [class.selected]="row ? dataSource.selection.isSelected(row) : false"
              [class.data-row]="!!row"
              (click)="row ? dataSource.selection.toggle(row) : null"></cdk-row>

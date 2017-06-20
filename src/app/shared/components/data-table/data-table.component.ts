@@ -19,18 +19,19 @@ export class DataTableComponent implements OnInit {
 
     ngOnInit() {
         this.dataSource.init({
-            className: this.className
+            className: this.className,
+            options: this.options,
         });
     }
 
     // 获取需要显示的字段
-    display() {
-        const display = this.options
+    columns() {
+        const columns = this.options
             .filter(x => x.operate.query.enabled)
             .sort((x, y) => x.operate.query.orderBy - y.operate.query.orderBy)
             .map(x => x.key);
-        display.unshift('__checkbox__'); // 左侧单选框，避免与自定义字段冲突
-        return display;
+        columns.unshift('__checkbox__'); // 左侧单选框，避免与自定义字段冲突
+        return columns;
     }
 
 }

@@ -1,10 +1,15 @@
 import {Injectable} from '@angular/core';
-import {SelectionModel} from '@angular/material';
+import {SelectionModel, MdDialog} from '@angular/material';
 import {Observable} from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {ParseService} from '../../services/services.module';
 
 import {DataTableInput} from './data-table';
+
+import {CreateComponent} from './create/create.component';
+import {DeleteComponent} from './delete/delete.component';
+import {FilterComponent} from './filter/filter.component';
+import {UpdateComponent} from './update/update.component';
 
 @Injectable()
 export class DataTableService {
@@ -14,10 +19,10 @@ export class DataTableService {
 
     public selection = new SelectionModel(true, []);  // 选中列表
     public data: any[] = [];                           // 当前数据列表
-    public isLoading: Boolean = false;
+    public isLoading: Boolean = false;                // 加载中
 
     // 分页配置
-    pagination = new Proxy({page: 1, maxPage: 1, pageSize: 10, total: 0}, {
+    pagination = new Proxy({page: 1, maxPage: 1, pageSize: 5, total: 0}, {
         get: (target, key, receiver) => {
             let value = 0;
             switch (key) {
@@ -44,7 +49,7 @@ export class DataTableService {
         }
     });
 
-    constructor(private parse: ParseService) {
+    constructor(private parse: ParseService, private dialog: MdDialog) {
     }
 
     init(input: DataTableInput) {
@@ -115,22 +120,39 @@ export class DataTableService {
 
     // 删除
     delete() {
-        console.log('delete', this.selection.selected);
+        this.dialog.open(DeleteComponent, {
+            data: {
+                selection: this.selection
+            }
+        });
     }
 
     // 修改
     update() {
-        console.log('update', this.selection.selected);
+        this.dialog.open(UpdateComponent, {
+            data: {
+                selection: this.selection,
+                options: this.input.options,
+            }
+        });
     }
 
     // 新增
     create() {
-        console.log('create');
+        this.dialog.open(CreateComponent, {
+            data: {
+                options: this.input.options
+            }
+        });
     }
 
     // 筛选
     filter() {
-        console.log('filter');
+        this.dialog.open(FilterComponent, {
+            data: {
+                options: this.input.options
+            }
+        });
     }
 
     // 导出数据

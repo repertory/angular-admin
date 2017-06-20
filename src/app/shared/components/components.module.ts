@@ -17,7 +17,7 @@ export * from './data-table/data-table.module';
         HeaderModule,
         MarkdownModule,
         QrcodeModule,
-    ]
+    ],
 })
 export class ComponentsModule {
 }
