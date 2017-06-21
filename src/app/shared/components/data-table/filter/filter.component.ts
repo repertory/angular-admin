@@ -12,7 +12,7 @@ export class FilterComponent {
 
     options: DataTableOption[];
 
-    constructor(@Inject(MD_DIALOG_DATA) private data: any) {
+    constructor(@Inject(MD_DIALOG_DATA) public data: any) {
         this.options = data.options.filter(x => x.operate.query.enabled);
     }
 

@@ -8,7 +8,7 @@ import {MD_DIALOG_DATA} from '@angular/material';
 })
 export class DeleteComponent {
 
-    constructor(@Inject(MD_DIALOG_DATA) private data: any) {
+    constructor(@Inject(MD_DIALOG_DATA) public data: any) {
         console.log(data.selection.selected);
     }
 

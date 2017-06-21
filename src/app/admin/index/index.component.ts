@@ -42,7 +42,7 @@ export class IndexComponent implements OnInit {
     ];
 
     public dataTable: DataTable = {
-        className: 'User',
+        className: 'Menu',
         options: [
             {
                 key: 'objectId',
@@ -62,15 +62,15 @@ export class IndexComponent implements OnInit {
                 }
             },
             {
-                key: 'username',
-                name: '用户名',
+                key: 'group',
+                name: '分组',
                 type: 'String',
                 operate: {
                     create: {
-                        enabled: false,
+                        enabled: true,
                     },
                     update: {
-                        enabled: false,
+                        enabled: true,
                     },
                     query: {
                         enabled: true,
@@ -79,15 +79,15 @@ export class IndexComponent implements OnInit {
                 }
             },
             {
-                key: 'createdAt',
-                name: '注册时间',
-                type: 'Date',
+                key: 'name',
+                name: '菜单',
+                type: 'String',
                 operate: {
                     create: {
-                        enabled: false,
+                        enabled: true,
                     },
                     update: {
-                        enabled: false,
+                        enabled: true,
                     },
                     query: {
                         enabled: true,
@@ -96,9 +96,9 @@ export class IndexComponent implements OnInit {
                 }
             },
             {
-                key: 'file',
-                name: '文件',
-                type: 'File',
+                key: 'link',
+                name: '链接',
+                type: 'String',
                 operate: {
                     create: {
                         enabled: true,
@@ -111,7 +111,75 @@ export class IndexComponent implements OnInit {
                         orderBy: 4,
                     },
                 }
-            }
+            },
+            {
+                key: 'icon',
+                name: '图标',
+                type: 'String',
+                operate: {
+                    create: {
+                        enabled: true,
+                    },
+                    update: {
+                        enabled: true,
+                    },
+                    query: {
+                        enabled: true,
+                        orderBy: 5,
+                    },
+                }
+            },
+            {
+                key: 'iconClass',
+                name: '图标属性',
+                type: 'String',
+                operate: {
+                    create: {
+                        enabled: true,
+                    },
+                    update: {
+                        enabled: true,
+                    },
+                    query: {
+                        enabled: true,
+                        orderBy: 6,
+                    },
+                }
+            },
+            {
+                key: 'orderBy',
+                name: '排序',
+                type: 'Number',
+                operate: {
+                    create: {
+                        enabled: true,
+                    },
+                    update: {
+                        enabled: true,
+                    },
+                    query: {
+                        enabled: true,
+                        orderBy: 7,
+                    },
+                }
+            },
+            {
+                key: 'createdAt',
+                name: '创建时间',
+                type: 'Date',
+                operate: {
+                    create: {
+                        enabled: false,
+                    },
+                    update: {
+                        enabled: false,
+                    },
+                    query: {
+                        enabled: true,
+                        orderBy: 9,
+                    },
+                }
+            },
         ]
     };
 
