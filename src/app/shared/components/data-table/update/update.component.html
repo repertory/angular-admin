@@ -1,7 +1,16 @@
-<!--<h2 md-dialog-title>修改</h2>-->
-<md-dialog-content style="padding: 0;margin-top: -24px;">
+<div style="margin: -24px -24px 0;">
+    <md-toolbar color="primary">
+        <h2>编辑(共{{data.selection.selected.length}}项)</h2>
+        <span style="flex: 1 1 auto"></span>
+        <button md-icon-button md-dialog-close>
+            <md-icon>close</md-icon>
+        </button>
+    </md-toolbar>
+</div>
+
+<md-dialog-content style="padding: 0;">
     <md-tab-group *ngIf="data.selection.selected.length > 1">
-        <md-tab [label]="item.id" *ngFor="let item of data.selection.selected">
+        <md-tab *ngFor="let item of data.selection.selected" [label]="item.id">
             <pre>{{item | json}}</pre>
         </md-tab>
     </md-tab-group>
@@ -9,8 +18,10 @@
         <pre>{{data.selection.selected | json}}</pre>
     </div>
 </md-dialog-content>
-<md-dialog-actions align="end" style="margin-right: -12px">
+
+<md-dialog-actions align="end" style="margin-right: -12px;">
     <button md-button md-dialog-close>取消</button>
     <button md-button color="warn" [md-dialog-close]="true">保存</button>
 </md-dialog-actions>
+
 

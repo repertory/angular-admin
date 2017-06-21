@@ -1,1 +1,18 @@
-<pre>{{options | json}}</pre>
+<div style="margin: -24px -24px 0;">
+    <md-toolbar color="primary">
+        <h2>添加</h2>
+        <span style="flex: 1 1 auto"></span>
+        <button md-icon-button md-dialog-close>
+            <md-icon>close</md-icon>
+        </button>
+    </md-toolbar>
+</div>
+
+<md-dialog-content style="padding: 0;">
+    <p>{{options | json}}</p>
+</md-dialog-content>
+
+<md-dialog-actions align="end" style="margin-right: -12px;">
+    <button md-button md-dialog-close>取消</button>
+    <button md-button color="warn" [md-dialog-close]="true">添加</button>
+</md-dialog-actions>
