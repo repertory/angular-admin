@@ -9,7 +9,13 @@
 </div>
 
 <md-dialog-content style="padding: 0;">
-    <p>{{options | json}}</p>
+    <md-grid-list cols="2" rowHeight="4:1" style="margin: 16px 8px 0;">
+        <md-grid-tile *ngFor="let option of options">
+            <md-input-container style="width: 96%">
+                <input mdInput placeholder="{{option.name}}" value="{{option.key}}">
+            </md-input-container>
+        </md-grid-tile>
+    </md-grid-list>
 </md-dialog-content>
 
 <md-dialog-actions align="end" style="margin-right: -12px;">

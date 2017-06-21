@@ -130,6 +130,7 @@ export class DataTableService {
     // 修改
     update() {
         this.dialog.open(UpdateComponent, {
+            width: '560px',
             data: {
                 selection: this.selection,
                 options: this.input.options,
@@ -140,6 +141,7 @@ export class DataTableService {
     // 新增
     create() {
         this.dialog.open(CreateComponent, {
+            width: '560px',
             data: {
                 options: this.input.options
             }

@@ -9,14 +9,17 @@
 </div>
 
 <md-dialog-content style="padding: 0;">
-    <md-tab-group *ngIf="data.selection.selected.length > 1">
+    <md-tab-group>
         <md-tab *ngFor="let item of data.selection.selected" [label]="item.id">
-            <pre>{{item | json}}</pre>
+            <md-grid-list cols="2" rowHeight="4:1" style="margin: 16px 8px 0;">
+                <md-grid-tile *ngFor="let option of options">
+                    <md-input-container style="width: 96%">
+                        <input mdInput placeholder="{{option.name}}" value="{{item.get(option.key)}}">
+                    </md-input-container>
+                </md-grid-tile>
+            </md-grid-list>
         </md-tab>
     </md-tab-group>
-    <div *ngIf="data.selection.selected.length == 1">
-        <pre>{{data.selection.selected | json}}</pre>
-    </div>
 </md-dialog-content>
 
 <md-dialog-actions align="end" style="margin-right: -12px;">
