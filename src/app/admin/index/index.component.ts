@@ -43,6 +43,7 @@ export class IndexComponent implements OnInit {
 
     public dataTable: DataTable = {
         className: 'Menu',
+        name: '菜单管理',
         options: [
             {
                 key: 'objectId',

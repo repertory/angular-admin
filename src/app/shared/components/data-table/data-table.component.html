@@ -2,7 +2,7 @@
 <div class="toolbar mat-toolbar"
      [ngClass]="{'mat-accent': dataSource.selection.hasValue(), 'no-background': !dataSource.selection.hasValue()}">
     <div class="content" *ngIf="!dataSource.selection.hasValue()">
-        <div class="title">用户管理</div>
+        <div class="title">{{name}}</div>
 
         <div class="actions">
             <button md-icon-button (click)="dataSource.create()">

@@ -11,6 +11,7 @@ import {DataTableOption} from './data-table';
 export class DataTableComponent implements OnInit {
 
     @Input() className: string;
+    @Input() name: string;
     @Input() options: DataTableOption[] = [];
     @Input() pageSizeOptions: number[] = [5, 10, 20, 50, 100, 500, 1000];
 

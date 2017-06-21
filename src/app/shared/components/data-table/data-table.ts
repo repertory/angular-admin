@@ -25,5 +25,6 @@ export interface DataTableOption {
 // app-data-table标签参数接口
 export interface DataTable {
     className: string;
+    name: string;
     options: DataTableOption[];
 }
