@@ -41,6 +41,9 @@
     <button md-icon-button (click)="add()">
         <md-icon>add</md-icon>
     </button>
+    <button md-icon-button (click)="filters = [{}]">
+        <md-icon>clear_all</md-icon>
+    </button>
     <span fxFlex></span>
     <button md-button md-dialog-close>取消</button>
     <button md-button color="warn" [md-dialog-close]="true">筛选</button>

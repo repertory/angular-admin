@@ -11,7 +11,7 @@ import {DataTableOption} from '../data-table';
 export class FilterComponent {
 
     options: DataTableOption[];
-    filters: any[] = [];
+    filters: any[] = [{}];
     where = {
         'String': [
             {
@@ -43,10 +43,6 @@ export class FilterComponent {
 
     constructor(@Inject(MD_DIALOG_DATA) public data: any) {
         this.options = data.options.filter(x => x.operate.query.enabled);
-
-        if (!this.filters.length) {
-            this.add();
-        }
     }
 
     add() {
