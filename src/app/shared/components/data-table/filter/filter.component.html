@@ -8,11 +8,40 @@
     </md-toolbar>
 </div>
 
-<md-dialog-content style="padding: 0;">
-    <p>{{options | json}}</p>
+<md-dialog-content>
+    <table style="width: 100%">
+        <tr *ngFor="let filter of filters; let index = index">
+            <td>
+                <md-select placeholder="字段" [(ngModel)]="filter.key" (change)="filter.where = ''">
+                    <md-option *ngFor="let option of options" [value]="option.key">{{ option.name }}
+                    </md-option>
+                </md-select>
+            </td>
+            <td>
+                <md-select placeholder="条件" [(ngModel)]="filter.where">
+                    <md-option *ngFor="let option of getWhere(filter.key)" [value]="option.key">{{ option.name }}
+                    </md-option>
+                </md-select>
+            </td>
+            <td>
+                <md-input-container>
+                    <input mdInput placeholder="关键字" [(ngModel)]="filter.value">
+                </md-input-container>
+            </td>
+            <td>
+                <button md-icon-button (click)="remove(index)">
+                    <md-icon>remove</md-icon>
+                </button>
+            </td>
+        </tr>
+    </table>
 </md-dialog-content>
 
-<md-dialog-actions align="end" style="margin-right: -12px;">
+<md-dialog-actions align="end" style="margin-right: -12px;margin-left: -12px;">
+    <button md-icon-button (click)="add()">
+        <md-icon>add</md-icon>
+    </button>
+    <span fxFlex></span>
     <button md-button md-dialog-close>取消</button>
     <button md-button color="warn" [md-dialog-close]="true">筛选</button>
 </md-dialog-actions>
