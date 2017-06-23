@@ -8,25 +8,28 @@
     </md-toolbar>
 </div>
 
-<md-dialog-content>
-    <table style="width: 100%">
+<md-dialog-content style="padding: 16px 16px 0;">
+    <table width="100%">
         <tr *ngFor="let filter of filters; let index = index">
             <td>
-                <md-select placeholder="字段" [(ngModel)]="filter.key" (change)="filter.where = ''">
+                <md-select placeholder="字段" [(ngModel)]="filter.key" (change)="filter.type = ''">
                     <md-option *ngFor="let option of options" [value]="option.key">{{ option.name }}
                     </md-option>
                 </md-select>
             </td>
             <td>
-                <md-select placeholder="条件" [(ngModel)]="filter.where">
-                    <md-option *ngFor="let option of getWhere(filter.key)" [value]="option.key">{{ option.name }}
+                <md-select placeholder="条件" [(ngModel)]="filter.type">
+                    <md-option *ngFor="let option of getType(filter.key)" [value]="option.key">{{ option.name }}
                     </md-option>
                 </md-select>
             </td>
-            <td>
-                <md-input-container>
+            <td [ngSwitch]="getValueType(filter)">
+                <md-input-container *ngSwitchCase="'string'">
                     <input mdInput placeholder="关键字" [(ngModel)]="filter.value">
                 </md-input-container>
+
+                <div *ngSwitchDefault></div>
+                {{getValueType(filter)}}
             </td>
             <td>
                 <button md-icon-button (click)="remove(index)">
