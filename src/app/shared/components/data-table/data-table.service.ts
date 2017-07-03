@@ -85,6 +85,10 @@ export class DataTableService {
         return this.query.asObservable();
     }
 
+    disconnect() {
+        console.log('disconnect');
+    }
+
     // 是否为全选状态
     isAllSelected(): boolean {
         return !this.selection.isEmpty() && this.selection.selected.length === this.data.length;
