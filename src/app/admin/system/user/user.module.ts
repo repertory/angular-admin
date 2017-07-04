@@ -6,14 +6,14 @@ import {UserComponent} from './user.component';
 import {UserService} from './user.service';
 
 @NgModule({
-    imports: [
-        SharedModule,
-        UserRoutingModule
-    ],
-    providers: [
-        UserService
-    ],
-    declarations: [UserComponent]
+  imports: [
+    SharedModule,
+    UserRoutingModule
+  ],
+  providers: [
+    UserService
+  ],
+  declarations: [UserComponent]
 })
 export class UserModule {
 }

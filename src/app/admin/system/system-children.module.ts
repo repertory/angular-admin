@@ -6,12 +6,12 @@ import {SettingModule} from './setting/setting.module';
 import {UserModule} from './user/user.module';
 
 @NgModule({
-    imports: [
-        MenuModule,
-        RoleModule,
-        SettingModule,
-        UserModule,
-    ]
+  imports: [
+    MenuModule,
+    RoleModule,
+    SettingModule,
+    UserModule,
+  ]
 })
 export class SystemChildrenModule {
 }

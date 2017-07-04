@@ -1,41 +1,41 @@
 a {
-    outline: none;
+  outline: none;
 }
 
 .title {
-    margin: 8px auto;
-    width: 30px;
-    line-height: 1.1;
-    text-align: center;
-    outline: none
+  margin: 8px auto;
+  width: 30px;
+  line-height: 1.1;
+  text-align: center;
+  outline: none
 }
 
 .padding {
-    padding: 8px;
+  padding: 8px;
 }
 
 .search-container {
-    width: 100%;
-    margin-top: 4px;
+  width: 100%;
+  margin-top: 4px;
 }
 
 .search-container /deep/ md-icon {
-    padding: 0 8px;
-    cursor: default;
+  padding: 0 8px;
+  cursor: default;
 }
 
 .search-container /deep/ .mat-input-flex {
-    align-items: center;
+  align-items: center;
 }
 
 .search-container /deep/ .mat-input-infix {
-    border-top: 0;
+  border-top: 0;
 }
 
 .search-container /deep/ .mat-input-underline {
-    display: none;
+  display: none;
 }
 
 input::-ms-clear, input::-webkit-search-cancel-button {
-    display: none;
+  display: none;
 }

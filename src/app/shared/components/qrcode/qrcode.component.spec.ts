@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { QrcodeComponent } from './qrcode.component';
+import {QrcodeComponent} from './qrcode.component';
 
 describe('QrcodeComponent', () => {
   let component: QrcodeComponent;
@@ -8,9 +8,9 @@ describe('QrcodeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ QrcodeComponent ]
+      declarations: [QrcodeComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

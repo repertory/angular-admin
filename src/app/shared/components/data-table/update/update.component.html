@@ -1,30 +1,30 @@
 <div style="margin: -24px -24px 0;">
-    <md-toolbar color="primary">
-        <h2>编辑(共{{data.selection.selected.length}}项)</h2>
-        <span style="flex: 1 1 auto"></span>
-        <button md-icon-button md-dialog-close>
-            <md-icon>close</md-icon>
-        </button>
-    </md-toolbar>
+  <md-toolbar color="primary">
+    <h2>编辑(共{{data.selection.selected.length}}项)</h2>
+    <span style="flex: 1 1 auto"></span>
+    <button md-icon-button md-dialog-close>
+      <md-icon>close</md-icon>
+    </button>
+  </md-toolbar>
 </div>
 
 <md-dialog-content style="padding: 0;">
-    <md-tab-group>
-        <md-tab *ngFor="let item of data.selection.selected" [label]="item.id">
-            <md-grid-list cols="2" rowHeight="4:1" style="margin: 16px 8px 0;">
-                <md-grid-tile *ngFor="let option of options">
-                    <md-input-container style="width: 96%">
-                        <input mdInput placeholder="{{option.name}}" value="{{item.get(option.key)}}">
-                    </md-input-container>
-                </md-grid-tile>
-            </md-grid-list>
-        </md-tab>
-    </md-tab-group>
+  <md-tab-group>
+    <md-tab *ngFor="let item of data.selection.selected" [label]="item.id">
+      <md-grid-list cols="2" rowHeight="4:1" style="margin: 16px 8px 0;">
+        <md-grid-tile *ngFor="let option of options">
+          <md-input-container style="width: 96%">
+            <input mdInput placeholder="{{option.name}}" value="{{item.get(option.key)}}">
+          </md-input-container>
+        </md-grid-tile>
+      </md-grid-list>
+    </md-tab>
+  </md-tab-group>
 </md-dialog-content>
 
 <md-dialog-actions align="end" style="margin-right: -12px;">
-    <button md-button md-dialog-close>取消</button>
-    <button md-button color="warn" [md-dialog-close]="true">保存</button>
+  <button md-button md-dialog-close>取消</button>
+  <button md-button color="warn" [md-dialog-close]="true">保存</button>
 </md-dialog-actions>
 
 

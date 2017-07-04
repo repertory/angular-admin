@@ -4,18 +4,18 @@ import {MD_DIALOG_DATA} from '@angular/material';
 import {DataTableOption} from '../data-table';
 
 @Component({
-    selector: 'app-update',
-    templateUrl: './update.component.html',
-    styleUrls: ['./update.component.css']
+  selector: 'app-update',
+  templateUrl: './update.component.html',
+  styleUrls: ['./update.component.css']
 })
 export class UpdateComponent {
 
-    options: DataTableOption[];
+  options: DataTableOption[];
 
-    constructor(@Inject(MD_DIALOG_DATA) public data: any) {
-        this.options = data.options.filter(x => x.operate.update.enabled);
+  constructor(@Inject(MD_DIALOG_DATA) public data: any) {
+    this.options = data.options.filter(x => x.operate.update.enabled);
 
-        console.log(data.selection.selected);
-    }
+    console.log(data.selection.selected);
+  }
 
 }

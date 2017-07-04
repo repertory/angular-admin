@@ -1,4 +1,4 @@
-import { ParsePointerPipe } from './parse-pointer.pipe';
+import {ParsePointerPipe} from './parse-pointer.pipe';
 
 describe('ParsePointerPipe', () => {
   it('create an instance', () => {

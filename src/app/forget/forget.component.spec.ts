@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ForgetComponent } from './forget.component';
+import {ForgetComponent} from './forget.component';
 
 describe('ForgetComponent', () => {
   let component: ForgetComponent;
@@ -8,9 +8,9 @@ describe('ForgetComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ForgetComponent ]
+      declarations: [ForgetComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -5,11 +5,11 @@ import {SystemRoutingModule} from './system-routing.module';
 import {SystemComponent} from './system.component';
 
 @NgModule({
-    imports: [
-        SharedModule,
-        SystemRoutingModule,
-    ],
-    declarations: [SystemComponent]
+  imports: [
+    SharedModule,
+    SystemRoutingModule,
+  ],
+  declarations: [SystemComponent]
 })
 export class SystemModule {
 }

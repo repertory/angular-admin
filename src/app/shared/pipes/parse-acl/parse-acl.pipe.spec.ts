@@ -1,4 +1,4 @@
-import { ParseAclPipe } from './parse-acl.pipe';
+import {ParseAclPipe} from './parse-acl.pipe';
 
 describe('ParseAclPipe', () => {
   it('create an instance', () => {

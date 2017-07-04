@@ -1,4 +1,4 @@
-import { ParseNumberPipe } from './parse-number.pipe';
+import {ParseNumberPipe} from './parse-number.pipe';
 
 describe('ParseNumberPipe', () => {
   it('create an instance', () => {

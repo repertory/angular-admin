@@ -1,4 +1,4 @@
-import { ParseRelationPipe } from './parse-relation.pipe';
+import {ParseRelationPipe} from './parse-relation.pipe';
 
 describe('ParseRelationPipe', () => {
   it('create an instance', () => {

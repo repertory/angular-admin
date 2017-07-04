@@ -1,4 +1,4 @@
-import { ParseStringPipe } from './parse-string.pipe';
+import {ParseStringPipe} from './parse-string.pipe';
 
 describe('ParseStringPipe', () => {
   it('create an instance', () => {

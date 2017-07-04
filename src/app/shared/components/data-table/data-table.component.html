@@ -1,52 +1,52 @@
 <!--工具栏-->
 <div class="toolbar mat-toolbar"
      [ngClass]="{'mat-accent': dataSource.selection.hasValue(), 'no-background': !dataSource.selection.hasValue()}">
-    <div class="content" *ngIf="!dataSource.selection.hasValue()">
-        <div class="title">{{name}}</div>
+  <div class="content" *ngIf="!dataSource.selection.hasValue()">
+    <div class="title">{{name}}</div>
 
-        <div class="actions">
-            <button md-icon-button (click)="dataSource.create()">
-                <md-icon>add_circle_outline</md-icon>
-            </button>
-            <button md-icon-button (click)="dataSource.filter()">
-                <md-icon>filter_list</md-icon>
-            </button>
-            <button md-icon-button [mdMenuTriggerFor]="moreMenu">
-                <md-icon>more_vert</md-icon>
-            </button>
+    <div class="actions">
+      <button md-icon-button (click)="dataSource.create()">
+        <md-icon>add_circle_outline</md-icon>
+      </button>
+      <button md-icon-button (click)="dataSource.filter()">
+        <md-icon>filter_list</md-icon>
+      </button>
+      <button md-icon-button [mdMenuTriggerFor]="moreMenu">
+        <md-icon>more_vert</md-icon>
+      </button>
 
-            <md-menu #moreMenu>
-                <button md-menu-item (click)="dataSource.setQuery()">
-                    <md-icon>refresh</md-icon>
-                    <span>刷新</span>
-                </button>
-                <button md-menu-item (click)="dataSource.export()">
-                    <md-icon>file_download</md-icon>
-                    <span>导出</span>
-                </button>
-            </md-menu>
-        </div>
+      <md-menu #moreMenu>
+        <button md-menu-item (click)="dataSource.setQuery()">
+          <md-icon>refresh</md-icon>
+          <span>刷新</span>
+        </button>
+        <button md-menu-item (click)="dataSource.export()">
+          <md-icon>file_download</md-icon>
+          <span>导出</span>
+        </button>
+      </md-menu>
+    </div>
+  </div>
+
+  <div class="content" *ngIf="dataSource.selection.hasValue()">
+    <div class="title">
+      <button md-icon-button (click)="dataSource.selection.clear()">
+        <md-icon>close</md-icon>
+      </button>
+      <div>已选择{{dataSource.selection.selected.length}}条</div>
     </div>
 
-    <div class="content" *ngIf="dataSource.selection.hasValue()">
-        <div class="title">
-            <button md-icon-button (click)="dataSource.selection.clear()">
-                <md-icon>close</md-icon>
-            </button>
-            <div>已选择{{dataSource.selection.selected.length}}条</div>
-        </div>
-
-        <div class="actions">
-            <button md-button (click)="dataSource.update()">
-                <md-icon>edit</md-icon>
-                编辑
-            </button>
-            <button md-button (click)="dataSource.delete()">
-                <md-icon>delete</md-icon>
-                删除
-            </button>
-        </div>
+    <div class="actions">
+      <button md-button (click)="dataSource.update()">
+        <md-icon>edit</md-icon>
+        编辑
+      </button>
+      <button md-button (click)="dataSource.delete()">
+        <md-icon>delete</md-icon>
+        删除
+      </button>
     </div>
+  </div>
 </div>
 
 <!--进度条-->
@@ -55,84 +55,84 @@
 <!--数据列表-->
 <cdk-table #table [dataSource]="dataSource">
 
-    <!--左侧单选框-->
-    <ng-container cdkColumnDef="__checkbox__">
-        <cdk-header-cell *cdkHeaderCellDef>
-            <md-checkbox (change)="$event ? dataSource.selectAllToggle() : null"
-                         [checked]="dataSource.isAllSelected()"
-                         [indeterminate]="dataSource.selection.hasValue() && !dataSource.isAllSelected()">
-            </md-checkbox>
-        </cdk-header-cell>
-        <cdk-cell *cdkCellDef="let row">
-            <md-checkbox (click)="$event.stopPropagation()"
-                         (change)="$event ? dataSource.selection.toggle(row) : null"
-                         [checked]="dataSource.selection.isSelected(row)"></md-checkbox>
-        </cdk-cell>
-    </ng-container>
+  <!--左侧单选框-->
+  <ng-container cdkColumnDef="__checkbox__">
+    <cdk-header-cell *cdkHeaderCellDef>
+      <md-checkbox (change)="$event ? dataSource.selectAllToggle() : null"
+                   [checked]="dataSource.isAllSelected()"
+                   [indeterminate]="dataSource.selection.hasValue() && !dataSource.isAllSelected()">
+      </md-checkbox>
+    </cdk-header-cell>
+    <cdk-cell *cdkCellDef="let row">
+      <md-checkbox (click)="$event.stopPropagation()"
+                   (change)="$event ? dataSource.selection.toggle(row) : null"
+                   [checked]="dataSource.selection.isSelected(row)"></md-checkbox>
+    </cdk-cell>
+  </ng-container>
 
-    <!--自定义字段-->
-    <ng-container *ngFor="let option of options" [cdkColumnDef]="option.key">
-        <cdk-header-cell *cdkHeaderCellDef>{{option.name}}</cdk-header-cell>
-        <cdk-cell *cdkCellDef="let row" [ngSwitch]="option.type.toLowerCase()">
-            <span *ngSwitchCase="'acl'" [innerHTML]="row[option.key] || row.get(option.key) | parseAcl"></span>
-            <span *ngSwitchCase="'array'" [innerHTML]="row[option.key] || row.get(option.key) | parseArray"></span>
-            <span *ngSwitchCase="'boolean'" [innerHTML]="row[option.key] || row.get(option.key) | parseBoolean"></span>
-            <span *ngSwitchCase="'date'" [innerHTML]="row[option.key] || row.get(option.key) | parseDate"></span>
-            <span *ngSwitchCase="'file'" [innerHTML]="row[option.key] || row.get(option.key) | parseFile"></span>
-            <span *ngSwitchCase="'number'" [innerHTML]="row[option.key] || row.get(option.key) | parseNumber"></span>
-            <span *ngSwitchCase="'object'" [innerHTML]="row[option.key] || row.get(option.key) | parseObject"></span>
-            <span *ngSwitchCase="'pointer'" [innerHTML]="row[option.key] || row.get(option.key) | parsePointer"></span>
-            <span *ngSwitchCase="'relation'"
-                  [innerHTML]="row[option.key] || row.get(option.key) | parseRelation"></span>
-            <span *ngSwitchCase="'string'"
-                  [innerText]="row[option.key == 'objectId' ? 'id' : option.key] || row.get(option.key) | parseString"></span>
-            <span *ngSwitchDefault [innerText]="row[option.key] || row.get(option.key)"></span>
-        </cdk-cell>
-    </ng-container>
+  <!--自定义字段-->
+  <ng-container *ngFor="let option of options" [cdkColumnDef]="option.key">
+    <cdk-header-cell *cdkHeaderCellDef>{{option.name}}</cdk-header-cell>
+    <cdk-cell *cdkCellDef="let row" [ngSwitch]="option.type.toLowerCase()">
+      <span *ngSwitchCase="'acl'" [innerHTML]="row[option.key] || row.get(option.key) | parseAcl"></span>
+      <span *ngSwitchCase="'array'" [innerHTML]="row[option.key] || row.get(option.key) | parseArray"></span>
+      <span *ngSwitchCase="'boolean'" [innerHTML]="row[option.key] || row.get(option.key) | parseBoolean"></span>
+      <span *ngSwitchCase="'date'" [innerHTML]="row[option.key] || row.get(option.key) | parseDate"></span>
+      <span *ngSwitchCase="'file'" [innerHTML]="row[option.key] || row.get(option.key) | parseFile"></span>
+      <span *ngSwitchCase="'number'" [innerHTML]="row[option.key] || row.get(option.key) | parseNumber"></span>
+      <span *ngSwitchCase="'object'" [innerHTML]="row[option.key] || row.get(option.key) | parseObject"></span>
+      <span *ngSwitchCase="'pointer'" [innerHTML]="row[option.key] || row.get(option.key) | parsePointer"></span>
+      <span *ngSwitchCase="'relation'"
+            [innerHTML]="row[option.key] || row.get(option.key) | parseRelation"></span>
+      <span *ngSwitchCase="'string'"
+            [innerText]="row[option.key == 'objectId' ? 'id' : option.key] || row.get(option.key) | parseString"></span>
+      <span *ngSwitchDefault [innerText]="row[option.key] || row.get(option.key)"></span>
+    </cdk-cell>
+  </ng-container>
 
-    <!--数据展示-->
-    <cdk-header-row *cdkHeaderRowDef="columns()"></cdk-header-row>
-    <cdk-row *cdkRowDef="let row; columns: columns()"
-             [class.selected]="row ? dataSource.selection.isSelected(row) : false"
-             [class.data-row]="!!row"
-             (click)="row ? dataSource.selection.toggle(row) : null"></cdk-row>
+  <!--数据展示-->
+  <cdk-header-row *cdkHeaderRowDef="columns()"></cdk-header-row>
+  <cdk-row *cdkRowDef="let row; columns: columns()"
+           [class.selected]="row ? dataSource.selection.isSelected(row) : false"
+           [class.data-row]="!!row"
+           (click)="row ? dataSource.selection.toggle(row) : null"></cdk-row>
 
 </cdk-table>
 
 <!--分页展示-->
 <div class="pagination" *ngIf="dataSource.pagination.total">
-    <div class="page-size">
-        <md-select [ngModel]="dataSource.pagination.pageSize"
-                   (change)="dataSource.setPageSize($event.value)">
-            <md-option *ngFor="let pageSizeOption of pageSizeOptions" [value]="pageSizeOption">
-                {{pageSizeOption}}
-            </md-option>
-        </md-select>
-    </div>
+  <div class="page-size">
+    <md-select [ngModel]="dataSource.pagination.pageSize"
+               (change)="dataSource.setPageSize($event.value)">
+      <md-option *ngFor="let pageSizeOption of pageSizeOptions" [value]="pageSizeOption">
+        {{pageSizeOption}}
+      </md-option>
+    </md-select>
+  </div>
 
-    <div class="range">
-        {{dataSource.pagination.page}} / {{dataSource.pagination.maxPage}} of
-        {{dataSource.pagination.total}}
-    </div>
+  <div class="range">
+    {{dataSource.pagination.page}} / {{dataSource.pagination.maxPage}} of
+    {{dataSource.pagination.total}}
+  </div>
 
-    <button md-icon-button
-            (click)="dataSource.pagination.page = 1"
-            [disabled]="dataSource.pagination.page <= 1">
-        <md-icon>first_page</md-icon>
-    </button>
-    <button md-icon-button
-            (click)="dataSource.incrementPage(-1)"
-            [disabled]="!dataSource.canIncrementPage(-1)">
-        <md-icon>navigate_before</md-icon>
-    </button>
-    <button md-icon-button
-            (click)="dataSource.incrementPage(1)"
-            [disabled]="!dataSource.canIncrementPage(1)">
-        <md-icon>navigate_next</md-icon>
-    </button>
-    <button md-icon-button
-            (click)="dataSource.pagination.page = dataSource.pagination.maxPage"
-            [disabled]="dataSource.pagination.page >= dataSource.pagination.maxPage">
-        <md-icon>last_page</md-icon>
-    </button>
+  <button md-icon-button
+          (click)="dataSource.pagination.page = 1"
+          [disabled]="dataSource.pagination.page <= 1">
+    <md-icon>first_page</md-icon>
+  </button>
+  <button md-icon-button
+          (click)="dataSource.incrementPage(-1)"
+          [disabled]="!dataSource.canIncrementPage(-1)">
+    <md-icon>navigate_before</md-icon>
+  </button>
+  <button md-icon-button
+          (click)="dataSource.incrementPage(1)"
+          [disabled]="!dataSource.canIncrementPage(1)">
+    <md-icon>navigate_next</md-icon>
+  </button>
+  <button md-icon-button
+          (click)="dataSource.pagination.page = dataSource.pagination.maxPage"
+          [disabled]="dataSource.pagination.page >= dataSource.pagination.maxPage">
+    <md-icon>last_page</md-icon>
+  </button>
 </div>

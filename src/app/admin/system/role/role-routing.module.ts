@@ -4,14 +4,14 @@ import {RouterModule, Route} from '@angular/router';
 import {RoleComponent} from './role.component';
 
 export const routerConfig: Route[] = [
-    {path: 'role', component: RoleComponent}
+  {path: 'role', component: RoleComponent}
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(routerConfig)
-    ],
-    exports: [RouterModule]
+  imports: [
+    RouterModule.forChild(routerConfig)
+  ],
+  exports: [RouterModule]
 })
 export class RoleRoutingModule {
 }

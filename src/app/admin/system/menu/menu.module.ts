@@ -5,11 +5,11 @@ import {MenuRoutingModule} from './menu-routing.module';
 import {MenuComponent} from './menu.component';
 
 @NgModule({
-    imports: [
-        SharedModule,
-        MenuRoutingModule
-    ],
-    declarations: [MenuComponent]
+  imports: [
+    SharedModule,
+    MenuRoutingModule
+  ],
+  declarations: [MenuComponent]
 })
 export class MenuModule {
 }

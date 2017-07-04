@@ -8,14 +8,14 @@ import {RegisterModule} from './register/register.module';
 import {SetupModule} from './setup/setup.module';
 
 @NgModule({
-    imports: [
-        AdminModule,
-        ErrorModule,
-        ForgetModule,
-        LoginModule,
-        RegisterModule,
-        SetupModule,
-    ]
+  imports: [
+    AdminModule,
+    ErrorModule,
+    ForgetModule,
+    LoginModule,
+    RegisterModule,
+    SetupModule,
+  ]
 })
 export class AppChildrenModule {
 }

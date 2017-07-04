@@ -1,4 +1,4 @@
-import { ParseDatePipe } from './parse-date.pipe';
+import {ParseDatePipe} from './parse-date.pipe';
 
 describe('ParseDatePipe', () => {
   it('create an instance', () => {

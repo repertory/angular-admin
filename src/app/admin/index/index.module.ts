@@ -6,11 +6,11 @@ import {IndexRoutingModule} from './index-routing.module';
 import {IndexComponent} from './index.component';
 
 @NgModule({
-    imports: [
-        SharedModule,
-        IndexRoutingModule
-    ],
-    declarations: [IndexComponent]
+  imports: [
+    SharedModule,
+    IndexRoutingModule
+  ],
+  declarations: [IndexComponent]
 })
 export class IndexModule {
 }

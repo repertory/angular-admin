@@ -1,4 +1,4 @@
-import { ParseBooleanPipe } from './parse-boolean.pipe';
+import {ParseBooleanPipe} from './parse-boolean.pipe';
 
 describe('ParseBooleanPipe', () => {
   it('create an instance', () => {

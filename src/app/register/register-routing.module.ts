@@ -4,14 +4,14 @@ import {RouterModule, Route} from '@angular/router';
 import {RegisterComponent} from './register.component';
 
 export const routerConfig: Route[] = [
-    {path: 'register', component: RegisterComponent},
+  {path: 'register', component: RegisterComponent},
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(routerConfig)
-    ],
-    exports: [RouterModule]
+  imports: [
+    RouterModule.forChild(routerConfig)
+  ],
+  exports: [RouterModule]
 })
 export class RegisterRoutingModule {
 }

@@ -1,57 +1,57 @@
 <div fxFill>
-    <app-header title="后台首页"></app-header>
+  <app-header title="后台首页"></app-header>
 
-    <md-card>
-        <md-card-title>datatable组件</md-card-title>
-        <md-divider></md-divider>
-        <md-card-content>
-            <app-data-table [name]="dataTable.name"
-                            [className]="dataTable.className"
-                            [options]="dataTable.options"></app-data-table>
-        </md-card-content>
-    </md-card>
+  <md-card>
+    <md-card-title>datatable组件</md-card-title>
+    <md-divider></md-divider>
+    <md-card-content>
+      <app-data-table [name]="dataTable.name"
+                      [className]="dataTable.className"
+                      [options]="dataTable.options"></app-data-table>
+    </md-card-content>
+  </md-card>
 
-    <md-card>
-        <md-card-title>gallery组件</md-card-title>
-        <md-divider></md-divider>
-        <md-card-content appGallery>
-            <md-grid-list cols="4" rowHeight="16:9">
-                <md-grid-tile *ngFor="let img of gallery">
-                    <a appGalleryItem [href]="img" target="_blank"><img [src]="img"></a>
-                </md-grid-tile>
-            </md-grid-list>
-        </md-card-content>
-    </md-card>
+  <md-card>
+    <md-card-title>gallery组件</md-card-title>
+    <md-divider></md-divider>
+    <md-card-content appGallery>
+      <md-grid-list cols="4" rowHeight="16:9">
+        <md-grid-tile *ngFor="let img of gallery">
+          <a appGalleryItem [href]="img" target="_blank"><img [src]="img"></a>
+        </md-grid-tile>
+      </md-grid-list>
+    </md-card-content>
+  </md-card>
 
-    <md-card>
-        <md-card-title>echarts组件</md-card-title>
-        <md-divider></md-divider>
-        <md-card-content>
-            <app-echarts [option]="echarts" width="600" height="400"></app-echarts>
-        </md-card-content>
-    </md-card>
+  <md-card>
+    <md-card-title>echarts组件</md-card-title>
+    <md-divider></md-divider>
+    <md-card-content>
+      <app-echarts [option]="echarts" width="600" height="400"></app-echarts>
+    </md-card-content>
+  </md-card>
 
-    <md-card>
-        <md-card-title>markdown组件</md-card-title>
-        <md-divider></md-divider>
-        <md-card-content>
-            <app-markdown [content]="markdown"></app-markdown>
-            <hr>
-            <md-input-container style="width:100%">
-                <textarea mdInput [(ngModel)]="markdown" style="height: 100px"></textarea>
-            </md-input-container>
-        </md-card-content>
-    </md-card>
+  <md-card>
+    <md-card-title>markdown组件</md-card-title>
+    <md-divider></md-divider>
+    <md-card-content>
+      <app-markdown [content]="markdown"></app-markdown>
+      <hr>
+      <md-input-container style="width:100%">
+        <textarea mdInput [(ngModel)]="markdown" style="height: 100px"></textarea>
+      </md-input-container>
+    </md-card-content>
+  </md-card>
 
-    <md-card>
-        <md-card-title>qrcode组件</md-card-title>
-        <md-divider></md-divider>
-        <md-card-content>
-            <app-qrcode [value]="qrcode" size="200"></app-qrcode>
-            <hr>
-            <md-input-container style="width:100%">
-                <input mdInput placeholder="二维码测试" [(ngModel)]="qrcode">
-            </md-input-container>
-        </md-card-content>
-    </md-card>
+  <md-card>
+    <md-card-title>qrcode组件</md-card-title>
+    <md-divider></md-divider>
+    <md-card-content>
+      <app-qrcode [value]="qrcode" size="200"></app-qrcode>
+      <hr>
+      <md-input-container style="width:100%">
+        <input mdInput placeholder="二维码测试" [(ngModel)]="qrcode">
+      </md-input-container>
+    </md-card-content>
+  </md-card>
 </div>

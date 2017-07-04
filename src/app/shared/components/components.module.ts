@@ -10,14 +10,14 @@ import {QrcodeModule} from './qrcode/qrcode.module';
 export * from './data-table/data-table.module';
 
 @NgModule({
-    exports: [
-        DataTableModule,
-        EchartsModule,
-        FooterModule,
-        HeaderModule,
-        MarkdownModule,
-        QrcodeModule,
-    ],
+  exports: [
+    DataTableModule,
+    EchartsModule,
+    FooterModule,
+    HeaderModule,
+    MarkdownModule,
+    QrcodeModule,
+  ],
 })
 export class ComponentsModule {
 }

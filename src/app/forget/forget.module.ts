@@ -6,11 +6,11 @@ import {ForgetRoutingModule} from './forget-routing.module';
 import {ForgetComponent} from './forget.component';
 
 @NgModule({
-    imports: [
-        SharedModule,
-        ForgetRoutingModule,
-    ],
-    declarations: [ForgetComponent]
+  imports: [
+    SharedModule,
+    ForgetRoutingModule,
+  ],
+  declarations: [ForgetComponent]
 })
 export class ForgetModule {
 }

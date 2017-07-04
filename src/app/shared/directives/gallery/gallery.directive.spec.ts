@@ -1,4 +1,4 @@
-import { GalleryDirective } from './gallery.directive';
+import {GalleryDirective} from './gallery.directive';
 
 describe('GalleryDirective', () => {
   it('should create an instance', () => {

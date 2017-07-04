@@ -4,9 +4,9 @@ import {ParseService} from './parse.service';
 export * from './parse.service';
 
 @NgModule({
-    providers: [
-        ParseService
-    ]
+  providers: [
+    ParseService
+  ]
 })
 export class ParseModule {
 }

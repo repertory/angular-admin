@@ -4,35 +4,35 @@ import {DataTableService} from './data-table.service';
 import {DataTableOption} from './data-table';
 
 @Component({
-    selector: 'app-data-table',
-    templateUrl: './data-table.component.html',
-    styleUrls: ['./data-table.component.css']
+  selector: 'app-data-table',
+  templateUrl: './data-table.component.html',
+  styleUrls: ['./data-table.component.css']
 })
 export class DataTableComponent implements OnInit {
 
-    @Input() className: string;
-    @Input() name: string;
-    @Input() options: DataTableOption[] = [];
-    @Input() pageSizeOptions: number[] = [5, 10, 20, 50, 100, 500, 1000];
+  @Input() className: string;
+  @Input() name: string;
+  @Input() options: DataTableOption[] = [];
+  @Input() pageSizeOptions: number[] = [5, 10, 20, 50, 100, 500, 1000];
 
-    constructor(public dataSource: DataTableService) {
-    }
+  constructor(public dataSource: DataTableService) {
+  }
 
-    ngOnInit() {
-        this.dataSource.init({
-            className: this.className,
-            options: this.options,
-        });
-    }
+  ngOnInit() {
+    this.dataSource.init({
+      className: this.className,
+      options: this.options,
+    });
+  }
 
-    // 获取需要显示的字段
-    columns() {
-        const columns = this.options
-            .filter(x => x.operate.query.enabled)
-            .sort((x, y) => x.operate.query.orderBy - y.operate.query.orderBy)
-            .map(x => x.key);
-        columns.unshift('__checkbox__'); // 左侧单选框，避免与自定义字段冲突
-        return columns;
-    }
+  // 获取需要显示的字段
+  columns() {
+    const columns = this.options
+      .filter(x => x.operate.query.enabled)
+      .sort((x, y) => x.operate.query.orderBy - y.operate.query.orderBy)
+      .map(x => x.key);
+    columns.unshift('__checkbox__'); // 左侧单选框，避免与自定义字段冲突
+    return columns;
+  }
 
 }

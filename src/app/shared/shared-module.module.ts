@@ -9,19 +9,19 @@ import {MaterialModule} from '@angular/material';
 import {CdkTableModule} from '@angular/cdk';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        RouterModule,
-    ],
-    exports: [
-        CommonModule,
-        FormsModule,
-        RouterModule,
-        HttpModule,
-        FlexLayoutModule,
-        MaterialModule,
-        CdkTableModule,
-    ]
+  imports: [
+    CommonModule,
+    RouterModule,
+  ],
+  exports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    HttpModule,
+    FlexLayoutModule,
+    MaterialModule,
+    CdkTableModule,
+  ]
 })
 export class SharedModuleModule {
 }

@@ -10,15 +10,15 @@ export * from './components/components.module';
 export * from './services/services.module';
 
 @NgModule({
-    imports: [
-        ServicesModule,
-    ],
-    exports: [
-        SharedModuleModule,
-        ComponentsModule,
-        DirectivesModule,
-        PipesModule,
-    ]
+  imports: [
+    ServicesModule,
+  ],
+  exports: [
+    SharedModuleModule,
+    ComponentsModule,
+    DirectivesModule,
+    PipesModule,
+  ]
 })
 export class SharedModule {
 }

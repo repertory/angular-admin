@@ -13,22 +13,22 @@ import {UpdateComponent} from './update/update.component';
 export * from './data-table';
 
 @NgModule({
-    imports: [SharedModuleModule, PipesModule],
-    providers: [DataTableService],
-    declarations: [
-        DataTableComponent,
-        CreateComponent,
-        DeleteComponent,
-        FilterComponent,
-        UpdateComponent,
-    ],
-    entryComponents: [
-        CreateComponent,
-        DeleteComponent,
-        FilterComponent,
-        UpdateComponent,
-    ],
-    exports: [DataTableComponent]
+  imports: [SharedModuleModule, PipesModule],
+  providers: [DataTableService],
+  declarations: [
+    DataTableComponent,
+    CreateComponent,
+    DeleteComponent,
+    FilterComponent,
+    UpdateComponent,
+  ],
+  entryComponents: [
+    CreateComponent,
+    DeleteComponent,
+    FilterComponent,
+    UpdateComponent,
+  ],
+  exports: [DataTableComponent]
 })
 export class DataTableModule {
 }

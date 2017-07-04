@@ -5,11 +5,11 @@ import {SetupRoutingModule} from './setup-routing.module';
 import {SetupComponent} from './setup.component';
 
 @NgModule({
-    imports: [
-        SharedModule,
-        SetupRoutingModule,
-    ],
-    declarations: [SetupComponent]
+  imports: [
+    SharedModule,
+    SetupRoutingModule,
+  ],
+  declarations: [SetupComponent]
 })
 export class SetupModule {
 }

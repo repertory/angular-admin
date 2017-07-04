@@ -5,11 +5,11 @@ import {RoleRoutingModule} from './role-routing.module';
 import {RoleComponent} from './role.component';
 
 @NgModule({
-    imports: [
-        SharedModule,
-        RoleRoutingModule
-    ],
-    declarations: [RoleComponent]
+  imports: [
+    SharedModule,
+    RoleRoutingModule
+  ],
+  declarations: [RoleComponent]
 })
 export class RoleModule {
 }

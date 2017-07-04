@@ -12,18 +12,18 @@ import {ParseRelationModule} from './parse-relation/parse-relation.module';
 import {ParseStringModule} from './parse-string/parse-string.module';
 
 @NgModule({
-    exports: [
-        ParseAclModule,
-        ParseArrayModule,
-        ParseBooleanModule,
-        ParseDateModule,
-        ParseFileModule,
-        ParseNumberModule,
-        ParseObjectModule,
-        ParsePointerModule,
-        ParseRelationModule,
-        ParseStringModule,
-    ],
+  exports: [
+    ParseAclModule,
+    ParseArrayModule,
+    ParseBooleanModule,
+    ParseDateModule,
+    ParseFileModule,
+    ParseNumberModule,
+    ParseObjectModule,
+    ParsePointerModule,
+    ParseRelationModule,
+    ParseStringModule,
+  ],
 })
 export class PipesModule {
 }

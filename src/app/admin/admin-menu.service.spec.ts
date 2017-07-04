@@ -1,6 +1,6 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {TestBed, inject} from '@angular/core/testing';
 
-import { AdminMenuService } from './admin-menu.service';
+import {AdminMenuService} from './admin-menu.service';
 
 describe('AdminMenuService', () => {
   beforeEach(() => {

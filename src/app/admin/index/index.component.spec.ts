@@ -7,28 +7,28 @@ import {routerConfig} from './index-routing.module';
 import {IndexComponent} from './index.component';
 
 describe('IndexComponent', () => {
-    let component: IndexComponent;
-    let fixture: ComponentFixture<IndexComponent>;
+  let component: IndexComponent;
+  let fixture: ComponentFixture<IndexComponent>;
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            imports: [
-                BrowserAnimationsModule,
-                SharedModule,
-                RouterTestingModule.withRoutes(routerConfig),
-            ],
-            declarations: [IndexComponent]
-        })
-            .compileComponents();
-    }));
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        BrowserAnimationsModule,
+        SharedModule,
+        RouterTestingModule.withRoutes(routerConfig),
+      ],
+      declarations: [IndexComponent]
+    })
+      .compileComponents();
+  }));
 
-    beforeEach(() => {
-        fixture = TestBed.createComponent(IndexComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(IndexComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

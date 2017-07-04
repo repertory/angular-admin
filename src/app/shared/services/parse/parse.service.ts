@@ -5,188 +5,188 @@ import {Parse} from 'parse';
 @Injectable()
 export class ParseService {
 
-    public ACL = Parse.ACL;
-    public Analytics = Parse.Analytics;
-    public Config = Parse.Config;
-    public Cloud = Parse.Cloud;
-    public Error = Parse.Error;
-    public File = Parse.File;
-    public GeoPoint = Parse.GeoPoint;
-    public Object = Parse.Object;
-    public Push = Parse.Push;
-    public Query = Parse.Query;
-    public Role = Parse.Role;
-    public Session = Parse.Session;
-    public User = Parse.User;
+  public ACL = Parse.ACL;
+  public Analytics = Parse.Analytics;
+  public Config = Parse.Config;
+  public Cloud = Parse.Cloud;
+  public Error = Parse.Error;
+  public File = Parse.File;
+  public GeoPoint = Parse.GeoPoint;
+  public Object = Parse.Object;
+  public Push = Parse.Push;
+  public Query = Parse.Query;
+  public Role = Parse.Role;
+  public Session = Parse.Session;
+  public User = Parse.User;
 
-    // 初始化配置
-    initialize(parseConfig) {
-        Parse.initialize(parseConfig.appId, parseConfig.javascriptKey);
-        Parse.serverURL = parseConfig.serverURL;
+  // 初始化配置
+  initialize(parseConfig) {
+    Parse.initialize(parseConfig.appId, parseConfig.javascriptKey);
+    Parse.serverURL = parseConfig.serverURL;
+  }
+
+  // 行为跟踪(数据分析用)
+  track(eventName: string, dimensions: Object, options?: Object): Observable<any> {
+    const dimensions2 = {};
+
+    for (const key of Object.keys(dimensions)) {
+      dimensions2[key] = dimensions[key].toString();
     }
 
-    // 行为跟踪(数据分析用)
-    track(eventName: string, dimensions: Object, options?: Object): Observable<any> {
-        const dimensions2 = {};
+    return Observable.fromPromise(this.Analytics.track(eventName, dimensions2, options));
+  }
 
-        for (const key of Object.keys(dimensions)) {
-            dimensions2[key] = dimensions[key].toString();
-        }
+  // 运行自定义函数
+  run(name: string, data?: Object, options?: Object): Observable<any> {
+    return Observable.fromPromise(this.Cloud.run(name, data, options));
+  }
 
-        return Observable.fromPromise(this.Analytics.track(eventName, dimensions2, options));
+  // 文件上传
+  file(file: File): Observable<any> {
+    const subject = new Subject();
+
+    if (!file) {
+      subject.error('未选择文件');
+      return subject;
     }
 
-    // 运行自定义函数
-    run(name: string, data?: Object, options?: Object): Observable<any> {
-        return Observable.fromPromise(this.Cloud.run(name, data, options));
+    const name = encodeURIComponent(file.name)
+      .replace(/!/g, '%21')
+      .replace(/'/g, '%27')
+      .replace(/\(/g, '%28')
+      .replace(/\)/g, '%29')
+      .replace(/\*/g, '%2A')
+      .replace(/\+/g, '%20')
+      .replace(/\%/g, '');
+
+    new this.File(name, file).save().then(
+      res => subject.next(res),
+      err => subject.error(err)
+    );
+    return subject;
+  }
+
+  // base64上传
+  base64(base64: string, name?: string): Observable<any> {
+    const subject = new Subject();
+
+    name = encodeURIComponent(name || 'base64.png')
+      .replace(/!/g, '%21')
+      .replace(/'/g, '%27')
+      .replace(/\(/g, '%28')
+      .replace(/\)/g, '%29')
+      .replace(/\*/g, '%2A')
+      .replace(/\+/g, '%20')
+      .replace(/\%/g, '');
+
+    new this.File(name, {base64: base64}).save().then(
+      res => subject.next(res),
+      err => subject.error(err)
+    );
+
+    return subject;
+  }
+
+  // 当前用户信息
+  userInfo(): Observable<any> {
+    return Observable
+      .interval(200)
+      .map(x => this.User.current())
+      .distinctUntilChanged();
+  }
+
+  // 重置密码
+  forget(email: string): Observable<any> {
+    return Observable.fromPromise(this.User.requestPasswordReset(email));
+  }
+
+  // 用户登录
+  login(username: string, password: string): Observable<any> {
+    return Observable.fromPromise(this.User.logIn(username, password));
+  }
+
+  // 退出登录
+  logout(): Observable<any> {
+    return Observable.fromPromise(this.User.logOut());
+  }
+
+  // 用户注册
+  register(username: string, password: string, attributes?: Object): Observable<any> {
+    const object = new this.User();
+    object.set('username', username);
+    object.set('password', password);
+
+    if (attributes) {
+      for (const key of Object.keys(attributes)) {
+        object.set(key, attributes[key]);
+      }
     }
 
-    // 文件上传
-    file(file: File): Observable<any> {
-        const subject = new Subject();
+    return Observable.fromPromise(object.signUp());
+  }
 
-        if (!file) {
-            subject.error('未选择文件');
-            return subject;
-        }
+  // 查询数据
+  query(className: string, callback?: Function, isSocket?: boolean): Observable<any> {
+    const subject = new Subject();
+    const query = new this.Query(className);
 
-        const name = encodeURIComponent(file.name)
-            .replace(/!/g, '%21')
-            .replace(/'/g, '%27')
-            .replace(/\(/g, '%28')
-            .replace(/\)/g, '%29')
-            .replace(/\*/g, '%2A')
-            .replace(/\+/g, '%20')
-            .replace(/\%/g, '');
-
-        new this.File(name, file).save().then(
-            res => subject.next(res),
-            err => subject.error(err)
-        );
-        return subject;
+    if (callback) {
+      callback(query);
     }
 
-    // base64上传
-    base64(base64: string, name?: string): Observable<any> {
-        const subject = new Subject();
+    query.find({
+      success: res => subject.next({type: 'result', result: res}),
+      error: err => subject.error(err)
+    });
 
-        name = encodeURIComponent(name || 'base64.png')
-            .replace(/!/g, '%21')
-            .replace(/'/g, '%27')
-            .replace(/\(/g, '%28')
-            .replace(/\)/g, '%29')
-            .replace(/\*/g, '%2A')
-            .replace(/\+/g, '%20')
-            .replace(/\%/g, '');
-
-        new this.File(name, {base64: base64}).save().then(
-            res => subject.next(res),
-            err => subject.error(err)
-        );
-
-        return subject;
+    if (isSocket) {
+      query.subscribe()
+        .on('open', () => subject.next({type: 'event', event: 'open'}))
+        .on('close', () => subject.next({type: 'event', event: 'close'}))
+        .on('create', data => subject.next({type: 'event', event: 'create', data: data}))
+        .on('update', data => subject.next({type: 'event', event: 'update', data: data}))
+        .on('delete', data => subject.next({type: 'event', event: 'delete', data: data}))
+        .on('enter', data => subject.next({type: 'event', event: 'enter', data: data}))
+        .on('leave', data => subject.next({type: 'event', event: 'leave', data: data}));
     }
 
-    // 当前用户信息
-    userInfo(): Observable<any> {
-        return Observable
-            .interval(200)
-            .map(x => this.User.current())
-            .distinctUntilChanged();
+    return subject;
+  }
+
+  // 新增数据
+  create(className: string, data: Object): Observable<any> {
+    const name = this.Object.extend(className);
+    const object = new name();
+
+    for (const key of Object.keys(data)) {
+      object.set(key, data[key]);
     }
 
-    // 重置密码
-    forget(email: string): Observable<any> {
-        return Observable.fromPromise(this.User.requestPasswordReset(email));
+    if (this.User.current()) {
+      object.set('createdBy', this.User.current());
     }
 
-    // 用户登录
-    login(username: string, password: string): Observable<any> {
-        return Observable.fromPromise(this.User.logIn(username, password));
+    return Observable.fromPromise(object.save());
+  }
+
+  // 修改数据
+  update(object: Parse.Object, data: Object): Observable<any> {
+    for (const key of Object.keys(data)) {
+      object.set(key, data[key]);
     }
 
-    // 退出登录
-    logout(): Observable<any> {
-        return Observable.fromPromise(this.User.logOut());
+    if (this.User.current()) {
+      object.set('updatedBy', this.User.current());
+    } else {
+      object.unset('updatedBy');
     }
 
-    // 用户注册
-    register(username: string, password: string, attributes?: Object): Observable<any> {
-        const object = new this.User();
-        object.set('username', username);
-        object.set('password', password);
+    return Observable.fromPromise(object.save());
+  }
 
-        if (attributes) {
-            for (const key of Object.keys(attributes)) {
-                object.set(key, attributes[key]);
-            }
-        }
-
-        return Observable.fromPromise(object.signUp());
-    }
-
-    // 查询数据
-    query(className: string, callback?: Function, isSocket?: boolean): Observable<any> {
-        const subject = new Subject();
-        const query = new this.Query(className);
-
-        if (callback) {
-            callback(query);
-        }
-
-        query.find({
-            success: res => subject.next({type: 'result', result: res}),
-            error: err => subject.error(err)
-        });
-
-        if (isSocket) {
-            query.subscribe()
-                .on('open', () => subject.next({type: 'event', event: 'open'}))
-                .on('close', () => subject.next({type: 'event', event: 'close'}))
-                .on('create', data => subject.next({type: 'event', event: 'create', data: data}))
-                .on('update', data => subject.next({type: 'event', event: 'update', data: data}))
-                .on('delete', data => subject.next({type: 'event', event: 'delete', data: data}))
-                .on('enter', data => subject.next({type: 'event', event: 'enter', data: data}))
-                .on('leave', data => subject.next({type: 'event', event: 'leave', data: data}));
-        }
-
-        return subject;
-    }
-
-    // 新增数据
-    create(className: string, data: Object): Observable<any> {
-        const name = this.Object.extend(className);
-        const object = new name();
-
-        for (const key of Object.keys(data)) {
-            object.set(key, data[key]);
-        }
-
-        if (this.User.current()) {
-            object.set('createdBy', this.User.current());
-        }
-
-        return Observable.fromPromise(object.save());
-    }
-
-    // 修改数据
-    update(object: Parse.Object, data: Object): Observable<any> {
-        for (const key of Object.keys(data)) {
-            object.set(key, data[key]);
-        }
-
-        if (this.User.current()) {
-            object.set('updatedBy', this.User.current());
-        } else {
-            object.unset('updatedBy');
-        }
-
-        return Observable.fromPromise(object.save());
-    }
-
-    // 删除数据
-    delete(object: Parse.Object): Observable<any> {
-        return Observable.fromPromise(object.destroy());
-    }
+  // 删除数据
+  delete(object: Parse.Object): Observable<any> {
+    return Observable.fromPromise(object.destroy());
+  }
 
 }

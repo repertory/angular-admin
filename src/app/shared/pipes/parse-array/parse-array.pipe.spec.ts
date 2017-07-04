@@ -1,4 +1,4 @@
-import { ParseArrayPipe } from './parse-array.pipe';
+import {ParseArrayPipe} from './parse-array.pipe';
 
 describe('ParseArrayPipe', () => {
   it('create an instance', () => {

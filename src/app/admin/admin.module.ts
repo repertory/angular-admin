@@ -8,16 +8,16 @@ import {AdminUserService} from './admin-user.service';
 import {AdminComponent} from './admin.component';
 
 @NgModule({
-    imports: [
-        SharedModule,
-        AdminRoutingModule,
-    ],
-    providers: [
-        AdminGuardService,
-        AdminMenuService,
-        AdminUserService,
-    ],
-    declarations: [AdminComponent],
+  imports: [
+    SharedModule,
+    AdminRoutingModule,
+  ],
+  providers: [
+    AdminGuardService,
+    AdminMenuService,
+    AdminUserService,
+  ],
+  declarations: [AdminComponent],
 })
 export class AdminModule {
 }

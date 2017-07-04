@@ -8,18 +8,18 @@ import {AppParseModule} from './app-parse.module';
 import {AppComponent} from './app.component';
 
 @NgModule({
-    declarations: [
-        AppComponent
-    ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        SharedModule,
-        AppRoutingModule,
-        AppParseModule,
-    ],
-    providers: [],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    SharedModule,
+    AppRoutingModule,
+    AppParseModule,
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }

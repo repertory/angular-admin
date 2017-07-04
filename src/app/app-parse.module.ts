@@ -5,7 +5,7 @@ import {ParseService} from './shared/shared.module';
 
 @NgModule()
 export class AppParseModule {
-    constructor(private parse: ParseService) {
-        parse.initialize(environment.parse);
-    }
+  constructor(private parse: ParseService) {
+    parse.initialize(environment.parse);
+  }
 }
