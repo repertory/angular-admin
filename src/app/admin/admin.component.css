@@ -7,7 +7,8 @@ a {
   width: 30px;
   line-height: 1.1;
   text-align: center;
-  outline: none
+  outline: none;
+  font-weight: bold;
 }
 
 .padding {

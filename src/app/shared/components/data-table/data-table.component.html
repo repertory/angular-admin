@@ -53,7 +53,7 @@
 <md-progress-bar mode="indeterminate" *ngIf="dataSource.isLoading"></md-progress-bar>
 
 <!--数据列表-->
-<cdk-table #table [dataSource]="dataSource">
+<md-table #table [dataSource]="dataSource" mdSort>
 
   <!--左侧单选框-->
   <ng-container cdkColumnDef="__checkbox__">
@@ -72,7 +72,7 @@
 
   <!--自定义字段-->
   <ng-container *ngFor="let option of options" [cdkColumnDef]="option.key">
-    <cdk-header-cell *cdkHeaderCellDef>{{option.name}}</cdk-header-cell>
+    <cdk-header-cell *cdkHeaderCellDef md-sort-header>{{option.name}}</cdk-header-cell>
     <cdk-cell *cdkCellDef="let row" [ngSwitch]="option.type.toLowerCase()">
       <span *ngSwitchCase="'acl'" [innerHTML]="row[option.key] || row.get(option.key) | parseAcl"></span>
       <span *ngSwitchCase="'array'" [innerHTML]="row[option.key] || row.get(option.key) | parseArray"></span>
@@ -91,48 +91,17 @@
   </ng-container>
 
   <!--数据展示-->
-  <cdk-header-row *cdkHeaderRowDef="columns()"></cdk-header-row>
-  <cdk-row *cdkRowDef="let row; columns: columns()"
-           [class.selected]="row ? dataSource.selection.isSelected(row) : false"
-           [class.data-row]="!!row"
-           (click)="row ? dataSource.selection.toggle(row) : null"></cdk-row>
+  <md-header-row *cdkHeaderRowDef="columns()"></md-header-row>
+  <md-row *cdkRowDef="let row; columns: columns()"
+          [class.selected]="row ? dataSource.selection.isSelected(row) : false"
+          [class.hover]="!!row"
+          (click)="row ? dataSource.selection.toggle(row) : null"></md-row>
 
-</cdk-table>
+</md-table>
 
-<!--分页展示-->
-<div class="pagination" *ngIf="dataSource.pagination.total">
-  <div class="page-size">
-    <md-select [ngModel]="dataSource.pagination.pageSize"
-               (change)="dataSource.setPageSize($event.value)">
-      <md-option *ngFor="let pageSizeOption of pageSizeOptions" [value]="pageSizeOption">
-        {{pageSizeOption}}
-      </md-option>
-    </md-select>
-  </div>
-
-  <div class="range">
-    {{dataSource.pagination.page}} / {{dataSource.pagination.maxPage}} of
-    {{dataSource.pagination.total}}
-  </div>
-
-  <button md-icon-button
-          (click)="dataSource.pagination.page = 1"
-          [disabled]="dataSource.pagination.page <= 1">
-    <md-icon>first_page</md-icon>
-  </button>
-  <button md-icon-button
-          (click)="dataSource.incrementPage(-1)"
-          [disabled]="!dataSource.canIncrementPage(-1)">
-    <md-icon>navigate_before</md-icon>
-  </button>
-  <button md-icon-button
-          (click)="dataSource.incrementPage(1)"
-          [disabled]="!dataSource.canIncrementPage(1)">
-    <md-icon>navigate_next</md-icon>
-  </button>
-  <button md-icon-button
-          (click)="dataSource.pagination.page = dataSource.pagination.maxPage"
-          [disabled]="dataSource.pagination.page >= dataSource.pagination.maxPage">
-    <md-icon>last_page</md-icon>
-  </button>
-</div>
+<md-paginator #paginator
+              [length]="dataSource.pagination.total"
+              [pageIndex]="0"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]">
+</md-paginator>

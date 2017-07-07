@@ -5,8 +5,8 @@ import {HttpModule} from '@angular/http';
 import {RouterModule} from '@angular/router';
 
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {MaterialModule} from '@angular/material';
 import {CdkTableModule} from '@angular/cdk';
+import {MaterialModule} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -19,8 +19,8 @@ import {CdkTableModule} from '@angular/cdk';
     RouterModule,
     HttpModule,
     FlexLayoutModule,
-    MaterialModule,
     CdkTableModule,
+    MaterialModule,
   ]
 })
 export class SharedModuleModule {

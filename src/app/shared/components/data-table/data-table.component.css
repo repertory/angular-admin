@@ -1,81 +1,22 @@
 /* datatable样式 */
-.cdk-table {
-  display: block;
-  flex: 1 1 auto;
+.mat-table {
   overflow: auto;
 }
 
-.cdk-row, .cdk-header-row {
-  display: flex;
-  border-bottom: 1px solid #eeeeee;
-  align-items: center;
-  height: 48px;
-  padding: 0 8px;
-}
-
 .cdk-cell, .cdk-header-cell {
-  width: 120px;
-  padding: 10px;
-  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 8px;
   flex: 1;
 }
 
 .cdk-header-cell {
-  font-size: 12px;
   font-weight: bold;
-}
-
-.cdk-cell {
-  font-size: 13px;
-}
-
-.cdk-row {
-  cursor: pointer;
-}
-
-.cdk-row.data-row:not(.selected):hover {
-  background: rgba(0, 0, 0, 0.05);
-}
-
-.cdk-row.data-row.selected,
-.cdk-row.data-row:active {
-  background: rgba(0, 0, 0, 0.03);
 }
 
 .cdk-column-__checkbox__ {
   max-width: 24px;
-}
-
-/*分页显示*/
-.pagination {
-  height: 56px;
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
-  font-size: 12px;
-  justify-content: flex-end;
-}
-
-.pagination .page-size {
-  display: flex;
-  align-items: center;
-}
-
-.pagination .mat-select /deep/ .mat-select-underline {
-  display: none;
-}
-
-.pagination .mat-select /deep/ .mat-select-trigger {
-  font-size: 12px;
-  min-width: 56px;
-}
-
-.pagination .range {
-  margin: 0 32px;
-}
-
-.pagination button[md-icon-button] + button[md-icon-button] {
-  margin-left: 8px;
+  overflow: visible;
 }
 
 /*工具栏*/
