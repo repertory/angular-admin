@@ -1,8 +1,8 @@
+![logo](src/assets/logo.png)
+
 # 后台管理系统
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.1.0.
-
-![logo](src/assets/logo.png)
 
 ## Screenshot
 
