@@ -39,6 +39,7 @@
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
+    "@angular/cdk": "git+https://github.com/angular/cdk-builds.git",
     "@angular/cli": "1.4.2",
     "@angular/compiler-cli": "^4.2.4",
     "@angular/flex-layout": "git+https://github.com/angular/flex-layout-builds.git",
