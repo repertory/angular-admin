@@ -2,16 +2,6 @@
   <app-header title="后台首页"></app-header>
 
   <md-card>
-    <md-card-title>datatable组件</md-card-title>
-    <md-divider></md-divider>
-    <md-card-content>
-      <app-data-table [name]="dataTable.name"
-                      [className]="dataTable.className"
-                      [options]="dataTable.options"></app-data-table>
-    </md-card-content>
-  </md-card>
-
-  <md-card>
     <md-card-title>gallery组件</md-card-title>
     <md-divider></md-divider>
     <md-card-content appGallery>
@@ -28,18 +18,6 @@
     <md-divider></md-divider>
     <md-card-content>
       <app-echarts [option]="echarts" width="600" height="400"></app-echarts>
-    </md-card-content>
-  </md-card>
-
-  <md-card>
-    <md-card-title>markdown组件</md-card-title>
-    <md-divider></md-divider>
-    <md-card-content>
-      <app-markdown [content]="markdown"></app-markdown>
-      <hr>
-      <md-input-container style="width:100%">
-        <textarea mdInput [(ngModel)]="markdown" style="height: 100px"></textarea>
-      </md-input-container>
     </md-card-content>
   </md-card>
 

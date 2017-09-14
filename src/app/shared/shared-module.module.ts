@@ -5,8 +5,37 @@ import {HttpModule} from '@angular/http';
 import {RouterModule} from '@angular/router';
 
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {CdkTableModule} from '@angular/cdk';
-import {MaterialModule} from '@angular/material';
+import {
+  MdButtonModule,
+  MdButtonToggleModule,
+  MdCardModule,
+  MdChipsModule,
+  MdCheckboxModule,
+  MdDatepickerModule,
+  MdDialogModule,
+  MdExpansionModule,
+  MdFormFieldModule,
+  MdGridListModule,
+  MdIconModule,
+  MdInputModule,
+  MdListModule,
+  MdMenuModule,
+  MdPaginatorModule,
+  MdProgressBarModule,
+  MdProgressSpinnerModule,
+  MdRadioModule,
+  MdSelectModule,
+  MdSidenavModule,
+  MdSliderModule,
+  MdSlideToggleModule,
+  MdSnackBarModule,
+  MdSortModule,
+  MdTableModule,
+  MdTabsModule,
+  MdToolbarModule,
+  MdTooltipModule,
+  MdStepperModule,
+} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -19,8 +48,36 @@ import {MaterialModule} from '@angular/material';
     RouterModule,
     HttpModule,
     FlexLayoutModule,
-    CdkTableModule,
-    MaterialModule,
+
+    MdButtonModule,
+    MdButtonToggleModule,
+    MdCardModule,
+    MdChipsModule,
+    MdCheckboxModule,
+    MdDatepickerModule,
+    MdDialogModule,
+    MdExpansionModule,
+    MdFormFieldModule,
+    MdGridListModule,
+    MdIconModule,
+    MdInputModule,
+    MdListModule,
+    MdMenuModule,
+    MdPaginatorModule,
+    MdProgressBarModule,
+    MdProgressSpinnerModule,
+    MdRadioModule,
+    MdSelectModule,
+    MdSidenavModule,
+    MdSliderModule,
+    MdSlideToggleModule,
+    MdSnackBarModule,
+    MdSortModule,
+    MdTableModule,
+    MdTabsModule,
+    MdToolbarModule,
+    MdTooltipModule,
+    MdStepperModule,
   ]
 })
 export class SharedModuleModule {
