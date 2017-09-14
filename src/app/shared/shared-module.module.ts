@@ -34,7 +34,6 @@ import {
   MdTabsModule,
   MdToolbarModule,
   MdTooltipModule,
-  MdStepperModule,
 } from '@angular/material';
 
 @NgModule({
@@ -77,7 +76,6 @@ import {
     MdTabsModule,
     MdToolbarModule,
     MdTooltipModule,
-    MdStepperModule,
   ]
 })
 export class SharedModuleModule {

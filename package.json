@@ -39,12 +39,12 @@
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
-    "@angular/cdk": "git+https://github.com/angular/cdk-builds.git",
+    "@angular/cdk": "^2.0.0-beta.10",
     "@angular/cli": "1.4.2",
     "@angular/compiler-cli": "^4.2.4",
-    "@angular/flex-layout": "git+https://github.com/angular/flex-layout-builds.git",
+    "@angular/flex-layout": "^2.0.0-beta.9",
     "@angular/language-service": "^4.2.4",
-    "@angular/material": "git+https://github.com/angular/material2-builds.git",
+    "@angular/material": "^2.0.0-beta.10",
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "~6.0.60",
     "codelyzer": "~3.1.1",
