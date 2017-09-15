@@ -4,8 +4,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Screenshot
 
-![light theme](screenshot/light-theme.png)
-![dark theme](screenshot/dark-theme.png)
+![login](screenshot/login.png)
+![index](screenshot/index.png)
 
 ## Development server
 
