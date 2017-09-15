@@ -1,7 +1,10 @@
 <div fxLayout.lt-md="column" fxLayout.md="row-reverse" fxLayout.gt-md="row-reverse" fxFill>
   <div fxFlex.lt-md="96px" fxFlex.md="40%" fxFlex.gt-md="40%" fxLayoutAlign="center center"
        class="mat-toolbar mat-primary">
-    <h3>后台管理系统</h3>
+    <div style="text-align: center">
+      <div fxHide.lt-md="true"><img src="/assets/logo.png" height="100"></div>
+      <div style="font-size: 26px">后台管理系统</div>
+    </div>
   </div>
 
   <form #loginForm="ngForm" (ngSubmit)="submit()" fxFlex
