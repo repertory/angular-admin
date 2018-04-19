@@ -1,16 +1,20 @@
 import {NgModule} from '@angular/core';
-import {RouterModule, Route} from '@angular/router';
+import {Routes, RouterModule} from '@angular/router';
 
 import {RegisterComponent} from './register.component';
 
-export const routerConfig: Route[] = [
-  {path: 'register', component: RegisterComponent},
+const routes: Routes = [
+  {
+    path: 'register',
+    component: RegisterComponent,
+    data: {
+      title: '用户注册'
+    }
+  }
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forChild(routerConfig)
-  ],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class RegisterRoutingModule {

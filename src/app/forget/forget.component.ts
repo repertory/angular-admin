@@ -1,33 +1,26 @@
-import {Component, OnInit} from '@angular/core';
-import {MdSnackBar} from '@angular/material';
-import {ParseService} from '../shared/shared.module';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {ConfigService} from '~shared/services/services.module';
+
+import {UserService as Service} from './user.service';
 
 @Component({
   selector: 'app-forget',
   templateUrl: './forget.component.html',
-  styleUrls: ['./forget.component.css']
+  styleUrls: ['./forget.component.scss']
 })
-export class ForgetComponent implements OnInit {
+export class ForgetComponent implements OnInit, OnDestroy {
 
-  public email: string;
-
-  constructor(public parse: ParseService, private snackBar: MdSnackBar) {
+  constructor(public service: Service, public config: ConfigService, private route: ActivatedRoute) {
+    this.route.params.subscribe((params: object) => this.service.params = params);
   }
 
   ngOnInit() {
+    this.service.onInit();
   }
 
-  isScreenSmall(): boolean {
-    return window.matchMedia(`(max-width: 736px)`).matches;
-  }
-
-  submit() {
-    this.parse.forget(this.email)
-      .subscribe(
-        res => this.snackBar.open('邮件发送成功', '关闭', {duration: 2000}),
-        err => this.snackBar.open(err.message || '邮件发送失败', '关闭', {duration: 2000})
-      );
-    return false;
+  ngOnDestroy() {
+    this.service.onDestroy();
   }
 
 }

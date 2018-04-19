@@ -1,0 +1,69 @@
+:host {
+  > mat-toolbar {
+    height: 64px;
+    position: relative;
+    z-index: 2;
+    padding-left: 0;
+    @media (max-width: 960px) {
+      height: 56px;
+    }
+    @media (max-width: 600px) {
+      height: 48px;
+    }
+
+    [mat-button] {
+      height: 100%;
+      padding: 0;
+    }
+
+    > button:first-child {
+      min-width: 56px;
+    }
+  }
+
+  > mat-sidenav-container {
+    height: calc(100vh - 64px);
+    @media (max-width: 960px) {
+      height: calc(100vh - 56px);
+    }
+    @media (max-width: 600px) {
+      height: calc(100vh - 48px);
+    }
+
+    mat-sidenav, mat-sidenav-content {
+      height: 100%;
+    }
+    mat-sidenav {
+      width: 240px;
+
+      mat-nav-list {
+        padding: 0;
+
+        input[type=search] {
+          font-size: 14px;
+          border: none;
+          background: none;
+          outline: none;
+          width: 100%;
+          -webkit-appearance: none;
+        }
+
+        .active {
+          background: rgba(0, 0, 0, .06);
+        }
+      }
+    }
+    mat-sidenav-content {
+      > section {
+        background: #ffffff;
+      }
+      > footer {
+        background-color: #263238;
+        color: #9e9e9e;
+        font-size: 13px;
+        padding: 0 24px;
+        overflow: hidden;
+      }
+    }
+  }
+}

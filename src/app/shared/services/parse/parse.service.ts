@@ -1,192 +1,252 @@
 import {Injectable} from '@angular/core';
-import {Observable, Subject} from 'rxjs/Rx';
 import {Parse} from 'parse';
+import {Observable} from 'rxjs/Observable';
+import {Subject} from 'rxjs/Subject';
+
+import {ConfigService} from '../config/config.module';
 
 @Injectable()
 export class ParseService {
 
-  public ACL = Parse.ACL;
-  public Analytics = Parse.Analytics;
-  public Config = Parse.Config;
-  public Cloud = Parse.Cloud;
-  public Error = Parse.Error;
-  public File = Parse.File;
-  public GeoPoint = Parse.GeoPoint;
-  public Object = Parse.Object;
-  public Push = Parse.Push;
-  public Query = Parse.Query;
-  public Role = Parse.Role;
-  public Session = Parse.Session;
-  public User = Parse.User;
-
-  // 初始化配置
-  initialize(parseConfig) {
-    Parse.initialize(parseConfig.appId, parseConfig.javascriptKey);
-    Parse.serverURL = parseConfig.serverURL;
-  }
-
-  // 行为跟踪(数据分析用)
-  track(eventName: string, dimensions: Object, options?: Object): Observable<any> {
-    const dimensions2 = {};
-
-    for (const key of Object.keys(dimensions)) {
-      dimensions2[key] = dimensions[key].toString();
+  ACL = Parse.ACL;
+  Analytics = Parse.Analytics;
+  Cloud = Parse.Cloud;
+  Config = Parse.Config;
+  Error = Parse.Error;
+  File = Parse.File;
+  GeoPoint = Parse.GeoPoint;
+  LiveQuery = Parse.LiveQuery;
+  Object = Parse.Object;
+  Polygon = Parse.Polygon;
+  Promise = Parse.Promise;
+  Push = Parse.Push;
+  Query = Parse.Query;
+  Relation = Parse.Relation;
+  Role = Parse.Role;
+  Session = Parse.Session;
+  User = Parse.User.extend({}, {
+    roles: function (user, options) {
+      const query = new Parse.Query(Parse.Role);
+      query.equalTo('users', user || Parse.User.current());
+      return query.find(options);
     }
+  });
 
-    return Observable.fromPromise(this.Analytics.track(eventName, dimensions2, options));
+  get current() {
+    return this.User.current();
   }
 
-  // 运行自定义函数
-  run(name: string, data?: Object, options?: Object): Observable<any> {
-    return Observable.fromPromise(this.Cloud.run(name, data, options));
+  constructor() {
+    const config = new ConfigService();
+    Parse.initialize(config.parse.appId, config.parse.javascriptKey);
+    Parse.serverURL = config.parse.serverURL;
   }
 
-  // 文件上传
-  file(file: File): Observable<any> {
+  reverseQuery(parentClass, relationKey, child) {
+    const query = new this.Query(parentClass);
+    query.equalTo(relationKey, child);
+    return query;
+  }
+
+  socket(query: Parse.Query, onlyEvent?: boolean): Observable<any> {
     const subject = new Subject();
 
-    if (!file) {
-      subject.error('未选择文件');
-      return subject;
+    if (!onlyEvent) {
+      query.find()
+        .then(rows => subject.next({type: 'query', rows: rows}))
+        .catch(err => subject.error(err));
     }
 
-    const name = encodeURIComponent(file.name)
-      .replace(/!/g, '%21')
-      .replace(/'/g, '%27')
-      .replace(/\(/g, '%28')
-      .replace(/\)/g, '%29')
-      .replace(/\*/g, '%2A')
-      .replace(/\+/g, '%20')
-      .replace(/\%/g, '');
-
-    new this.File(name, file).save().then(
-      res => subject.next(res),
-      err => subject.error(err)
-    );
-    return subject;
-  }
-
-  // base64上传
-  base64(base64: string, name?: string): Observable<any> {
-    const subject = new Subject();
-
-    name = encodeURIComponent(name || 'base64.png')
-      .replace(/!/g, '%21')
-      .replace(/'/g, '%27')
-      .replace(/\(/g, '%28')
-      .replace(/\)/g, '%29')
-      .replace(/\*/g, '%2A')
-      .replace(/\+/g, '%20')
-      .replace(/\%/g, '');
-
-    new this.File(name, {base64: base64}).save().then(
-      res => subject.next(res),
-      err => subject.error(err)
-    );
+    query.subscribe()
+      .on('open', () => subject.next({type: 'event', event: 'open'}))
+      .on('close', row => subject.next({type: 'event', event: 'close', row: row}))
+      .on('create', row => subject.next({type: 'event', event: 'create', row: row}))
+      .on('update', row => subject.next({type: 'event', event: 'update', row: row}))
+      .on('delete', row => subject.next({type: 'event', event: 'delete', row: row}))
+      .on('enter', row => subject.next({type: 'event', event: 'enter', row: row}))
+      .on('leave', row => subject.next({type: 'event', event: 'leave', row: row}));
 
     return subject;
   }
 
-  // 当前用户信息
-  userInfo(): Observable<any> {
-    return Observable
-      .interval(200)
-      .map(x => this.User.current())
-      .distinctUntilChanged();
+  // 对比
+  compareObject(left: any, right: any) {
+    return left === right || left.equals(right);
   }
 
-  // 重置密码
-  forget(email: string): Observable<any> {
-    return Observable.fromPromise(this.User.requestPasswordReset(email));
-  }
-
-  // 用户登录
-  login(username: string, password: string): Observable<any> {
-    return Observable.fromPromise(this.User.logIn(username, password));
-  }
-
-  // 退出登录
-  logout(): Observable<any> {
-    return Observable.fromPromise(this.User.logOut());
-  }
-
-  // 用户注册
-  register(username: string, password: string, attributes?: Object): Observable<any> {
-    const object = new this.User();
-    object.set('username', username);
-    object.set('password', password);
-
-    if (attributes) {
-      for (const key of Object.keys(attributes)) {
-        object.set(key, attributes[key]);
+  // 处理catch返回错误
+  handleError(err) {
+    if (err instanceof Parse.Error) {
+      switch (err.code) {
+        case Parse.Error.OTHER_CAUSE:
+          err.message = '其他原因';
+          break;
+        case Parse.Error.INTERNAL_SERVER_ERROR:
+          err.message = '内部服务器错误';
+          break;
+        case Parse.Error.CONNECTION_FAILED:
+          err.message = '连接失败';
+          break;
+        case Parse.Error.OBJECT_NOT_FOUND:
+          err.message = '数据不存在或验证失败';
+          break;
+        case Parse.Error.INVALID_QUERY:
+          err.message = '无效的查询';
+          break;
+        case Parse.Error.INVALID_CLASS_NAME:
+          err.message = '无效的类名';
+          break;
+        case Parse.Error.MISSING_OBJECT_ID:
+          err.message = '缺少objectId';
+          break;
+        case Parse.Error.INVALID_KEY_NAME:
+          err.message = '无效的key';
+          break;
+        case Parse.Error.INVALID_POINTER:
+          err.message = '无效的pointer';
+          break;
+        case Parse.Error.INVALID_JSON:
+          err.message = '无效的json';
+          break;
+        case Parse.Error.COMMAND_UNAVAILABLE:
+          err.message = '命令不可用';
+          break;
+        case Parse.Error.NOT_INITIALIZED:
+          err.message = '未初始化';
+          break;
+        case Parse.Error.INCORRECT_TYPE:
+          err.message = '不正确的类型';
+          break;
+        case Parse.Error.INVALID_CHANNEL_NAME:
+          err.message = '无效的channel名称';
+          break;
+        case Parse.Error.PUSH_MISCONFIGURED:
+          err.message = '消息推送配置错误';
+          break;
+        case Parse.Error.OBJECT_TOO_LARGE:
+          err.message = '目标太大';
+          break;
+        case Parse.Error.OPERATION_FORBIDDEN:
+          err.message = '操作被禁止';
+          break;
+        case Parse.Error.CACHE_MISS:
+          err.message = '缓存缺失';
+          break;
+        case Parse.Error.INVALID_NESTED_KEY:
+          err.message = '无效的nested键值';
+          break;
+        case Parse.Error.INVALID_FILE_NAME:
+          err.message = '无效的文件名';
+          break;
+        case Parse.Error.INVALID_ACL:
+          err.message = '无效的ACL';
+          break;
+        case Parse.Error.INVALID_EMAIL_ADDRESS:
+          err.message = '无效的邮箱地址';
+          break;
+        case Parse.Error.MISSING_CONTENT_TYPE:
+          err.message = '缺少content-type';
+          break;
+        case Parse.Error.MISSING_CONTENT_LENGTH:
+          err.message = '缺少content-length';
+          break;
+        case Parse.Error.INVALID_CONTENT_LENGTH:
+          err.message = '无效内容长度';
+          break;
+        case Parse.Error.FILE_TOO_LARGE:
+          err.message = '文件太大';
+          break;
+        case Parse.Error.FILE_SAVE_ERROR:
+          err.message = '文件保存错误';
+          break;
+        case Parse.Error.DUPLICATE_VALUE:
+          err.message = '重复的值';
+          break;
+        case Parse.Error.INVALID_ROLE_NAME:
+          err.message = '无效的角色名';
+          break;
+        case Parse.Error.EXCEEDED_QUOTA:
+          err.message = '超过定额';
+          break;
+        case Parse.Error.SCRIPT_FAILED:
+          err.message = '脚本失败';
+          break;
+        case Parse.Error.VALIDATION_ERROR:
+          err.message = '验证错误';
+          break;
+        case Parse.Error.INVALID_IMAGE_DATA:
+          err.message = '无效的图像数据';
+          break;
+        case Parse.Error.UNSAVED_FILE_ERROR:
+          err.message = '保存文件时出错';
+          break;
+        case Parse.Error.INVALID_PUSH_TIME_ERROR:
+          err.message = '无效的推送时间';
+          break;
+        case Parse.Error.FILE_DELETE_ERROR:
+          err.message = '文件删除失败';
+          break;
+        case Parse.Error.REQUEST_LIMIT_EXCEEDED:
+          err.message = '请求超出限制';
+          break;
+        case Parse.Error.INVALID_EVENT_NAME:
+          err.message = '无效的事件名称';
+          break;
+        case Parse.Error.USERNAME_MISSING:
+          err.message = '缺少用户名';
+          break;
+        case Parse.Error.PASSWORD_MISSING:
+          err.message = '缺少密码';
+          break;
+        case Parse.Error.USERNAME_TAKEN:
+          err.message = '用户名已存在';
+          break;
+        case Parse.Error.EMAIL_TAKEN:
+          err.message = '邮箱已存在';
+          break;
+        case Parse.Error.EMAIL_MISSING:
+          err.message = '缺少邮箱';
+          break;
+        case Parse.Error.EMAIL_NOT_FOUND:
+          err.message = '邮箱未认证或不存在';
+          break;
+        case Parse.Error.SESSION_MISSING:
+          err.message = '数据不能被操作';
+          break;
+        case Parse.Error.MUST_CREATE_USER_THROUGH_SIGNUP:
+          err.message = '必须通过注册创建用户';
+          break;
+        case Parse.Error.ACCOUNT_ALREADY_LINKED:
+          err.message = '账号已关联';
+          break;
+        case Parse.Error.INVALID_SESSION_TOKEN:
+          err.message = '身份已过期，请重新登录';
+          Parse.User.logOut();
+          break;
+        case Parse.Error.LINKED_ID_MISSING:
+          err.message = '缺少关联id';
+          break;
+        case Parse.Error.INVALID_LINKED_SESSION:
+          err.message = '无效的关联会话';
+          break;
+        case Parse.Error.UNSUPPORTED_SERVICE:
+          err.message = '不支持的服务';
+          break;
+        case Parse.Error.INVALID_SCHEMA_OPERATION:
+          err.message = '无效的schema操作';
+          break;
+        case Parse.Error.AGGREGATE_ERROR:
+          err.message = '部分数据操作失败';
+          break;
+        case Parse.Error.FILE_READ_ERROR:
+          err.message = '文件读取错误';
+          break;
+        case Parse.Error.X_DOMAIN_REQUEST:
+          err.message = '跨域请求';
+          break;
       }
+      return Parse.Promise.reject(err);
     }
-
-    return Observable.fromPromise(object.signUp());
-  }
-
-  // 查询数据
-  query(className: string, callback?: Function, isSocket?: boolean): Observable<any> {
-    const subject = new Subject();
-    const query = new this.Query(className);
-
-    if (callback) {
-      callback(query);
-    }
-
-    query.find({
-      success: res => subject.next({type: 'result', result: res}),
-      error: err => subject.error(err)
-    });
-
-    if (isSocket) {
-      query.subscribe()
-        .on('open', () => subject.next({type: 'event', event: 'open'}))
-        .on('close', () => subject.next({type: 'event', event: 'close'}))
-        .on('create', data => subject.next({type: 'event', event: 'create', data: data}))
-        .on('update', data => subject.next({type: 'event', event: 'update', data: data}))
-        .on('delete', data => subject.next({type: 'event', event: 'delete', data: data}))
-        .on('enter', data => subject.next({type: 'event', event: 'enter', data: data}))
-        .on('leave', data => subject.next({type: 'event', event: 'leave', data: data}));
-    }
-
-    return subject;
-  }
-
-  // 新增数据
-  create(className: string, data: Object): Observable<any> {
-    const name = this.Object.extend(className);
-    const object = new name();
-
-    for (const key of Object.keys(data)) {
-      object.set(key, data[key]);
-    }
-
-    if (this.User.current()) {
-      object.set('createdBy', this.User.current());
-    }
-
-    return Observable.fromPromise(object.save());
-  }
-
-  // 修改数据
-  update(object: Parse.Object, data: Object): Observable<any> {
-    for (const key of Object.keys(data)) {
-      object.set(key, data[key]);
-    }
-
-    if (this.User.current()) {
-      object.set('updatedBy', this.User.current());
-    } else {
-      object.unset('updatedBy');
-    }
-
-    return Observable.fromPromise(object.save());
-  }
-
-  // 删除数据
-  delete(object: Parse.Object): Observable<any> {
-    return Observable.fromPromise(object.destroy());
   }
 
 }

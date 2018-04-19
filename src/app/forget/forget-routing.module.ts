@@ -1,16 +1,20 @@
 import {NgModule} from '@angular/core';
-import {RouterModule, Route} from '@angular/router';
+import {Routes, RouterModule} from '@angular/router';
 
 import {ForgetComponent} from './forget.component';
 
-export const routerConfig: Route[] = [
-  {path: 'forget', component: ForgetComponent},
+const routes: Routes = [
+  {
+    path: 'forget',
+    component: ForgetComponent,
+    data: {
+      title: '找回密码'
+    }
+  }
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forChild(routerConfig)
-  ],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class ForgetRoutingModule {

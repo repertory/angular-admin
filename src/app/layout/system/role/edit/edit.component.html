@@ -1,0 +1,30 @@
+<mat-progress-bar mode="indeterminate" *ngIf="!service.data"></mat-progress-bar>
+<mat-card class="no-shadow">
+  <form [formGroup]="service.form" (ngSubmit)="service.onSubmit($event)">
+    <mat-card>
+      <mat-card-title>编辑角色</mat-card-title>
+      <mat-card-content fxLayout="column">
+
+        <mat-form-field>
+          <input formControlName="name" placeholder="名称" matInput readonly>
+          <mat-error *ngIf="service.hasError('name', 'required')">请输入名称</mat-error>
+          <mat-error *ngIf="service.hasError('name', 'minlength')">名称长度过短</mat-error>
+          <mat-error *ngIf="service.hasError('name', 'maxlength')">名称长度超过限制</mat-error>
+          <mat-error *ngIf="service.hasError('name', 'pattern')">名称为小写字母组成</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input formControlName="alias" placeholder="别名" matInput>
+          <mat-error *ngIf="service.hasError('alias', 'required')">请输入别名</mat-error>
+          <mat-error *ngIf="service.hasError('alias', 'minlength')">别名长度过短</mat-error>
+          <mat-error *ngIf="service.hasError('alias', 'maxlength')">别名长度超过限制</mat-error>
+        </mat-form-field>
+
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="primary" [disabled]="!service.data">保存</button>
+        <a mat-button routerLink="/system/role">返回</a>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</mat-card>

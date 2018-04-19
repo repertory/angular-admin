@@ -1,4 +1,5 @@
 import {NgModule} from '@angular/core';
+
 import {QrcodeComponent} from './qrcode.component';
 
 @NgModule({

@@ -1,19 +1,19 @@
-import {Directive, ElementRef, HostListener} from '@angular/core';
+import {Directive, ElementRef, AfterViewInit} from '@angular/core';
 
 @Directive({
   selector: '[appGallery]'
 })
-export class GalleryDirective {
-
-  @HostListener('mouseenter') onMouseEnter() {
-    window['lightGallery'](this.element.nativeElement, {
-      selector: '[appGalleryItem]',
-      cssEasing: 'cubic-bezier(0.680, -0.550, 0.265, 1.550)'
-    });
-  }
+export class GalleryDirective implements AfterViewInit {
 
   constructor(private element: ElementRef) {
   }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      window['lightGallery'](this.element.nativeElement, {selector: '[appGalleryItem]'});
+    }, 150);
+  }
+
 }
 
 @Directive({

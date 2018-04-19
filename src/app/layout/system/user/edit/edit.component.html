@@ -1,0 +1,38 @@
+<mat-progress-bar mode="indeterminate" *ngIf="!service.data"></mat-progress-bar>
+<mat-card class="no-shadow">
+  <form [formGroup]="service.form" (ngSubmit)="service.onSubmit($event)">
+    <mat-card>
+      <mat-card-title>编辑用户</mat-card-title>
+      <mat-card-content fxLayout="column">
+
+        <mat-form-field>
+          <input formControlName="nick" type="text" matInput placeholder="昵称" readonly>
+          <mat-error *ngIf="service.hasError('nick', 'required')">请输入昵称</mat-error>
+          <mat-error *ngIf="service.hasError('nick', 'minlength')">昵称长度过短</mat-error>
+          <mat-error *ngIf="service.hasError('nick', 'maxlength')">昵称长度超过限制</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input formControlName="username" placeholder="用户名" matInput readonly>
+          <mat-error *ngIf="service.hasError('username', 'required')">请输入用户名</mat-error>
+          <mat-error *ngIf="service.hasError('username', 'minlength')">用户名长度过短</mat-error>
+          <mat-error *ngIf="service.hasError('username', 'maxlength')">用户名长度超过限制</mat-error>
+          <mat-error *ngIf="service.hasError('username', 'duplicated')">用户名已存在</mat-error>
+          <mat-hint *ngIf="service.control('username')?.pending">验证中...</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select formControlName="roles" placeholder="角色" [multiple]="true" [compareWith]="service.compareObject">
+            <mat-option *ngFor="let role of service.roles" [value]="role">{{role.get('alias')}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="service.hasError('roles', 'required')">请选择角色</mat-error>
+        </mat-form-field>
+
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="primary" [disabled]="!service.data">保存</button>
+        <a mat-button routerLink="/system/user">返回</a>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</mat-card>

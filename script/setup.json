@@ -1,0 +1,98 @@
+{
+  "root": {
+    "email": "mail@wangdong.io",
+    "user": "wangdong",
+    "pass": "wangdong",
+    "nick": "王冬"
+  },
+  "users": [
+    {
+      "email": "admin@test.dev",
+      "user": "admin",
+      "pass": "111111",
+      "nick": "管理员",
+      "roles": [
+        "admin"
+      ]
+    },
+    {
+      "email": "test@test.dev",
+      "user": "test",
+      "pass": "111111",
+      "nick": "普通用户",
+      "roles": []
+    }
+  ],
+  "role": [
+    {
+      "name": "tester",
+      "alias": "测试人员"
+    }
+  ],
+  "notification": {
+    "public": "> 这是一条系统消息，支持markdown格式",
+    "user": "> 这是一条个人消息，默认为已读状态"
+  },
+  "menu": [
+    {
+      "group": "我的面板",
+      "name": "个人资料",
+      "url": "/user/profile",
+      "icon": "assignment_ind",
+      "orderBy": 1,
+      "acl": [
+        "public"
+      ]
+    },
+    {
+      "group": "我的面板",
+      "name": "我的消息",
+      "url": "/user/message",
+      "icon": "notifications",
+      "orderBy": 2,
+      "acl": [
+        "public"
+      ]
+    },
+    {
+      "group": "系统管理",
+      "name": "菜单管理",
+      "url": "/system/menu",
+      "icon": "menu",
+      "orderBy": 3,
+      "acl": [
+        "root"
+      ]
+    },
+    {
+      "group": "系统管理",
+      "name": "角色管理",
+      "url": "/system/role",
+      "icon": "group",
+      "orderBy": 4,
+      "acl": [
+        "root"
+      ]
+    },
+    {
+      "group": "系统管理",
+      "name": "用户管理",
+      "url": "/system/user",
+      "icon": "person",
+      "orderBy": 5,
+      "acl": [
+        "root"
+      ]
+    },
+    {
+      "group": "关于系统",
+      "name": "帮助中心",
+      "url": "/help",
+      "icon": "help",
+      "orderBy": 99,
+      "acl": [
+        "public"
+      ]
+    }
+  ]
+}

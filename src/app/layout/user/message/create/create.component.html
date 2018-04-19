@@ -1,0 +1,45 @@
+<mat-card class="no-shadow">
+  <form [formGroup]="service.form" (ngSubmit)="service.onSubmit($event)">
+    <mat-card>
+      <mat-card-title>发布消息</mat-card-title>
+      <mat-card-content fxLayout="column">
+
+        <mat-form-field>
+          <mat-select formControlName="type" placeholder="消息类型">
+            <mat-option value="public">系统通知</mat-option>
+            <mat-option value="role">群组消息</mat-option>
+            <mat-option value="user">个人消息</mat-option>
+          </mat-select>
+          <mat-error *ngIf="service.hasError('type', 'required')">请选择消息类型</mat-error>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="service.control('type').value === 'role'">
+          <mat-select formControlName="role" placeholder="角色">
+            <mat-option *ngFor="let role of service.roles" [value]="role">{{role.get('alias')}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="service.hasError('role', 'required')">请选择角色</mat-error>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="service.control('type').value === 'user'">
+          <input formControlName="user" placeholder="用户" matInput [matAutocomplete]="user">
+          <mat-error *ngIf="service.hasError('user', 'required')">请选择用户</mat-error>
+          <mat-error *ngIf="service.hasError('user', 'type')">请选择用户</mat-error>
+        </mat-form-field>
+
+        <mat-autocomplete autoActiveFirstOption #user="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let user of service.users" [value]="user">
+            {{ user.get('nick') }}
+          </mat-option>
+        </mat-autocomplete>
+
+        <app-editor formControlName="content" placeholder="消息内容"></app-editor>
+        <mat-error *ngIf="service.hasError('content', 'required')">请输入消息内容</mat-error>
+
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="primary">保存</button>
+        <button mat-button routerLink="/user/message">返回</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</mat-card>

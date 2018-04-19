@@ -1,0 +1,24 @@
+article {
+  height: 100vh;
+}
+
+p {
+  margin: 0;
+  padding: 8px;
+}
+
+.code {
+  font-size: 96px;
+  line-height: 96px;
+  color: rgba(0, 0, 0, 0.45);
+  font-family: 'Arial Negreta', 'Arial Normal', 'Arial';
+  font-weight: 700;
+}
+
+.message {
+  font-family: 'PingFang SC Regular', 'PingFang SC';
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 32px;
+  color: rgba(0, 0, 0, 0.45);
+}

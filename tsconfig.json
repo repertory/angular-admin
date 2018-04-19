@@ -1,7 +1,20 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "outDir": "./dist/out-tsc",
+    "baseUrl": "./src/",
+    "paths": {
+      "~layout/*": [
+        "app/layout/*"
+      ],
+      "~shared/*": [
+        "app/shared/*"
+      ],
+      "~script/*": [
+        "../script/*"
+      ]
+    },
+    "allowJs": true,
+    "outDir": "./data/public/out-tsc",
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",

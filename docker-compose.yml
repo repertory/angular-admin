@@ -1,0 +1,32 @@
+version: '2'
+services:
+  server:
+    build: .
+    restart: always
+    environment:
+      - DATABASE=mongodb://mongo:27017/server
+      - REDIS_SOCKET=redis://redis:6379/0
+      - REDIS_CACHE=redis://redis:6379/1
+    depends_on:
+      - mongo
+      - redis
+    volumes:
+      - ./data/server:/app/data
+      - ./script:/app/script
+      - ./server:/app/server
+      - ./src:/app/src
+    ports:
+      - 80:80
+      - 4200:4200
+  mongo:
+    image: mongo:latest
+    restart: always
+    volumes:
+      - ./data/docker/Shanghai:/etc/localtime
+      - ./data/mongo/data:/data
+  redis:
+    image: redis:alpine
+    restart: always
+    volumes:
+      - ./data/docker/Shanghai:/etc/localtime
+      - ./data/redis/data:/data

@@ -1,0 +1,19 @@
+[mat-dialog-title], mat-dialog-content {
+  min-width: 360px;
+
+  @media (min-width: 600px) and (max-width: 960px) {
+    min-width: 320px;
+  }
+
+  @media (min-width: 360px) and (max-width: 600px) {
+    min-width: 240px;
+  }
+
+  @media (max-width: 360px) {
+    min-width: 200px;
+  }
+}
+
+mat-form-field {
+  width: 100%;
+}

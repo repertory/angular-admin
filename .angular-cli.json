@@ -1,12 +1,12 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "admin"
+    "name": "angular"
   },
   "apps": [
     {
       "root": "src",
-      "outDir": "dist",
+      "outDir": "data/public",
       "assets": [
         "assets",
         "favicon.ico"
@@ -19,10 +19,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "../node_modules/normalize.css/normalize.css",
         "../node_modules/lightgallery.js/dist/css/lightgallery.css",
-        "theme.scss",
-        "style.scss"
+        "styles.scss"
       ],
       "scripts": [
         "../node_modules/lightgallery.js/dist/js/lightgallery.min.js",
@@ -45,13 +43,16 @@
   },
   "lint": [
     {
-      "project": "src/tsconfig.app.json"
+      "project": "src/tsconfig.app.json",
+      "exclude": "**/node_modules/**"
     },
     {
-      "project": "src/tsconfig.spec.json"
+      "project": "src/tsconfig.spec.json",
+      "exclude": "**/node_modules/**"
     },
     {
-      "project": "e2e/tsconfig.e2e.json"
+      "project": "e2e/tsconfig.e2e.json",
+      "exclude": "**/node_modules/**"
     }
   ],
   "test": {
@@ -60,7 +61,32 @@
     }
   },
   "defaults": {
-    "styleExt": "css",
-    "component": {}
+    "styleExt": "scss",
+    "class": {
+      "spec": false
+    },
+    "component": {
+      "spec": false
+    },
+    "directive": {
+      "spec": false
+    },
+    "guard": {
+      "spec": false
+    },
+    "module": {
+      "spec": false
+    },
+    "pipe": {
+      "spec": false
+    },
+    "service": {
+      "spec": false
+    },
+    "serve": {
+      "port": 4200,
+      "host": "0.0.0.0",
+      "ssl": false
+    }
   }
 }

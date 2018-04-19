@@ -1,0 +1,75 @@
+/* You can add global styles to this file, and also import other style files */
+@import "assets/iconfont/material-icons.css";
+@import "~font-awesome/css/font-awesome.css";
+@import "~highlight.js/styles/idea.css";
+@import "~perfect-scrollbar/css/perfect-scrollbar.css";
+@import "~simplemde/dist/simplemde.min.css";
+@import 'theme';
+
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+.ps {
+  .ps__rail-x {
+    top: auto !important;
+  }
+
+  .ps__rail-y {
+    left: auto !important;
+    z-index: 2;
+  }
+}
+
+.editor-toolbar, .CodeMirror {
+  border-radius: 0;
+  border: none;
+  * {
+    outline: none;
+  }
+}
+
+.editor-toolbar {
+  min-height: 48px !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12) !important;
+  background: whitesmoke !important;
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+
+.editor-toolbar.fullscreen {
+  top: 64px !important;
+  @media (max-width: 960px) {
+    top: 56px !important;
+  }
+  @media (max-width: 600px) {
+    top: 48px !important;
+  }
+}
+
+.CodeMirror, .editor-preview {
+  padding: 6px;
+}
+
+.CodeMirror-fullscreen, .CodeMirror-fullscreen + .editor-preview-side {
+  top: 112px !important;
+  border: none;
+  @media (max-width: 960px) {
+    top: 104px !important;
+  }
+  @media (max-width: 600px) {
+    top: 96px !important;
+  }
+}
+
+.CodeMirror-fullscreen + .editor-preview-side {
+  border-left: 1px solid rgba(0, 0, 0, 0.12) !important;
+}
+
+.no-shadow {
+  box-shadow: none !important;
+}
+
+.no-border {
+  border: none !important;
+}

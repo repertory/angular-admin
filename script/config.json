@@ -1,0 +1,139 @@
+{
+  "env": {
+    "server.port": "SERVER_PORT",
+    "server.domain": "SERVER_DOMAIN",
+    "server.public": "SERVER_PUBLIC",
+    "server.path": "SERVER_PATH",
+    "app.appName": "SERVER_NAME",
+    "server.dashboard.status": "DASHBOARD_STATUS",
+    "server.dashboard.path": "DASHBOARD_PATH",
+    "server.dashboard.options.allowInsecureHTTP": "DASHBOARD_HTTP",
+    "server.dashboard.options.cookieSessionSecret": "DASHBOARD_SECRET",
+    "dashboard.users.0.user": "DASHBOARD_USER",
+    "dashboard.users.0.pass": "DASHBOARD_PASS",
+    "server.https.status": "HTTPS_STATUS",
+    "server.https.key": "HTTPS_KEY",
+    "server.https.cert": "HTTPS_CERT",
+    "app.databaseURI": "DATABASE",
+    "app.collectionPrefix": "DATABASE_PREFIX",
+    "app.liveQuery.redisURL": "REDIS_SOCKET",
+    "app.cacheAdapter.options.url": "REDIS_CACHE",
+    "app.appId": "KEY_APPID",
+    "app.masterKey": "KEY_MASTER",
+    "app.readOnlyMasterKey": "KEY_READONLY_MASTER",
+    "app.fileKey": "KEY_FILE",
+    "app.clientKey": "KEY_CLIENT",
+    "app.javascriptKey": "KEY_JAVASCRIPT",
+    "app.restAPIKey": "KEY_RESTAPI",
+    "app.dotNetKey": "KEY_DOTNET",
+    "app.webhookKey": "KEY_WEBHOOK",
+    "app.emailAdapter.options.fromAddress": "EMAIL_FROM_ADDRESS",
+    "app.emailAdapter.options.fromName": "EMAIL_FROM_NAME",
+    "app.emailAdapter.options.sendmail": "EMAIL_SENDMAIL",
+    "app.emailAdapter.options.smtp.host": "EMAIL_SMTP_HOST",
+    "app.emailAdapter.options.smtp.port": "EMAIL_SMTP_PORT",
+    "app.emailAdapter.options.smtp.secure": "EMAIL_SMTP_SECURE",
+    "app.emailAdapter.options.smtp.auth.user": "EMAIL_SMTP_USER",
+    "app.emailAdapter.options.smtp.auth.pass": "EMAIL_SMTP_PASS"
+  },
+  "server": {
+    "port": 80,
+    "domain": "http://127.0.0.1",
+    "public": "http://127.0.0.1",
+    "path": "/api",
+    "dashboard": {
+      "status": true,
+      "path": "/dashboard",
+      "options": {
+        "allowInsecureHTTP": true,
+        "cookieSessionSecret": "dashboard"
+      }
+    },
+    "https": {
+      "status": false,
+      "key": "~/server/certs/key.pem",
+      "cert": "~/server/certs/cert.pem"
+    }
+  },
+  "app": {
+    "production": true,
+    "appName": "后台管理系统",
+    "cloud": "~/server/cloud",
+    "collectionPrefix": "",
+    "databaseURI": "mongodb://127.0.0.1:27017/server",
+    "logsFolder": "~/data/logs",
+    "appId": "ddc9ac052450367e4a03c4056c21bff8",
+    "masterKey": "b59551ab147d580a84272044b2139fbd",
+    "readOnlyMasterKey": "d9a89397c4594e819e230b9f9b0bf354",
+    "fileKey": "cde555791c334e511d05bd1f6e116cea",
+    "clientKey": "ffa79ee8765e79d312bc64dd6ff17cb6",
+    "javascriptKey": "5e0f45081b4085bb505122d164d716cd",
+    "restAPIKey": "98317a374012ad31fa40c09d397ca830",
+    "dotNetKey": "cbcf24090c8f0d68a568b9df0c3ddd59",
+    "webhookKey": "d11ff93d316fadfee9b1c02897dbc91e",
+    "liveQuery": {
+      "redisURL": "redis://127.0.0.1:6379/0",
+      "classNames": [
+        "Notification"
+      ]
+    },
+    "auth": {},
+    "accountLockout": {
+      "threshold": 5,
+      "duration": 120
+    },
+    "customPages": {},
+    "maxLimit": 1000,
+    "sessionLength": 31536000,
+    "userSensitiveFields": [
+      "email"
+    ],
+    "enableAnonymousUsers": false,
+    "allowClientClassCreation": true,
+    "masterKeyIps": [],
+    "verifyUserEmails": true,
+    "preventLoginWithUnverifiedEmail": true,
+    "analyticsAdapter": {
+      "module": "~/server/adapter/analytics.js"
+    },
+    "cacheAdapter": {
+      "module": "parse-server/lib/Adapters/Cache/RedisCacheAdapter.js",
+      "options": {
+        "url": "redis://127.0.0.1:6379/1"
+      }
+    },
+    "emailAdapter": {
+      "module": "~/server/adapter/mail.js",
+      "options": {
+        "fromAddress": "noreply@notice.server",
+        "fromName": "系统通知",
+        "sendmail": 1,
+        "smtp": {
+          "host": "smtp.xxx.com",
+          "port": 465,
+          "secure": true,
+          "auth": {
+            "user": "xxx@xxx.com",
+            "pass": "xxxxxx"
+          }
+        }
+      }
+    },
+    "filesAdapter": {
+      "module": "~/server/adapter/filesystem.js",
+      "options": {
+        "filesRootDirectory": "~/data/files"
+      }
+    },
+    "maxUploadSize": "30mb"
+  },
+  "dashboard": {
+    "users": [
+      {
+        "user": "wangdong",
+        "pass": "$2y$10$AAHxcEGyK8T6Tz3Lee1XIuMS/G5cXVxIfqMrfFBtykwo7OrW8WaNK"
+      }
+    ],
+    "useEncryptedPasswords": true
+  }
+}

@@ -1,18 +1,22 @@
 import {NgModule} from '@angular/core';
-import {RouterModule, Route} from '@angular/router';
-
-import {environment} from '../environments/environment';
+import {Routes, RouterModule} from '@angular/router';
 import {AppComponent} from './app.component';
 
-export const routerConfig: Route[] = [
-  {path: '', component: AppComponent, loadChildren: './app-children.module#AppChildrenModule'},
-  {path: '**', redirectTo: '/error/404', pathMatch: 'full'}
+const routes: Routes = [
+  {
+    path: '',
+    component: AppComponent,
+    loadChildren: './app-children.module#AppChildrenModule'
+  },
+  {
+    path: '**',
+    redirectTo: '/error/404',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routerConfig, environment.router)
-  ],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

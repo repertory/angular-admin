@@ -1,12 +1,14 @@
 import {NgModule} from '@angular/core';
 
+import {ConfigModule} from '../config/config.module';
+
 import {ParseService} from './parse.service';
-export * from './parse.service';
 
 @NgModule({
-  providers: [
-    ParseService
-  ]
+  imports: [ConfigModule],
+  providers: [ParseService]
 })
 export class ParseModule {
 }
+
+export {ParseService} from './parse.service';

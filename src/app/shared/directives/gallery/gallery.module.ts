@@ -1,4 +1,5 @@
 import {NgModule} from '@angular/core';
+
 import {GalleryDirective, GalleryItemDirective} from './gallery.directive';
 
 @NgModule({

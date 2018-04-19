@@ -1,50 +1,46 @@
-<div fxLayout.lt-md="column" fxLayout.md="row-reverse" fxLayout.gt-md="row-reverse" fxFill>
-  <div fxFlex.lt-md="96px" fxFlex.md="40%" fxFlex.gt-md="40%" fxLayoutAlign="center center"
-       class="mat-toolbar mat-primary">
-    <div style="text-align: center">
-      <div fxHide.lt-md="true"><img src="/assets/logo.png" height="100"></div>
-      <div style="font-size: 26px">后台管理系统</div>
-    </div>
-  </div>
+<div class="layout" fxLayout.lt-md="column" fxLayout.md="row-reverse" fxLayout.gt-md="row-reverse">
 
-  <form #loginForm="ngForm" (ngSubmit)="submit()" fxFlex
-        [fxLayoutAlign]="isScreenSmall() ? 'start center' : 'center center'"
-        fxLayout="column">
-    <md-card style="box-shadow: none; width:60%; min-width: 240px; max-width: 520px">
-      <md-card-title>用户登录</md-card-title>
-      <md-card-content fxLayoutAlign="start center">
-        <div style="width: 100%;">
-          <md-input-container style="width: 100%">
-            <input mdInput placeholder="请输入用户名" name="username"
-                   #usernameElement
-                   [(ngModel)]="username"
-                   required
-                   minlength="6"
-                   maxlength="20">
-            <md-hint align="end">{{usernameElement.value.length}} / 20</md-hint>
-          </md-input-container>
-          <md-input-container style="width: 100%">
-            <input mdInput type="password" name="password"
-                   #passwordElement
-                   [(ngModel)]="password"
-                   placeholder="请输入密码"
-                   required
-                   minlength="6"
-                   maxlength="20">
-            <md-hint align="end">{{passwordElement.value.length}} / 20</md-hint>
-          </md-input-container>
-        </div>
-      </md-card-content>
-      <md-card-actions>
-        <div style="padding:0 8px">
-          <button md-raised-button color="primary" [disabled]="!loginForm.form.valid" (click)="submit()">登录
-          </button>
-          <a routerLink="/register" md-button>注册新用户</a>
-          <span fxFlex></span>
-          <a routerLink="/forget" md-button>找回密码</a>
-        </div>
-      </md-card-actions>
-    </md-card>
+  <mat-toolbar color="primary"
+               fxLayout="column"
+               fxLayoutAlign="center center"
+               fxFlex.xs="48px"
+               fxFlex.sm="48px"
+               fxFlex.gt-sm="40%">
+    <app-qrcode [value]="config.domain"
+                size="88"
+                backgroundAlpha="0.8"
+                foregroundAlpha="0.75"
+                fxHide.lt-md="true">
+    </app-qrcode>
+    <span>{{config.name}}</span>
+  </mat-toolbar>
 
-  </form>
+  <article fxFlex fxLayoutAlign="center center" fxLayout="column">
+    <form [formGroup]="service.form" (ngSubmit)="service.onSubmit($event)">
+      <h2>用户登录</h2>
+
+      <mat-form-field>
+        <input formControlName="username" type="text" matInput placeholder="用户名/邮箱">
+        <mat-error *ngIf="service.hasError('username', 'required')">请输入用户名或邮箱</mat-error>
+        <mat-error *ngIf="service.hasError('username', 'minlength')">用户名或邮箱长度过短</mat-error>
+        <mat-error *ngIf="service.hasError('username', 'maxlength')">用户名或邮箱长度超过限制</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input formControlName="password" type="password" matInput placeholder="密码">
+        <mat-error *ngIf="service.hasError('password', 'required')">请输入密码</mat-error>
+        <mat-error *ngIf="service.hasError('password', 'minlength')">密码长度过短</mat-error>
+        <mat-error *ngIf="service.hasError('password', 'maxlength')">密码长度超过限制</mat-error>
+      </mat-form-field>
+
+      <div fxLayout>
+        <button mat-raised-button color="primary">登录</button>
+        <a [routerLink]="['/register', service.params]" mat-button>注册新用户</a>
+        <span fxFlex></span>
+        <a [routerLink]="['/forget', service.params]" mat-button>找回密码</a>
+      </div>
+
+    </form>
+  </article>
+
 </div>

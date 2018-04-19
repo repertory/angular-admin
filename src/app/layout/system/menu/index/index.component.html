@@ -1,0 +1,132 @@
+<mat-progress-bar mode="indeterminate" *ngIf="service.loading"></mat-progress-bar>
+<mat-card class="no-shadow">
+  <mat-card-content class="mat-elevation-z2">
+    <mat-toolbar color="accent" *ngIf="service.selection.selected.length">
+      <button mat-icon-button (click)="service.selection.clear()">
+        <mat-icon>clear</mat-icon>
+      </button>
+      <span>已选择{{service.selection.selected.length}}条</span>
+      <span fxFlex></span>
+      <button mat-icon-button (click)="service.destroySelected()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <mat-toolbar color="default" *ngIf="!service.selection.selected.length">
+      <!--工具栏-->
+      <div fxFlex *ngIf="!searchbar.status">
+        <button mat-button routerLink="/system/menu/create" *ngIf="user.hasRole(['root', 'admin'])">
+          <mat-icon>playlist_add</mat-icon>
+          添加
+        </button>
+        <button mat-button (click)="service.refresh()" [disabled]="service.loading">
+          <mat-icon>sync</mat-icon>
+          刷新
+        </button>
+      </div>
+
+      <!--搜索栏-->
+      <div fxFlex *ngIf="searchbar.status">
+        <mat-form-field floatPlaceholder="never">
+          <input matInput type="search" placeholder="搜索关键字..."
+                 [(ngModel)]="searchbar.keyword"
+                 (ngModelChange)="service.search(searchbar.keyword)">
+        </mat-form-field>
+      </div>
+
+      <button mat-icon-button (click)="searchbar.status = !searchbar.status">
+        <mat-icon>{{searchbar.status ? 'arrow_back' : 'filter_list'}}</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <mat-table #table [dataSource]="service.dataSource" matSort matSortActive="orderBy" matSortDirection="asc">
+
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? service.masterToggle() : null"
+                        [checked]="service.selection.hasValue() && service.isAllSelected()"
+                        [indeterminate]="service.selection.hasValue() && !service.isAllSelected()">
+          </mat-checkbox>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="$event ? service.selection.toggle(row) : null"
+                        [checked]="service.selection.isSelected(row)">
+          </mat-checkbox>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="group">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> 分组</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{element | get:'group'}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> 名称</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{element | get:'name'}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="icon">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> 图标</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <mat-icon>{{element | get:'icon' || 'note'}}</mat-icon>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="url">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> 链接</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{element | get:'url'}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="orderBy">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> 排序</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{element | get:'orderBy'}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="createdAt">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> 创建时间</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{element | get:'createdAt' | date:'fromNow'}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="updatedAt">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> 更新时间</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{element | get:'updatedAt' | date:'fromNow'}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef> 操作</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-icon-button [routerLink]="'/system/menu/edit/' + element.id" *ngIf="user.hasWriteAccess(element)">
+            编辑
+          </button>
+          <button mat-icon-button (click)="service.destroy(element)" *ngIf="user.hasWriteAccess(element)">
+            删除
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"
+               [class.selected]="service.selection.isSelected(row)"></mat-row>
+    </mat-table>
+
+    <mat-paginator [length]="pagination.length"
+                   [pageSize]="pagination.pageSize"
+                   [pageSizeOptions]="pagination.pageSizeOptions"
+                   [showFirstLastButtons]="pagination.showFirstLastButtons">
+    </mat-paginator>
+  </mat-card-content>
+</mat-card>

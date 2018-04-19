@@ -1,16 +1,20 @@
 import {NgModule} from '@angular/core';
-import {RouterModule, Route} from '@angular/router';
+import {Routes, RouterModule} from '@angular/router';
 
 import {ErrorComponent} from './error.component';
 
-export const routerConfig: Route[] = [
-  {path: 'error/:code', component: ErrorComponent},
+const routes: Routes = [
+  {
+    path: 'error/:code',
+    component: ErrorComponent,
+    data: {
+      title: '出错啦'
+    }
+  }
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forChild(routerConfig)
-  ],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class ErrorRoutingModule {

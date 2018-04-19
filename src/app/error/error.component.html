@@ -1,5 +1,5 @@
-<div fxLayout="column" fxFill>
-  <b fxFlex fxLayoutAlign="center center">
-    错误码：{{ params | json }}
-  </b>
-</div>
+<article fxFlex fxLayoutAlign="center center" fxLayout="column">
+  <p class="code">{{code || 404}}</p>
+  <p class="message">{{message || '抱歉，您访问的页面不存在'}}</p>
+  <button mat-button routerLink="/">返回首页</button>
+</article>

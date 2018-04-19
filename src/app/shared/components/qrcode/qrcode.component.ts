@@ -17,7 +17,7 @@ export class QrcodeComponent implements OnInit, OnChanges {
   @Input() size: Number = 100;
   @Input() value: String = '';
 
-  @Input() canvas: Boolean = false;
+  @Input() canvas: Boolean = true;
 
   constructor(private element: ElementRef) {
   }

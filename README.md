@@ -1,48 +1,88 @@
-# 后台管理系统
+# Angular Admin
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.2.
+## 预览效果
 
-## Screenshot
+<img src="screenshot/login.png" alt="登录" width="680">
 
-![login](screenshot/login.png)
-![index](screenshot/index.png)
+<img src="screenshot/index.png" alt="详情" width="680">
 
-## Development server
+<img src="screenshot/profile.png" alt="表单" width="680">
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## 环境配置
 
-## Code scaffolding
+### docker
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|module`.
+> 修改`/etc/docker/daemon.json`
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-
-## Nginx rewrite
-
-```
-server {
-    listen       80;
-    server_name  admin.dev;
-    root         /var/www/html/admin/dist;
-
-    location / {
-        index  index.html index.htm;
-        try_files $uri $uri/ /index.html$is_args$args;
-    }
+```json
+{
+  "registry-mirrors": ["https://lvpmz2sk.mirror.aliyuncs.com"]
 }
 ```
+
+### docker-compose
+
+> 部分linux需要单独安装 
+
+```shell
+pip install docker-compose
+```
+
+### node.js
+
+> npm加速
+
+```shell
+npm config set registry https://registry.npm.taobao.org
+npm config set disturl https://npm.taobao.org/dist
+```
+
+> node-sass加速
+
+- windows(环境变量)
+   - 变量名(N): `SASS_BINARY_SITE`
+   - 变量值(V): `https://npm.taobao.org/mirrors/node-sass/`
+- linux或mac
+   - `echo 'sass_binary_site=https://npm.taobao.org/mirrors/node-sass/' >> ~/.npmrc`
+
+## 代码部署
+
+**初始化命令**
+
+```shell
+# 启动
+docker-compose up -d
+
+# 升级
+docker-compose up -d --build
+```
+
+**常用命令**
+
+> docker环境命令格式`docker-compose exec server npm run setup`
+
+```shell
+npm run setup   # 初始化数据
+npm run build   # 编译静态文件
+npm run watch   # 本地调试模式
+```
+
+## 备份还原
+
+```
+# 备份还原
+npm run backup
+npm run restore
+
+# 单独web
+npm run backup -- web
+npm run restore -- web
+
+# 单独mongo
+npm run backup -- mongo
+npm run restore -- mongo
+```
+
+## dashboard密码生成
+
+> 在线生成工具： https://bcrypt-generator.com
