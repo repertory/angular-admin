@@ -4,9 +4,9 @@
 
 ![登录](screenshot/login.png)
 
-![详情](screenshot/index.png)
+![首页](screenshot/index.png)
 
-![表单](screenshot/profile.png)
+![列表](screenshot/list.png)
 
 ## 环境配置
 
