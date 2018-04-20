@@ -10,6 +10,18 @@ const parse = config => {
       let name = prefix ? [prefix, key].join('.') : key;
       if (!name.startsWith('env') && typeof env[name] === 'string') {
         value = process.env[env[name]] || value;  // 使用环境变量
+        // 处理特殊类型
+        if (typeof value == 'string') {
+          switch (value.toLowerCase()) {
+            case 'true':
+              value = true;
+              break;
+            case 'false':
+              value = false;
+              break;
+          }
+        }
+
         config[key] = value;
       }
 

@@ -64,7 +64,6 @@ Promise.resolve(args.parse(process.argv, {version: false, name: '配置项生成
     const configSimple = {
       server: {
         domain: finalConfig.server.domain,
-        public: finalConfig.server.public,
         path: finalConfig.server.path,
       },
       app: {

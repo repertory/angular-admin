@@ -10,14 +10,12 @@ args
   .option('pass', '管理员密码', setupData.root.pass)
   .option('nick', '管理员昵称', setupData.root.nick);
 
-Parse.initialize(CONFIG.app.appId, CONFIG.app.javascriptKey);
-Parse.serverURL = CONFIG.app.serverURL;
-Parse.masterKey = CONFIG.app.masterKey;
-
 const ROLES = new Map();
 
-function checkSetup() {
-  let option = args.parse(process.argv, {version: false, name: '数据初始化操作'});
+function checkSetup(option) {
+  Parse.initialize(CONFIG.app.appId, CONFIG.app.javascriptKey);
+  Parse.serverURL = CONFIG.app.serverURL;
+  Parse.masterKey = CONFIG.app.masterKey;
 
   return new Promise((resolve, reject) => {
     let role = new Parse.Query(Parse.Role);
@@ -28,7 +26,8 @@ function checkSetup() {
   });
 }
 
-checkSetup()
+Promise.resolve(args.parse(process.argv, {version: false, name: '数据初始化操作'}))
+  .then(option => checkSetup(option))
   .then(option => {
     let user = new Parse.User();
     user.set('username', option.user);

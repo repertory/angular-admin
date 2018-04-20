@@ -6,20 +6,21 @@ const args = require('args');
 const restore = require('mongodb-restore');
 const {CONFIG} = require('./config');
 
-let option = {
+let command = {
   web: false,
   mongo: false,
-  all: false
+  all: true
 };
 args
-  .command('web', '还原web文件', () => option.web = true)
-  .command('mongo', '还原数据库', () => option.mongo = true)
-  .command('all', '还原数据库和web文件', () => option.all = true)
-  .parse(process.argv, {version: false, name: '数据还原操作'});
+  .command('web', '还原web文件', () => command.web = true)
+  .command('mongo', '还原数据库', () => command.mongo = true)
+  .command('all', '还原数据库和web文件，默认启用', () => command.all = true);
 
-Promise.resolve(option)
+Promise.resolve(args.parse(process.argv, {version: false, name: '数据还原操作'}))
   .then(option => {
-    console.log('正在执行还原操作，请勿关闭进程...');
+    Object.assign(option, command);
+
+    console.log('正在执行还原操作，请勿关闭进程...', option);
     let backupPath = path.join(path.dirname(__dirname), 'data', 'backup');
     if (!option.all && !option.mongo) {
       return Promise.resolve(option);

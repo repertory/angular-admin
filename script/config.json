@@ -107,7 +107,7 @@
       "options": {
         "fromAddress": "noreply@notice.server",
         "fromName": "系统通知",
-        "sendmail": 1,
+        "sendmail": true,
         "smtp": {
           "host": "smtp.xxx.com",
           "port": 465,
