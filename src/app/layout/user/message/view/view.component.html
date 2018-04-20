@@ -6,7 +6,9 @@
       <span>{{(service.data | pointer:'sender' | async | get:'nick') || '[系统消息]'}}</span>
     </mat-card-title>
     <mat-card-subtitle>
-      <time>{{service.data | get:'createdAt' | date:'LLL'}}</time>
+      <small>
+        <time>{{service.data | get:'createdAt' | date:'LLLL'}}</time>
+      </small>
     </mat-card-subtitle>
   </mat-card-header>
   <mat-divider></mat-divider>

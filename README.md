@@ -2,11 +2,11 @@
 
 ## 预览效果
 
-<img src="screenshot/login.png" alt="登录" width="680">
+![登录](screenshot/login.png)
 
-<img src="screenshot/index.png" alt="详情" width="680">
+![详情](screenshot/index.png)
 
-<img src="screenshot/profile.png" alt="表单" width="680">
+![表单](screenshot/profile.png)
 
 ## 环境配置
 
