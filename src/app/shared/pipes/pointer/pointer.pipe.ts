@@ -9,7 +9,7 @@ export class PointerPipe implements PipeTransform {
     let data = value;
     if (key) {
       if (!data || !data.has(key)) {
-        return Promise.resolve(data);
+        return Promise.resolve(null);
       }
       data = value.get(key);
     }
