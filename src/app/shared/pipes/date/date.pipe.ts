@@ -6,7 +6,7 @@ moment.locale('zh-cn');
 
 @Pipe({
   name: 'date',
-  pure: false
+  pure: true
 })
 export class DatePipe implements PipeTransform {
 

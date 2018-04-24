@@ -12,18 +12,15 @@ export class UserService extends ParseService {
     super();
 
     this.form = this.fb.group({
-      nick: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(32)]
-      ],
-      username: [
-        null,
+      nick: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(32)]),
+      username: new FormControl(null,
         [Validators.required, Validators.minLength(2), Validators.maxLength(32)],
         [(control: FormControl) => this.validatorExist(control, 'username')]
-      ],
-      email: [
-        null,
+      ),
+      email: new FormControl(null,
         [Validators.required, Validators.email],
         // [(control: FormControl) => this.validatorExist(control, 'email')]
-      ],
+      )
     });
   }
 

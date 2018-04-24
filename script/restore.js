@@ -6,26 +6,17 @@ const args = require('args');
 const restore = require('mongodb-restore');
 const {CONFIG} = require('./config');
 
-let command = {
-  web: false,
-  mongo: false,
-  all: true
-};
-args
-  .command('web', '还原web文件', () => command.web = true)
-  .command('mongo', '还原数据库', () => command.mongo = true)
-  .command('all', '还原数据库和web文件，默认启用', () => command.all = true);
+args.option('type', '还原类型[支持: all/mongo/web]', 'all').option('point', '时间点');
 
 Promise.resolve(args.parse(process.argv, {version: false, name: '数据还原操作'}))
   .then(option => {
-    Object.assign(option, command);
-
-    console.log('正在执行还原操作，请勿关闭进程...', option);
-    let backupPath = path.join(path.dirname(__dirname), 'data', 'backup');
-    if (!option.all && !option.mongo) {
+    console.log(`正在执行还原操作(${option.point || 'latest'})，请勿关闭进程...`);
+    if (!['all', 'mongo'].includes(option.type.toLowerCase())) {
       return Promise.resolve(option);
     }
-    if (!fs.existsSync(path.join(backupPath, 'mongo.latest.tar'))) {
+    let backupFile = !option.point ? 'mongo.latest.tar' : `${option.point}.tar`;
+    let backupPath = !option.point ? path.join(path.dirname(__dirname), 'data', 'backup') : path.join(path.dirname(__dirname), 'data', 'backup', 'mongo');
+    if (!fs.existsSync(path.join(backupPath, backupFile))) {
       return Promise.reject('未找到数据库备份文件');
     }
     console.log('正在还原数据库...');
@@ -33,8 +24,8 @@ Promise.resolve(args.parse(process.argv, {version: false, name: '数据还原操
       restore({
         uri: CONFIG.app.databaseURI,
         root: backupPath,
-        logger: path.join(path.dirname(backupPath), 'logs', 'store'),
-        tar: 'mongo.latest.tar',
+        logger: path.join(path.dirname(__dirname), 'data', 'logs', 'restore'),
+        tar: backupFile,
         metadata: true,
         drop: true,
         callback: err => (err ? reject(err) : resolve(option)),
@@ -42,24 +33,25 @@ Promise.resolve(args.parse(process.argv, {version: false, name: '数据还原操
     });
   })
   .then(option => {
-    let backupPath = path.join(path.dirname(__dirname), 'data', 'backup');
-    if (!option.all && !option.web) {
-      return Promise.resolve();
+    if (!['all', 'web'].includes(option.type.toLowerCase())) {
+      return Promise.resolve(option);
     }
-    if (!fs.existsSync(path.join(backupPath, 'web.latest.tar'))) {
+    let backupFile = !option.point ? 'web.latest.tar' : `${option.point}.tar`;
+    let backupPath = !option.point ? path.join(path.dirname(__dirname), 'data', 'backup') : path.join(path.dirname(__dirname), 'data', 'backup', 'web');
+    if (!fs.existsSync(path.join(backupPath, backupFile))) {
       return Promise.reject('未找到web备份文件');
     }
     console.log('正在还原web文件...');
     return new Promise((resolve, reject) => {
-      fs.createReadStream(path.join(backupPath, 'web.latest.tar'))
+      fs.createReadStream(path.join(backupPath, backupFile))
         .on('error', err => reject(err))
         .pipe(tar
           .Extract({
-            path: path.join(path.dirname(backupPath), 'public'),
+            path: path.join(path.dirname(__dirname), 'data', 'public'),
             strip: 0
           })
           .on('error', err => reject(err))
-          .on('end', () => resolve())
+          .on('end', () => resolve(option))
         );
     });
   })

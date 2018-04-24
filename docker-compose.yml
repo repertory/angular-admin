@@ -19,7 +19,7 @@ services:
       - 80:80
       - 4200:4200
   mongo:
-    image: mongo:latest
+    image: mongo:3.6
     restart: always
     volumes:
       - ./data/docker/Shanghai:/etc/localtime

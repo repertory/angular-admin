@@ -74,13 +74,17 @@ npm run watch   # 本地调试模式
 npm run backup
 npm run restore
 
+# 指定还原点
+npm run backup -- --point test
+npm run restore -- --point test
+
 # 单独web
-npm run backup -- web
-npm run restore -- web
+npm run backup -- --type web
+npm run restore -- --type web
 
 # 单独mongo
-npm run backup -- mongo
-npm run restore -- mongo
+npm run backup -- --type mongo
+npm run restore -- --type mongo
 ```
 
 ## dashboard密码生成

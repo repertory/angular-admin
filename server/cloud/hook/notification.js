@@ -5,6 +5,8 @@ Parse.Cloud.beforeFind('Notification', function (request) {
   if (request.user) {
     query.notEqualTo('deletedBy', request.user);
     query.greaterThanOrEqualTo('createdAt', request.user.get('createdAt'));
+  } else if (!request.master && !request.user) {
+    query.equalTo('objectId', null);
   }
 });
 
@@ -19,13 +21,10 @@ Parse.Cloud.beforeSave('Notification', function (request, response) {
 
     Promise.resolve(acl)
       .then(acl => {
-        if (request.object.has('public')) {
-          let public = !!request.object.get('public');
-          if (public) {
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            request.object.set('type', 'public');
-          }
+        if (request.object.has('type') && request.object.get('type') == 'public') {
+          acl.setPublicReadAccess(true);
+          acl.setPublicWriteAccess(true);
+          request.object.set('type', 'public');
         }
         return Promise.resolve(acl);
       })
@@ -34,11 +33,7 @@ Parse.Cloud.beforeSave('Notification', function (request, response) {
         if (request.object.has('role')) {
           let role = request.object.get('role');
           if (role) {
-            if (!request.object.has('type')) {
-              request.object.set('type', 'role');
-              acl.setRoleReadAccess('root', true);
-              acl.setRoleWriteAccess('root', true);
-            }
+            request.object.set('type', 'role');
             role.fetch({useMasterKey: true})
               .then(() => {
                 acl.setRoleReadAccess(role, true);
@@ -57,9 +52,7 @@ Parse.Cloud.beforeSave('Notification', function (request, response) {
           if (user) {
             acl.setReadAccess(user, true);
             acl.setWriteAccess(user, true);
-            if (!request.object.has('type')) {
-              request.object.set('type', 'user');
-            }
+            request.object.set('type', 'user');
           }
         }
         return Promise.resolve(acl);

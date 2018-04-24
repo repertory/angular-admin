@@ -10,7 +10,7 @@ export class NotificationService extends ParseService {
 
   private routeParams: object = {};
 
-  data: null;
+  data = null;
 
   set params(val) {
     this.routeParams = val;

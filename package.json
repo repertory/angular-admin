@@ -7,10 +7,14 @@
     "email": "mail@wangdong.io",
     "url": "https://wangdong.io"
   },
+  "engines": {
+    "node": ">=8.0.0"
+  },
   "main": "server",
   "private": true,
   "scripts": {
     "ng": "ng",
+    "pm2": "pm2",
     "watch": "npm run make && ng serve",
     "build": "npm run make && ng build --prod",
     "test": "ng test",
@@ -25,7 +29,7 @@
     "reload": "pm2 reload ecosystem.json",
     "status": "pm2 status ecosystem.json",
     "delete": "pm2 delete ecosystem.json",
-    "logs": "pm2 logs ecosystem.json",
+    "logs": "pm2 logs",
     "monit": "pm2 monit",
     "docker": "docker-compose exec server npm run"
   },

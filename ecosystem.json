@@ -6,6 +6,13 @@
       "instances": 0,
       "exec_mode": "cluster",
       "watch": false
+    },
+    {
+      "name": "backup",
+      "script": "script/backup.js",
+      "instances": 1,
+      "watch": false,
+      "cron_restart": "0 3 * * *"
     }
   ]
 }

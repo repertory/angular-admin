@@ -107,7 +107,6 @@ export class NotificationService extends ParseService {
 
     const data = new this.database();
     data.set('sender', this.current);
-    data.set('public', this.form.controls['type'].value === 'public');
     Object.entries(this.form.value)
       .forEach(([key, val]) => {
         data.set(key, val);
