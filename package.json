@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "docker": "docker-compose up",
     "parse": "parse.server",
     "start": "ng serve",
     "build": "ng build",

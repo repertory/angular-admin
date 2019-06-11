@@ -1,0 +1,34 @@
+version: '2'
+
+volumes:
+  mongo-data:
+    driver: local
+  redis-data:
+    driver: local
+
+services:
+  vscode:
+    image: registry.cn-hangzhou.aliyuncs.com/wangdong/vscode:latest
+    # restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - .:/home/vscode/workspace
+    ports:
+      - "8443:8443"
+      - "8080:8080"
+      - "4200:4200"
+    command: --allow-http --no-auth --disable-telemetry
+  mongo:
+    image: mongo:latest
+    # restart: always
+    volumes:
+      - mongo-data:/data
+    ports:
+      - "27017:27017"
+  redis:
+    image: redis:alpine
+    # restart: always
+    volumes:
+      - redis-data:/data
+    ports:
+      - "6379:6379"
