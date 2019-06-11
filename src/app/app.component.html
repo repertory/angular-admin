@@ -1,1 +1,66 @@
-<router-outlet></router-outlet>
+<mat-sidenav-container fullscreen>
+  <mat-sidenav *ngIf="!fullscreen" class="mat-elevation-z3" [mode]="isSmallScreen ? 'over' : 'side'"
+    [(opened)]="siderLeftOpened">
+    <div class="account-panel">
+      <mat-icon class="avatar">account_circle</mat-icon>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header collapsedHeight="40px" expandedHeight="40px">
+          <small>{{ user?.get('email') }}</small>
+        </mat-expansion-panel-header>
+        <mat-nav-list>
+          <a mat-list-item routerLink="/error">
+            <mat-icon matListIcon>account_box</mat-icon>
+            <span matLine>用户中心</span>
+          </a>
+          <a mat-list-item (click)="logout()">
+            <mat-icon matListIcon>exit_to_app</mat-icon>
+            <span matLine>退出登录</span>
+          </a>
+        </mat-nav-list>
+        <mat-divider></mat-divider>
+      </mat-expansion-panel>
+    </div>
+
+    <mat-nav-list>
+      <h3 matSubheader>系统设置</h3>
+      <a mat-list-item>
+        <mat-icon matListIcon>group</mat-icon>
+        <span matLine>角色管理</span>
+      </a>
+      <a mat-list-item>
+        <mat-icon matListIcon>person</mat-icon>
+        <span matLine>用户管理</span>
+      </a>
+      <mat-divider></mat-divider>
+      <h3 matSubheader>其他设置</h3>
+      <a mat-list-item>
+        <mat-icon matListIcon>help</mat-icon>
+        <span matLine>关于系统</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav *ngIf="!fullscreen" position="end" mode="over" [(opened)]="siderRightOpened">
+    <mat-toolbar>
+      <span>设置</span>
+    </mat-toolbar>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <header *ngIf="!fullscreen">
+      <mat-toolbar [ngClass]="toolbarClass">
+        <button mat-icon-button (click)="siderLeftOpened = !siderLeftOpened">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span fxFlex></span>
+        <button mat-icon-button (click)="siderRightOpened = !siderRightOpened">
+          <mat-icon>settings</mat-icon>
+        </button>
+      </mat-toolbar>
+      <section appBanner class="mat-elevation-z3"></section>
+    </header>
+
+    <router-outlet></router-outlet>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

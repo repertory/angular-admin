@@ -1,46 +1,32 @@
-<div class="layout" fxLayout.lt-md="column" fxLayout.md="row-reverse" fxLayout.gt-md="row-reverse">
-
-  <mat-toolbar color="primary"
-               fxLayout="column"
-               fxLayoutAlign="center center"
-               fxFlex.xs="48px"
-               fxFlex.sm="48px"
-               fxFlex.gt-sm="40%">
-    <app-qrcode [value]="config.domain"
-                size="88"
-                backgroundAlpha="0.8"
-                foregroundAlpha="0.75"
-                fxHide.lt-md="true">
-    </app-qrcode>
-    <span>{{config.name}}</span>
-  </mat-toolbar>
-
-  <article fxFlex fxLayoutAlign="center center" fxLayout="column">
-    <form [formGroup]="service.form" (ngSubmit)="service.onSubmit($event)">
-      <h2>用户登录</h2>
-
-      <mat-form-field>
-        <input formControlName="username" type="text" matInput placeholder="用户名/邮箱">
-        <mat-error *ngIf="service.hasError('username', 'required')">请输入用户名或邮箱</mat-error>
-        <mat-error *ngIf="service.hasError('username', 'minlength')">用户名或邮箱长度过短</mat-error>
-        <mat-error *ngIf="service.hasError('username', 'maxlength')">用户名或邮箱长度超过限制</mat-error>
-      </mat-form-field>
-
-      <mat-form-field>
-        <input formControlName="password" type="password" matInput placeholder="密码">
-        <mat-error *ngIf="service.hasError('password', 'required')">请输入密码</mat-error>
-        <mat-error *ngIf="service.hasError('password', 'minlength')">密码长度过短</mat-error>
-        <mat-error *ngIf="service.hasError('password', 'maxlength')">密码长度超过限制</mat-error>
-      </mat-form-field>
-
-      <div fxLayout>
-        <button mat-raised-button color="primary">登录</button>
-        <a [routerLink]="['/register', service.params]" mat-button>注册新用户</a>
-        <span fxFlex></span>
-        <a [routerLink]="['/forget', service.params]" mat-button>找回密码</a>
+<article fxLayoutAlign="center center">
+  <mat-card>
+    <mat-card-content>
+      <div>
+        <div class="logo">
+          <div class="icon-lock"></div>
+        </div>
+        <h4>用户登录</h4>
       </div>
-
-    </form>
-  </article>
-
-</div>
+      <form [formGroup]="form" (ngSubmit)="submit($event)">
+        <mat-form-field color="accent">
+          <input matInput formControlName="username" placeholder="用户名">
+          <mat-error *ngIf="hasError('username', 'required')">请输入用户名</mat-error>
+          <mat-error *ngIf="hasError('username', 'minlength')">长度过短</mat-error>
+          <mat-error *ngIf="hasError('username', 'maxlength')">长度超过限制</mat-error>
+        </mat-form-field>
+        <mat-form-field color="accent">
+          <input matInput type="password" formControlName="password" placeholder="密　码">
+          <mat-error *ngIf="hasError('password', 'required')">请输入密码</mat-error>
+          <mat-error *ngIf="hasError('password', 'minlength')">长度过短</mat-error>
+          <mat-error *ngIf="hasError('password', 'maxlength')">长度超过限制</mat-error>
+        </mat-form-field>
+        <button mat-fab color="accent">
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+      </form>
+    </mat-card-content>
+    <mat-card-actions align="center">
+      <a [routerLink]="[ '/forget']">忘记密码 ? </a>
+    </mat-card-actions>
+  </mat-card>
+</article>

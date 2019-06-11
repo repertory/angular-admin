@@ -1,0 +1,18 @@
+table {
+  width: 100%;
+
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+
+  tr.mat-row {
+    &:not(.selected):hover {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    &.selected,
+    &:active {
+      background: rgba(0, 0, 0, 0.06);
+    }
+  }
+}

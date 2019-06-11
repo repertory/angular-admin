@@ -1,16 +1,17 @@
-import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
-import {AppComponent} from './app.component';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
+import { AppAuthGuard } from './app-auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    component: AppComponent,
-    loadChildren: './app-children.module#AppChildrenModule'
+    loadChildren: './app-children.module#AppChildrenModule',
+    canActivateChild: [AppAuthGuard]
   },
   {
     path: '**',
-    redirectTo: '/error/404',
+    redirectTo: '/error',
     pathMatch: 'full'
   }
 ];
@@ -19,5 +20,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule { }

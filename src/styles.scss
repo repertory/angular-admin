@@ -1,75 +1,33 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~material-design-icons/iconfont/material-icons.css';
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$material-primary: mat-palette($mat-indigo);
+$material-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$material-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$material-theme: mat-light-theme($material-primary, $material-accent, $material-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($material-theme);
+
 /* You can add global styles to this file, and also import other style files */
-@import "assets/iconfont/material-icons.css";
-@import "~font-awesome/css/font-awesome.css";
-@import "~highlight.js/styles/idea.css";
-@import "~perfect-scrollbar/css/perfect-scrollbar.css";
-@import "~simplemde/dist/simplemde.min.css";
-@import 'theme';
 
-body, html {
-  margin: 0;
-  padding: 0;
-}
-
-.ps {
-  .ps__rail-x {
-    top: auto !important;
-  }
-
-  .ps__rail-y {
-    left: auto !important;
-    z-index: 2;
-  }
-}
-
-.editor-toolbar, .CodeMirror {
-  border-radius: 0;
-  border: none;
-  * {
-    outline: none;
-  }
-}
-
-.editor-toolbar {
-  min-height: 48px !important;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12) !important;
-  background: whitesmoke !important;
-  color: rgba(0, 0, 0, 0.87) !important;
-}
-
-.editor-toolbar.fullscreen {
-  top: 64px !important;
-  @media (max-width: 960px) {
-    top: 56px !important;
-  }
-  @media (max-width: 600px) {
-    top: 48px !important;
-  }
-}
-
-.CodeMirror, .editor-preview {
-  padding: 6px;
-}
-
-.CodeMirror-fullscreen, .CodeMirror-fullscreen + .editor-preview-side {
-  top: 112px !important;
-  border: none;
-  @media (max-width: 960px) {
-    top: 104px !important;
-  }
-  @media (max-width: 600px) {
-    top: 96px !important;
-  }
-}
-
-.CodeMirror-fullscreen + .editor-preview-side {
-  border-left: 1px solid rgba(0, 0, 0, 0.12) !important;
-}
-
-.no-shadow {
-  box-shadow: none !important;
-}
-
-.no-border {
-  border: none !important;
-}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

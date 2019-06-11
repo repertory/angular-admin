@@ -1,14 +1,14 @@
-import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
-import {ErrorComponent} from './error.component';
+import { ErrorComponent } from './error.component';
 
 const routes: Routes = [
   {
-    path: 'error/:code',
+    path: 'error',
     component: ErrorComponent,
     data: {
-      title: '出错啦'
+      fullscreen: true
     }
   }
 ];
@@ -17,5 +17,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ErrorRoutingModule {
-}
+export class ErrorRoutingModule { }

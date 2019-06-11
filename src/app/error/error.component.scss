@@ -1,24 +1,30 @@
 article {
-  height: 100vh;
-}
+  padding: 20px;
+  border-color: #e4e4e4;
+  line-height: 1.2;
 
-p {
-  margin: 0;
-  padding: 8px;
-}
+  h1,
+  h2 {
+    margin: 0;
+    font-weight: normal;
+    font-family: "微软雅黑", Arial, "Trebuchet MS", Helvetica, Verdana;
+  }
 
-.code {
-  font-size: 96px;
-  line-height: 96px;
-  color: rgba(0, 0, 0, 0.45);
-  font-family: 'Arial Negreta', 'Arial Normal', 'Arial';
-  font-weight: 700;
-}
+  h1 {
+    font-size: 44px;
+    color: #0188DE;
+    padding: 20px 0px 10px;
+  }
 
-.message {
-  font-family: 'PingFang SC Regular', 'PingFang SC';
-  font-weight: 400;
-  font-size: 24px;
-  line-height: 32px;
-  color: rgba(0, 0, 0, 0.45);
+  h2 {
+    color: #0188DE;
+    font-size: 16px;
+    padding: 10px 0px 30px;
+  }
+
+  p {
+    color: #666666;
+    padding: 0;
+    margin-bottom: 40px;
+  }
 }
