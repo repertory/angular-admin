@@ -1,0 +1,50 @@
+{
+  "enabled": {
+    "static": true,
+    "server": true,
+    "dashboard": true
+  },
+  "apps": [{
+    "appName": "material",
+    "mountPath": "/parse",
+    "serverURL": "http://127.0.0.1:8080/parse",
+    "databaseURI": "mongodb://mongo:27017/parse",
+    "databaseOptions": {
+      "autoReconnect": true,
+      "poolSize": 10
+    },
+    "liveQuery": {
+      "redisURL": "redis://redis:6379/0",
+      "classNames": [
+        "Notification"
+      ]
+    },
+    "appId": "A9bVJTT5fmH5zqP8CPqDK1cva5NfkBP6",
+    "masterKey": "myLbNIjpf2Ibtb8UAGQzUuPnAfxBRSwS",
+    "readOnlyMasterKey": "efTxKLyn3V6kAk95qbThdpWfN0ayCHi7",
+    "fileKey": "N1u4P8BOCTODMxtMwF8i01a7hVgj7ZCK",
+    "clientKey": "eGjn5OM4aBzMqQ2HrBINmXFv9IbPNS6g",
+    "javascriptKey": "96SFBryScCCydhqwjG8ZhnsKjUC1jB5g",
+    "restAPIKey": "acsYoNjK8JrDUXkjThs86LLOkRHReFyM",
+    "webhookKey": "pRnUOeEiwgml4GsYBPSpF6j6rj4862PI"
+  }],
+  "dashboard": {
+    "mountPath": "/dashboard",
+    "useEncryptedPasswords": false,
+    "users": [{
+      "user": "admin",
+      "pass": "admin"
+    }],
+    "options": {
+      "allowInsecureHTTP": true
+    }
+  },
+  "statics": [{
+    "mountPath": "/",
+    "path": "dist/material",
+    "rewrite": true,
+    "options": {
+      "index": "index.html"
+    }
+  }]
+}
