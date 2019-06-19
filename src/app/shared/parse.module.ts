@@ -25,13 +25,13 @@ export function initialize(config: ParseConfig) {
     }
   ]
 })
-export class AppParseModule {
+export class ParseModule {
 
-  constructor(private provide: ParseProvide) { }
+  constructor(parseProvide: ParseProvide) { }
 
   static initialize(config: ParseConfig) {
     return {
-      ngModule: AppParseModule,
+      ngModule: ParseModule,
       providers: [
         { provide: parseConfigToken, useValue: config },
       ]

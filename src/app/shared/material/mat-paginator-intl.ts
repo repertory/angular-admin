@@ -1,6 +1,6 @@
-import { MatPaginatorIntl } from '@angular/material';
+import { MatPaginatorIntl as BaseMatPaginatorIntl } from '@angular/material';
 
-export class AppPaginatorIntl extends MatPaginatorIntl {
+export class MatPaginatorIntl extends BaseMatPaginatorIntl {
 
   itemsPerPageLabel = '每页显示';
   firstPageLabel = '首页';
@@ -18,6 +18,6 @@ export class AppPaginatorIntl extends MatPaginatorIntl {
       Math.min(startIndex + pageSize, length) :
       startIndex + pageSize;
     return '第' + (startIndex + 1) + ' - ' + endIndex + '条，共' + length + '条';
-  };
+  }
 
 }
